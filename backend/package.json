@@ -1,0 +1,46 @@
+{
+  "name": "hartleadershipportalbackend",
+  "version": "1.0.0",
+  "description": "A node.js api to access the hart leadership portal ",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js --exec babel-node --presets env",
+    "release": "npm run clean && npm run build && npm run serve",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "babel . -s -D -d dist --presets env --ignore node_modules",
+    "serve": "node dist/server.js",
+    "test": "jest",
+    "lint": "eslint"
+  },
+  "author": "Dylan Furner",
+  "license": "ISC",
+  "dependencies": {
+    "@rama41222/node-logger": "^1.0.1",
+    "@types/node": "^14.14.7",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^2.3.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "google-maps": "^4.3.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "node-geocoder": "^3.27.0",
+    "nodemailer": "^6.4.16",
+    "react-google-maps-loader": "^4.3.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.6"
+  },
+  "babel": {
+    "plugins": [
+      "transform-object-rest-spread"
+    ]
+  }
+}
