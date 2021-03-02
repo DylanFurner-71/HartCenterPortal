@@ -2,9 +2,10 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config/config.env" });
 import express from "express";
 import cors from "cors";
-import student from "./student.js";
-const Admin = require("./admin");
-// import { mongooseConnect } from "./atlasConnect.js";
+import student from "./controllers/student.js";
+import login from "./controllers/login.js";
+import {mongooseConnect} from './mongooseConnect.js';
+const Admin = require("./controllers/admin");
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const routes = require('./routes.js');
 const app = express();
@@ -24,7 +25,8 @@ const logger = log({ console: true, file: false, label: config.name });
 routes(app, logger);
 student(app, logger);
 Admin(app, logger);
-
+login(app, logger);
+// mongooseConnect();
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });

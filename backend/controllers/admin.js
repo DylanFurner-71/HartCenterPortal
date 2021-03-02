@@ -1,13 +1,13 @@
-const pool = require('./db')
+const pool = require('../db')
 const hartPrefix = "/hartBE/v1";
 
-module.exports = function student(app, logger) {
+module.exports = function admin(app, logger) {
   // GET /
   // POST /reset
-  app.route(`${hartPrefix}/student/`) 
+  app.route(`${hartPrefix}/admin/`) 
   .get((req, res, next) => {
     pool.query(
-      "SELECT * FROM Student", (err, result) => {
+      "SELECT * FROM Admin", (err, result) => {
         if (err) throw err;
         res.end(JSON.stringify(result));
         });   
@@ -18,10 +18,10 @@ module.exports = function student(app, logger) {
   .all((req, res, next) => { //idk
   res.send('Other requests called'); 
   }); 
-         app.route(`${hartPrefix}/student/:id`) 
+         app.route(`${hartPrefix}/admin/:id`) 
         .get((req, res, next) => {
           pool.query(
-            "SELECT * FROM Student WHERE smu_id = ?", [req.params.id], (err, result) => {
+            "SELECT * FROM Admin WHERE smu_id = ?", [req.params.id], (err, result) => {
                 if (err) throw err;
               res.end(JSON.stringify(result));
               });   
