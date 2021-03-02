@@ -13,6 +13,8 @@ const app = express();
 const path = "./public";
 const hartPrefix = "/hartBE/v1";
 app.use(cors());
+const jwt = require('jsonwebtoken');
+
 // const publicPath = path.join(path, './public');
 const publicPath = path;
 app.use(express.json());
@@ -43,17 +45,18 @@ var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });
 
+
+const { getResponses, getResponseBySMUID, saveResponse, editResponse, deleteResponse
+} = require('./models/survey_Resp_Model');
+
+//functions from model above
+
+
 app.get("/", (req, res) => {
   res.send("/ is running just fine");
 });
 
-app.post('/createUser',(req,res,next)=>{
-  saveUser(req.body).then((result)=>{
-      return res.header('x-auth', result.token).send({email : result.email});
-  }).catch((e)=>{
-      return res.status(400).send(e);
-  });
-});
+//student table restful calls
 app.route(`${hartPrefix}/student/`) 
 .get((req, res, next) => {
   pool.query(
@@ -63,11 +66,12 @@ app.route(`${hartPrefix}/student/`)
       });   
 }) 
 .post((req, res, next) => { //probably append a new students list to the existing one
-res.send('POST request called'); 
+res.send('POST /student/ request called'); 
 }) 
 .all((req, res, next) => { //idk
-res.send('Other requests called'); 
+res.send('Other /student/ request requests called'); 
 }); 
+//student table but by id as req parameter
        app.route(`${hartPrefix}/student/:id`) 
       .get((req, res, next) => {
         pool.query(
@@ -77,14 +81,15 @@ res.send('Other requests called');
             });   
       })
       .post((req, res, next) => { //probably append a new students list to the existing one
-          res.send('POST request called'); 
+          res.send('POST /student/:id request called'); 
           }) 
           .all((req, res, next) => { //idk
           res.send('Other requests called'); 
           });  
 
-            // GET /
-  // POST /reset
+
+
+          //admin table and access
   app.route(`${hartPrefix}/admin/`) 
   .get((req, res, next) => {
     pool.query(
@@ -99,6 +104,8 @@ res.send('Other requests called');
   .all((req, res, next) => { //idk
   res.send('Other requests called'); 
   }); 
+
+  //admin table access by smu_id in parameter
          app.route(`${hartPrefix}/admin/:id`) 
         .get((req, res, next) => {
           pool.query(
@@ -113,8 +120,10 @@ res.send('Other requests called');
             .all((req, res, next) => { //idk
             res.send('Other requests called'); 
             }); 
-// GET /
-  // POST /reset
+
+
+            //login functionality
+            //works outside of duo, authenticates with info stored in our sql database and jwtoken
   app.route(`${hartPrefix}/login/`) 
   .post((req, res, next) => {  //the response here is all of the user's data minus smu password
 //POST: Login Account
@@ -147,13 +156,17 @@ res.send('Other requests called');
   .all((req, res, next) => { //idk
   res.send('Other requests called'); 
   }); 
-         app.route(`${hartPrefix}/student/:id`) 
+
+//restful calls on response, returning promises from here on
+
+app.route(`${hartPrefix}/response/`) 
         .get((req, res, next) => {
-          pool.query(
-            "SELECT * FROM Student WHERE smu_id = ?", [req.params.id], (err, result) => {
-                if (err) throw err;
-              res.end(JSON.stringify(result));
-              });   
+          getResponses().then((result)=> {
+            return res.send({result})
+          })
+          .catch((e)=>{
+            return res.status(400).send(e);
+        });
         })
         .post((req, res, next) => { //probably append a new students list to the existing one
             res.send('POST request called'); 
@@ -161,4 +174,24 @@ res.send('Other requests called');
             .all((req, res, next) => { //idk
             res.send('Other requests called'); 
             });  
+            //end of response
+
+
+
+            app.route(`${hartPrefix}/response/:id`) 
+          .get( (req, res, next) => {
+            getResponseBySMUID(req).then(response => {
+              return res.send({response});
+          })    
+          .catch((e)=>{
+            return res.status(400).send(e);
+          });
+        })
+        .post((req, res, next) => { //probably append a new students list to the existing one
+            res.send('POST request called'); 
+            }) 
+            .all((req, res, next) => { //idk
+            res.send('Other requests called'); 
+            });  
+   
     module.exports = server;
