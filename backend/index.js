@@ -4,25 +4,18 @@ dotenv.config({ path: "./config/config.env" });
 const express = require("express");
 // var path = require('path');
 const cors = require("cors");
-const student = require("./controllers/student.js");
-const login = require("./controllers/login.js");
-const Admin = require("./controllers/admin");
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const routes = require('./routes.js');
 const app = express();
 const path = "./public";
-const hartPrefix = "/hartBE/v1";
 app.use(cors());
 const jwt = require('jsonwebtoken');
 
-// const publicPath = path.join(path, './public');
 const publicPath = path;
 app.use(express.json());
 app.use(express.static(publicPath));
 var router = express.Router()
-// The code below allows the node js to find the public directory with the index.html file
-// Node js is using port 3000/ and when you push to cloud it will use process.env.PORT
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
   console.log('Time: ', Date.now())
@@ -45,19 +38,20 @@ var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });
 
-
+//define our model below
 const { getResponses, getResponseBySMUID, saveResponse, editResponse, deleteResponse
 } = require('./models/survey_Resp_Model');
+const { getCompetencies } = require('./models/comptencies_model');
 
-//functions from model above
 
+//end defining of models
 
 app.get("/", (req, res) => {
   res.send("/ is running just fine");
 });
 
 //student table restful calls
-app.route(`${hartPrefix}/student/`) 
+app.route(`${process.env.HART}/student/`) 
 .get((req, res, next) => {
   pool.query(
     "SELECT * FROM Student", (err, result) => {
@@ -72,7 +66,7 @@ res.send('POST /student/ request called');
 res.send('Other /student/ request requests called'); 
 }); 
 //student table but by id as req parameter
-       app.route(`${hartPrefix}/student/:id`) 
+       app.route(`${process.env.HART}/student/:id`) 
       .get((req, res, next) => {
         pool.query(
           "SELECT * FROM Student WHERE smu_id = ?", [req.params.id], (err, result) => {
@@ -90,7 +84,7 @@ res.send('Other /student/ request requests called');
 
 
           //admin table and access
-  app.route(`${hartPrefix}/admin/`) 
+  app.route(`${process.env.HART}/admin/`) 
   .get((req, res, next) => {
     pool.query(
       "SELECT * FROM Admin", (err, result) => {
@@ -106,7 +100,7 @@ res.send('Other /student/ request requests called');
   }); 
 
   //admin table access by smu_id in parameter
-         app.route(`${hartPrefix}/admin/:id`) 
+         app.route(`${process.env.HART}/admin/:id`) 
         .get((req, res, next) => {
           pool.query(
             "SELECT * FROM Admin WHERE smu_id = ?", [req.params.id], (err, result) => {
@@ -124,7 +118,7 @@ res.send('Other /student/ request requests called');
 
             //login functionality
             //works outside of duo, authenticates with info stored in our sql database and jwtoken
-  app.route(`${hartPrefix}/login/`) 
+  app.route(`${process.env.HART}/login/`) 
   .post((req, res, next) => {  //the response here is all of the user's data minus smu password
 //POST: Login Account
   //Authenticate user
@@ -159,7 +153,7 @@ res.send('Other /student/ request requests called');
 
 //restful calls on response, returning promises from here on
 
-app.route(`${hartPrefix}/response/`) 
+app.route(`${process.env.HART}/response/`) 
         .get((req, res, next) => {
           getResponses().then((result)=> {
             return res.send({result})
@@ -176,9 +170,9 @@ app.route(`${hartPrefix}/response/`)
             });  
             //end of response
 
+//response with smu_id as param id=
 
-
-            app.route(`${hartPrefix}/response/:id`) 
+            app.route(`${process.env.HART}/response/:id`) 
           .get( (req, res, next) => {
             getResponseBySMUID(req).then(response => {
               return res.send({response});
@@ -193,5 +187,23 @@ app.route(`${hartPrefix}/response/`)
             .all((req, res, next) => { //idk
             res.send('Other requests called'); 
             });  
+//competency
+            app.route(`${process.env.HART}/competency/`) 
+            .get( (req, res, next) => {
+              getCompetencies(req).then(response => {
+                return res.send({response});
+            })    
+            .catch((e)=>{
+              return res.status(400).send(e);
+            });
+          })
+          // .post((req, res, next) => { //probably append a new students list to the existing one
+          //     res.send('POST request called'); 
+          //     }) 
+          //     .all((req, res, next) => { //idk
+          //     res.send('Other requests called'); 
+          //     }); 
+
+          //end competency
    
     module.exports = server;
