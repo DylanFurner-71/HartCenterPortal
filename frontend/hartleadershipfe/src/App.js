@@ -60,11 +60,11 @@ function App() {
                         path='/resetPassword'
                         component={SendPassword}
                     /> */}
-                    {/* <Switch>
+                    <Switch>
                         {ROUTES.map((route, i) => (
                             <PrivateRoute exact key={i} {...route} />
                         ))}
-                    </Switch> */}
+                    </Switch>
                 </Router>
             </div>
         </Provider>
