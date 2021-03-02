@@ -1,0 +1,27 @@
+[
+    {
+        "smu_id": "47419883",
+        "first_name": "John Dylan",
+        "last_name": "Furner",
+        "pref": "Dylan",
+        "smu_email": "dfurner@smu.edu",
+        "alt_email": null,
+        "class": 1,
+        "major": "2",
+        "major1": null,
+        "major2": null,
+        "allowview": 1,
+        "print": 1,
+        "batch": "Fall-2017",
+        "surv_status": 3,
+        "gender": "M",
+        "ethnicity": null,
+        "competency1": "",
+        "competency2": "",
+        "phonenumber": null,
+        "addedcompetency": 0,
+        "studentgroup": "f17-AARO3",
+        "study": "1",
+        "role": "student |"
+    }
+]
