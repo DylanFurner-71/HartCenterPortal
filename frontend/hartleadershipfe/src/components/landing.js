@@ -5,7 +5,28 @@ import {Button, Form, FormControl, Navbar} from "react-bootstrap";
 
 const Landing = () => {
     const [modalShow, setModalShow] = useState(false);
-
+    // onSubmit = e => {
+    //     return new Promise((resolve, reject) => {
+    //                     axios.get(`${this.url}/hartBE/v1/accounts`, this.config)
+    //                     .then(x => resolve(x.data))
+    //                     .catch(e => {
+    //                         alert(e);
+    //                         reject();
+    //                     });
+    //                 });
+    //     e.preventDefault();
+    //     const userData = {
+    //         email: this.state.email,
+    //         password: this.state.password,
+    //         isStylist: this.state.isStylist
+    //     };
+    //        // Remove token from local storage
+    // localStorage.removeItem('jwtToken');
+    // // Remove auth header for future requests
+    // setAuthToken(false);
+    // // Set current user to empty object {} which will set isAuthenticated to false
+    // dispatch(setCurrentUser({})); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    };
     return (
         <div className="h-100 text-center justify-content-center align-items-center landing">
             <div className="">
@@ -30,9 +51,16 @@ const Landing = () => {
                     {/*>Register</Link>*/}
 
                     <Link
-                        to="/login"
+                        to="/login/"
                         className="btn btn-light m-2"
-                    >Log In</Link>
+                    >Login</Link>
+                              <button
+                                    type="button"
+                                    className="btn btn-lg btn-primary btn-block text-uppercase"
+                                     onClick={this.onSubmit}
+                                >
+                                    Test Button
+                                </button>
                     <button onClick={() => setModalShow(true)} className="btn btn-light m-2">
                         Register
                     </button>
