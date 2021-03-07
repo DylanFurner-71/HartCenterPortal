@@ -1,7 +1,7 @@
 const pool = require('../db')
 const hartPrefix = "/hartBE/v1";
 const jwt = require('jsonwebtoken');
-const { getCompetencies } = require('./models/comptencies_model');
+const { getCompetencies } = require("../models/comptencies_model");
 
 module.exports = function competency(app, logger) {
     app.route(`${process.env.HART}/competency/`) 
