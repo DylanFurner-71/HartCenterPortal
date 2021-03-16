@@ -44,6 +44,7 @@ function App() {
                     <Navigation />
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/home' component={Landing} />
+                    <Route exact path='student/home' component={Landing} />
                   <Route exact path='/login/' component={Login} />
                     {/* <Route
                         exact
