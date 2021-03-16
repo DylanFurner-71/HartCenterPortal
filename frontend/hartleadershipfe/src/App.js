@@ -17,23 +17,23 @@ import { ROUTES } from './routes';
 // import StylistsList from './components/search/stylistsList';
 
 // Check for token to keep user logged in
-// if (localStorage.jwtToken) {
-//     // Set auth token header auth
-//     const token = localStorage.getItem("jwtToken");
-//     setAuthToken(token);
-//     // Decode token and get user info and exp
-//     const decoded = jwt_decode(token);
-//     // Set user and isAuthenticated
-//     store.dispatch(setCurrentUser(decoded));
-//     // Check for expired token
-//     const currentTime = Date.now() / 1000; // to get in milliseconds
-//     if (decoded.exp < currentTime) {
-//         // Logout user
-//         store.dispatch(logoutUser());
-//         //Redirect to login
-//         window.location.href = '/login/';
-//     }
-// }
+if (localStorage.getItem('accessToken')) {
+    // Set auth token header auth
+    const token = localStorage.getItem("accessToken");
+    setAuthToken(token);
+    // Decode token and get user info and exp
+    // const decoded = jwt_decode(token);
+    // // Set user and isAuthenticated
+    store.dispatch(setCurrentUser(token));
+    // Check for expired token
+    const currentTime = Date.now() / 1000; // to get in milliseconds
+    if (token.exp < currentTime) {
+        // Logout user
+        store.dispatch(logoutUser());
+        //Redirect to login
+        window.location.href = '/login/';
+    }
+}
 
 function App() {
     return (
@@ -41,10 +41,10 @@ function App() {
         <Provider store={store}>
             <div className='App'>
                 <Router>
-                    <Navigation />
+                <Navigation />
+                <div>
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/home' component={Landing} />
-                    <Route exact path='student/home' component={Landing} />
                   <Route exact path='/login/' component={Login} />
                     {/* <Route
                         exact
@@ -53,19 +53,17 @@ function App() {
                     />
                     <Route
                         exact
-                        path='/stylist/register'
-                        component={RegisterStylist}
-                    />
-                    <Route
-                        exact
                         path='/resetPassword'
                         component={SendPassword}
                     />  */}
                     <Switch>
+                                            {/* <Navigation /> */} {/* maybe will move nav to here */}
+
                         {ROUTES.map((route, i) => (
                             <PrivateRoute exact key={i} {...route} />
                         ))}
                     </Switch>
+                    </div>
                 </Router>
             </div>
         </Provider>

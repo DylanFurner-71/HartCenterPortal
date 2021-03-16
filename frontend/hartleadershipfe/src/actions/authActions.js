@@ -2,81 +2,49 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from './types';
+import {HartAPIPrefix } from "../prefixes/hart";
 // Register User
-const base_url = "localhost"
-const api = `http://${base_url}:8000`;
-axios.defaults.baseURL = api;
-export const registerUser = (userData, history) => dispatch => {
-    axios
-        .post('/api/users/register', userData)
-        .then(() => history.push('/login')) // re-direct to login on successful register
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data,
-            })
-        );
-};
-
-// Register Stylist
-export const registerStylist = (userData, history) => dispatch => {
-    axios
-        .post("/api/stylists/register/", userData)
-        .then(() => history.push("/login")) // re-direct to login on successful register
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data,
-            })
-        );
-};
-
-//registerSylistUserWillBe updated once I figure out how to correctlyCheck the texas ID database
-export const registerUserStylist = (userData, history) => dispatch => {
-    axios
-        .post(`/api/stylists/register/create`, userData)
-        .then(() => history.push('/stylists/stylistLanding')) // re-direct to login on successful register
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data,
-            })
-        );
-};
+axios.defaults.baseURL = HartAPIPrefix;
 // Change Password
-export const changePassword = (userData, history) => dispatch => {
-    axios
-        .post('/hartBE/v1/student/changePassword', userData)
-        .then(() => history.push('/home')) // re-direct to home after changing password
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data,
-            })
-        );
-};
+// export const changePassword = (userData, history) => dispatch => {
+//     axios
+//         .post('/student/changePassword', userData)
+//         .then(() => history.push('/home')) // re-direct to home after changing password
+//         .catch(err =>
+//             dispatch({
+//                 type: GET_ERRORS,
+//                 payload: err.response.data,
+//             })
+//         );
+// };
 export const login = userData => dispatch => {
         axios
-            .post('/hartBE/v1/login/', userData)
+            .post('/login/', userData)
             .then(res => {
+                // if (localStorage.getItem('user', token)){
+                //     console.log("What does thi smean?");
+                // }
                 // Save to localStorage
                 // Set token to localStorage
-                // console.log(res.data)
-                const { token } = res.data;
-                localStorage.setItem('jwtToken', token);
+                 console.log(res.data);
+                if (res.data.accessToken){
+                    const token=res.data.accessToken;
+                localStorage.setItem('accessToken', res.data.accessToken);
 
                 // Set token to Auth header
                 setAuthToken(token);
                 // Decode token to get user data
                 const decoded = jwt_decode(token);
+                console.log("decoded", decoded);
                 // Set current user
-                dispatch(setCurrentUser(decoded));
+                dispatch(setCurrentUser(res.data.user));
+                }
             })
             .catch(err => {
                 console.log(err);
                 dispatch({
                     type: GET_ERRORS,
-                    payload: err.response.data,
+                    payload: err,
                 });
             });
 };

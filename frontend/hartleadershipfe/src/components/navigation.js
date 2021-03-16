@@ -3,101 +3,116 @@ import axios from 'axios'
 import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from "react-bootstrap"
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {logoutUser} from "../actions/authActions";
-const URL = `http://localhost:8000`;  
+import logo from "../hartCenterLogo.jpg";
+
+/*
+To Do -- Logout functionality
+    Add profile picture in top right for student and admin
+    create an algorithm to map and array of category names to a nav drop down menu so when she adds something its there
+*/
+
 
 const Navigation = () => {
 //     const [name, setName] = useState('');
-//     const user = useSelector(state => state.auth);
+    const user = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const onLogout = () => {
         dispatch(logoutUser())
     };
-// if (user.role === "Admin"){
-    //return (
-//         <div>
-// </div>
-//)
-// } else {
+if (user.isAdmin){
     return (
-<div> 
-<Navbar bg="#0033A0" variant="light" expand="lg" className="border-bottom" fixed="top">
-<Navbar.Brand href="/student/home">
-    Hart Leadership Assessment Portal
+<div style={{  position: "sticky",
+  top: "0"}}> 
+<Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
+<Navbar.Brand href="/admin/home">
+    <img src={logo}
+        className="d-inline-block alight-top"
+        alt="Hart Leadership Assessment Portal"
+        width="50px"
+        height="50px"> 
+    </img>
 </Navbar.Brand>
+<Nav className="mr-auto"> 
+<Navbar.Toggle aria-controls="basic-navbar-nav"/>
+<Nav.Link href="/statistics/"> Statistics </Nav.Link>
+<NavDropdown title = "Edit" id="basic-nav-dropdown">
+        <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
+        <NavDropdown.Item href ="/edit/other_survey/survey1"> Survey 1</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
+        <NavDropdown.Item href ="/edit/other_survey/survey2"> Survey 2</NavDropdown.Item>
+        <NavDropdown.Item href ="/edit/myleadership/competency/"> My Leadership - competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
+        <NavDropdown.Item href ="/edit/career/"> Career</NavDropdown.Item>
+        <NavDropdown.Item href ="/edit/about/"> About</NavDropdown.Item>
+        <NavDropdown.Item href ="/edit/contact/"> Contact Us</NavDropdown.Item>
+        </NavDropdown>
+<Nav.Link href="/students/"> Student Management </Nav.Link>
+</Nav>
+</Navbar>
+{user.isAuthenticated ? (
+                        <button
+                            onClick={onLogout}
+                            className='btn btn-warning mx-2'
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <></>
+                    )}
+</div>
+)
+} else if (user.isStudent) {
+    return (
+<div style={{  position: "sticky",
+  top: "0"}}> 
+<Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
+<Navbar.Brand href="/student/home">
+    <img src={logo}
+        className="d-inline-block alight-top"
+        alt="Hart Leadership Assessment Portal"
+        width="50px"
+        height="50px">
+        
+    </img>
+</Navbar.Brand>
+<Nav className="mr-auto"> 
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/hartassessmentslink"> Leadership Survey </NavDropdown.Item>
 </NavDropdown>
+<NavDropdown title = "Other Assessments" id="basic-nav-dropdown">
+        <NavDropdown.Item href ="/hartassessmentslink"> Survey 1</NavDropdown.Item>
+        <NavDropdown.Item href ="/hartassessmentslink"> Survey 2</NavDropdown.Item>
+</NavDropdown>
+  <Nav.Link href ="studenthelpsme"> 
+        My Leadership
+  </Nav.Link>
+  <Nav.Link href ="studenthelpsme"> 
+        Career
+  </Nav.Link>
+  <Nav.Link href ="studenthelpsme"> 
+        About
+  </Nav.Link>
+  <Nav.Link href ="studenthelpsme"> 
+        Contact us
+  </Nav.Link>
+
+</Nav>
 </Navbar>
+{user.isAuthenticated ? (
+                        <button
+                            onClick={onLogout}
+                            className='btn btn-warning mx-2'
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <></>
+                    )}
 </div>
     );
-//}
+} else {
+    return <div></div>
+}
 
 }
 
 export default Navigation;
-
-// const Navigation = () => {
-//     const [name, setName] = useState('');
-//     const searchURL = '/stylists/search/';
-//     const user = useSelector(state => state.auth);
-//     const dispatch = useDispatch();
-//     const onLogout = () => {
-//         dispatch(logoutUser())
-//     };
-//     if (user.user.role === "stylist"){
-//         return (       
-//              <div style={{margin: "5%"}}>
-//             <Navbar bg="light" variant="light" expand="lg" className="border-bottom" fixed="top">
-//                 <Navbar.Brand href={`/stylists/stylistLanding/stylistId=${user.user.id}`}>Ultimate Style</Navbar.Brand>
-//                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-//                 <Navbar.Collapse id="basic-navbar-nav">
-//                     <Nav className="mr-auto">
-//                         <Nav.Link href={`/stylists/appointments/upcoming/stylistId=${user.user.id}`}>Upcoming Appointments</Nav.Link>
-//                         <Nav.Link href={`/stylists/appointments/past/stylistId=${user.user.id}`}>Past Appointments</Nav.Link>
-//                         <Nav.Link href={`/services/servicesOffered/stylistId=${user.user.id}`}>Services Offered</Nav.Link>
-//                         <Nav.Link href={`/stylists/stylistCalendar/stylistId=${user.user.id}`}>Calendar </Nav.Link>
-//                         <Nav.Link href={`/stylists/stylistId=${user.user.id}/info`}>My Profile</Nav.Link>
-//                     </Nav>
-//                 </Navbar.Collapse>
-//                 {user.isAuthenticated ? <button onClick={onLogout} className="btn btn-warning mx-2">Logout</button> : <></>}
-//             </Navbar>
-//         </div>
-//         );
-//     } else {
-//     return (
-//         <div>
-//             {/*make nav bar bigger brigher*/}
-//             <Navbar bg="light" variant="light" expand="lg" className="border-bottom" fixed="top">
-//                 <Navbar.Brand href="/userLanding">Hart Leadership Survey</Navbar.Brand>
-//                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-//                 <Navbar.Collapse id="basic-navbar-nav">
-//                     <Nav className="mr-auto">
-//                         <NavDropdown title="Services" id="basic-nav-dropdown">
-//                             {/*<NavDropdown.Item href="/retail">Overview</NavDropdown.Item>*/}
-//                             <NavDropdown.Item href={searchURL+'services/haircuts'}>Haircuts</NavDropdown.Item>
-//                             <NavDropdown.Item href={searchURL+'services/waxing'}>Waxing</NavDropdown.Item>
-//                         </NavDropdown>
-//                         <Nav.Link href="/UserProfile">My Profile</Nav.Link>
-//                     </Nav>
-//                 </Navbar.Collapse>
-//                 <Form inline>
-//                     <FormControl
-//                         onChange={event => setName(event.target.value)}
-//                         value={name}
-//                         type="text"
-//                         placeholder="Stylist"
-//                         className="mr-sm-2"
-//                     />
-//                 </Form>
-//                 <a href={`${searchURL}name/${name}`}><Button variant="dark">Search</Button></a>
-//                 {user.isAuthenticated ? <button onClick={onLogout} className="btn btn-warning mx-2">Logout</button> : <></>}
-
-//             </Navbar>
-
-//         </div>
-//     );
-//     }
-// }
-
-// export default Navigation;

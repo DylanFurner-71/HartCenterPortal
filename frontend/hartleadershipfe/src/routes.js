@@ -23,7 +23,8 @@ import Login from './components/Login'
 // // import WebManagerReviewList from './components/WebManagerReviewList.jsx';
 // // import CustomerReviewList from './components/CustomerReviewList.jsx';
 // this is the private route
+import StudentHome from "./components/student/studentLanding";
 export const ROUTES = [
     { path: '/', component: Landing },
-    // { path: '/student/home', component: StudentHome }
+    { path: '/student/home', component: StudentHome }
 ]

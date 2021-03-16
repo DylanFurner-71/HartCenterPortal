@@ -4,11 +4,11 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {login} from "../actions/authActions";
 import classnames from "classnames";
+import { HartPrefix } from "../prefixes/hart";
 // import "../register/register.css"
 // import RegisterPopup from "../register/registerPopup";
-
+import {login} from "../actions/authActions";
 class Login extends Component {
     constructor() {
         super();
@@ -16,41 +16,21 @@ class Login extends Component {
             email: "",
             password: "",
             modalShow: false,
-            error: {}
+            error: {},
+            isStudent: false,
+            loggedIn: {},
         };
     }
 
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
         if (this.props.auth.isAuthenticated) {
-            if (this.state.isAdmin === true){
-            this.props.history.push(`/admin/adminLanding/}`); // push user to dashboard when they login
+            if (this.state.isStudent === false){
+            this.props.history.push(`/admin/home/}`); // push user to dashboard when they login
             } else {
-                this.props.history.push(`/userLanding/smu_id=${this.props.auth.user.smu_id}`);
+                // this.props.history.push(`/student/home/smu_id=${this.props.auth.user.smu_id}`);
+                this.props.history.push(`/student/home/`);
             }
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.isAuthenticated) {
-            console.log(nextProps.auth);
-            if (this.state.isStylist === true){
-            this.props.history.push(`/admin/adminLanding/`); // push user to dashboard when they login
-            } else {
-                this.props.history.push(`/userLanding/smu_id=${this.props.auth.user.smu_id}`);
-            }
-        }
-        if (nextProps.error) {
-            this.setState({
-                error: nextProps.error
-            });
-        }
-    }
-    onCheck = e => {
-        if (this.state.isStylist === false){
-        this.setState(({isStylist: true}));
-        } else {
-            this.setState(({isStylist: false}));
         }
     }
     onChange = e => {
@@ -67,27 +47,27 @@ class Login extends Component {
 
     render() {
         const error = this.state.error;
-        console.log(error.error)
         return (
-            <div className="container">
+            <div className="container" style={{marginTop: "1%"}}>
                                 <h5 className="card-title text-center">Login</h5>
                                 <form className="form-signin" onSubmit={this.onSubmit}>
                                     <span className="text-danger">
                                             {error.error}</span>
-                                    <div className="form-label-group">
+                                            <div className="form-label-group">
                                         <input
                                             onChange={this.onChange}
                                             value={this.state.email}
                                             id="email"
-                                            type="email"
+                                            type="text"
                                             className={classnames("form-control", {
                                                 invalid: error.email || error.emailnotfound
                                             })}
                                         />
-                                        <label htmlFor="email">SMU Email</label>
+                                        <label htmlFor="email">Email</label>
                                     </div>
 
                                     <div className="form-label-group">
+                                        <label htmlFor="password">Password/ as of now actually smu_id</label>
                                         <input
                                             onChange={this.onChange}
                                             value={this.state.password}
@@ -97,7 +77,6 @@ class Login extends Component {
                                                 invalid: error.password || error.passwordincorrect
                                             })}
                                         />
-                                        <label htmlFor="password">Password/ as of now actually smu_id</label>
                                     </div> 
                                     <hr/>
                                         <button
