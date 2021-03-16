@@ -1,71 +1,71 @@
-// const express = require('express');
-// const cors = require('cors');
-// const student = require("../student.js");
-// // import { mongooseConnect } from "./atlasConnect.js";
-// const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-// const routes = require('../routes.js');
-// const app = express();
-// app.use(cors());
-// app.use(express.json());
-// var router = express.Router()
+// const app = require('../index');
+// const expect = require('expect');
+// const request = require('supertest');
+// const should = require('should');
+//  const hartPrefix = "/hartBE/v1";
+// const {populateUsers, users} = require('./seed/seed');
+// // const jest = require('jest');
 
-// // middleware that is specific to this router
-// router.use(function timeLog (req, res, next) {
-//   console.log('Time: ', Date.now())
-//   next()
-// })
+// beforeEach(populateUsers);
 
 
-// const config = {
-//   name: "hartBE"
-// }
-// const logger = log({ console: true, file: false, label: config.name });
-// routes(app, logger);
-// student(app, logger);
-// // admin(app, logger);
+// /* Testing the users route for creating a new user */
+// describe('Testing POST /createUser',()=>{
+  
+//     it('should get all of the students', (done)=> {
+//         const {smu_email, password, alt_email, firstname, lastname, pref} = users[0];
+//       request(app).get(`${hartPrefix}/student/`).send({smu_email, password}).expect(200) .expect((res) =>{
+//         expect(users[0].Owner).toEqual(res.body.Owner).end(done);
+//     })
+//     })
+//     it('should create a new user',(done)=>{
+//         request(app)
+//             .post('/createUser')
+//             .send({
+//                 Owner : users[0].Owner,
+//                 firstname : users[0].firstname,
+//                 lastname : users[0].lastname,
+//                 email:users[0].email,
+//                 password : users[0].password,
+//             })
+//             .expect(200)
+//             .expect((res) => {
+//                 expect(res.headers['x-auth']).toBeTruthy();
+//                 expect(res.body.email).toEqual(users[0].email);
+//             })
+//             .end(done);
+//     });
 
-// app.listen(process.env.PORT, () => {
-//   console.log(`Server is running on port: ${process.env.PORT}`);
+//     it('should not create a new user with invalid body',(done)=>{
+//         request(app)
+//             .post('/createUser')
+//             .send({})
+//             .expect(400)
+//             .end((err,res)=>{
+//                 return done(err);
+//             });
+//     });
 // });
 
-// const hartPrefix = "/hartBE/v1";
-const mysql = require('mysql');
-describe('My Test Suite', () => {
-  beforeAll(() => {
-var config = {
-  user: 'root', //this has to be changed before deployment but i don't know how
-  password: 'password',
-  server: 'localhost', 
-  database: 'db1',
-  port: "3306",
-  socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
-};
-var connection = mysql.createConnection({
-host: config.server,
-user: config.user,
-password: config.password,
-port: config.port,
-database: config.database
-});
+// describe('Testing the GET get/me for authentication ',()=>{
+//     xit('should return user if authenticated',(done)=>{
+//         request(app)
+//             .get('/get/me')
+//             .set('x-auth',users[0].token)
+//             .expect(200)
+//             .expect((res) =>{
+//                 expect(users[0].Owner).toEqual(res.body.Owner);
+//             })
+//             .end(done)
+//     });
 
-    return connection.connect();
-
-  });
-  afterAll(() => {
-    return connection.close();
-  });
-    it('My Test Case', () => {
-      expect(true).toEqual(true);
-    });
-    const data = require('./testdata/studenttestdata.json');
-    const app = express();
-    it('Should get all students', () => {
-      const { res } = app.get(`${hartPrefix}/student/`);
-      expect(res).toEqual(stringify(data));
-      
-    });
-    
-});
-
-
-
+//     xit('should return 401 if not authenticated',(done)=>{
+//         request(app)
+//             .get('/get/me')
+//             .set('x-auth', '12121212')
+//             .expect(401)
+//             .end((err,res)=>{
+//                 return done(err);
+//             });
+//     });
+// });

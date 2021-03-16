@@ -1,47 +1,89 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
 // import RegisterPopup from "./register/registerPopup";
 import {Button, Form, FormControl, Navbar} from "react-bootstrap";
-
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../actions/authActions';
+import { Link } from 'react-router-dom';
+// import base_url from '../base_url';
+const base_url = "placeholder";
 const Landing = () => {
-    const [modalShow, setModalShow] = useState(false);
+    const { user } = useSelector(state => state.auth);
+    const [appointments, setAppointments] = useState([]);
+    const [services, setServices] = useState([]);
+    useEffect(() => {
+        const fetchStylist = async () => {
+            await axios
+                .get(`http://${base_url}:8000/api/stylists/${user.id}`)
+                .then(res => {
+                    const stylistData = res.data.stylist;
+                    console.log(stylistData);
+                    setServices(stylistData.services);
+                });
+        };
+        fetchStylist();
+    }, [services]);
 
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            await axios
+                .get(
+                    `http://${base_url}:8000/api/stylists/appointments/${user.id}`
+                )
+                .then(res => {
+                    const appts = res.data.appointments;
+                    setAppointments(appts);
+                });
+        };
+        fetchAppointments();
+    }, [appointments]);
     return (
-        <div className="h-100 text-center justify-content-center align-items-center landing">
-            <div className="">
-                {/* <img className="mx-auto" style={{ width: "350px", height: "225px"}} src={require("../UltimateStyle.png" )}/> */}
-                {/*<h1 className="mx-auto">*/}
-                {/*    <b>Welcome</b> to Ultimate Style*/}
-                {/*</h1>*/}
-                <h1 className="mx-auto display-2 text-white">
-                    <b>REVIEW</b> AND <b>BOOK</b> STYLISTS MADE EASY
-                </h1>
-                <div className="mx-auto d-flex justify-content-center mt-lg-5">
-
-                    {/*<Link*/}
-                    {/*    to="/register"*/}
-                    {/*    style={{*/}
-                    {/*        width: "140px",*/}
-                    {/*        borderRadius: "3px",*/}
-                    {/*        letterSpacing: "1.5px",*/}
-                    {/*        */}
-                    {/*    }}*/}
-                    {/*    className="btn btn-large btn-flat waves-effect blue black-text m-2"*/}
-                    {/*>Register</Link>*/}
-
-                    <Link
-                        to="/login"
-                        className="btn btn-light m-2"
-                    >Log In</Link>
-                    <button onClick={() => setModalShow(true)} className="btn btn-light m-2">
-                        Register
-                    </button>
-                    {/* <RegisterPopup
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    /> */}
+        <div
+            className='container justify-content-center align-items-center h-100'
+            style={{ marginTop: '3%' }}
+        >
+            To be done. This will be a login/register navigator.
+            {/* <div className='row'>
+                <div className='justify-content-center container valign-wrapper'>
+                    <h1>
+                        {' '}
+                        Hello {`${user.firstName}  ${user.lastName}`} welcome to
+                        Ultimate Style!
+                    </h1>
+                    <div>
+                        <div className='row'>
+                            <div className='col center-align'>
+                                <Link
+                                    to={`/stylists/stylistCalendar/stylistId=${user.id}`}
+                                    style={{
+                                        width: '140px',
+                                        borderRadius: '3px',
+                                        letterSpacing: '1.5px',
+                                        padding: '12px',
+                                    }}
+                                    className='btn btn-large btn-flat waves-effect blue black-text'
+                                >
+                                    Calendar
+                                </Link>
+                                <Link
+                                    to='/'
+                                    style={{
+                                        width: '140px',
+                                        borderRadius: '3px',
+                                        letterSpacing: '1.5px',
+                                        padding: '12px',
+                                    }}
+                                    className='btn btn-large btn-flat waves-effect blue black-text'
+                                >
+                                    Back to home
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 

@@ -1,5 +1,5 @@
 import Landing from './components/landing.js'
-// import Login from './components/login'
+import Login from './components/Login'
 // // import RegisterUser from "./components/RegisterUser";
 // // import RegisterDriver from "./components/RegisterDriver";
 // // import RegisterWebManager from "./components/RegisterWebManager";
@@ -22,7 +22,9 @@ import Landing from './components/landing.js'
 // // import EmployeeOrders from "./components/EmployeeOrders";
 // // import WebManagerReviewList from './components/WebManagerReviewList.jsx';
 // // import CustomerReviewList from './components/CustomerReviewList.jsx';
-
+// this is the private route
+import StudentHome from "./components/student/studentLanding";
 export const ROUTES = [
-    { path: '/', component: Landing }
+    { path: '/', component: Landing },
+    { path: '/student/home', component: StudentHome }
 ]

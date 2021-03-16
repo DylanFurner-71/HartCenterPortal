@@ -1,5 +1,46 @@
-// const app = require("./server.js");
-// app.listen(8000, () => {
-//   console.log("Server has started!");
-// });
-// export default app;
+
+const dotenv = require("dotenv");
+dotenv.config({ path: "./config/config.env" });
+const express = require("express");
+// var path = require('path');
+const cors = require("cors");
+const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
+const routes = require('./routes.js');
+const app = express();
+const path = "./public";
+app.use(cors());
+
+//controller imports 
+const student = require("./controllers/student");
+const login = require("./controllers/login");
+const admin = require("./controllers/admin");
+const response = require("./controllers/response");
+const competency = require("./controllers/competency");
+const publicPath = path;
+app.use(express.json());
+app.use(express.static(publicPath));
+var router = express.Router()
+const port = process.env.PORT || 8000;
+// middleware that is specific to this router
+router.use(function timeLog (req, res, next) {
+  console.log('Time: ', Date.now())
+  next()
+})
+const config = {
+  name: "hartBE"
+}
+const logger = log({ console: true, file: false, label: config.name });
+routes(app, logger);
+student(app, logger);
+admin(app, logger);
+login(app, logger);
+response(app, logger);
+competency(app, logger);
+var server = app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port: ${process.env.PORT}`);
+});
+app.get("/", (req, res) => {
+  res.send("/ is running just fine");
+});
+
+module.exports = server;
