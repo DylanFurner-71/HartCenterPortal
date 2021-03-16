@@ -10,35 +10,35 @@ import { Link } from 'react-router-dom';
 // import base_url from '../base_url';
 const base_url = "placeholder";
 const Landing = () => {
-    const { user } = useSelector(state => state.auth);
-    const [appointments, setAppointments] = useState([]);
-    const [services, setServices] = useState([]);
-    useEffect(() => {
-        const fetchStylist = async () => {
-            await axios
-                .get(`http://${base_url}:8000/api/stylists/${user.id}`)
-                .then(res => {
-                    const stylistData = res.data.stylist;
-                    console.log(stylistData);
-                    setServices(stylistData.services);
-                });
-        };
-        fetchStylist();
-    }, [services]);
+    // const { user } = useSelector(state => state.auth);
+    // const [appointments, setAppointments] = useState([]);
+    // const [services, setServices] = useState([]);
+    // useEffect(() => {
+    //     const fetchStylist = async () => {
+    //         await axios
+    //             .get(`http://${base_url}:8000/api/stylists/${user.id}`)
+    //             .then(res => {
+    //                 const stylistData = res.data.stylist;
+    //                 console.log(stylistData);
+    //                 setServices(stylistData.services);
+    //             });
+    //     };
+    //     fetchStylist();
+    // }, [services]);
 
-    useEffect(() => {
-        const fetchAppointments = async () => {
-            await axios
-                .get(
-                    `http://${base_url}:8000/api/stylists/appointments/${user.id}`
-                )
-                .then(res => {
-                    const appts = res.data.appointments;
-                    setAppointments(appts);
-                });
-        };
-        fetchAppointments();
-    }, [appointments]);
+    // useEffect(() => {
+    //     const fetchAppointments = async () => {
+    //         await axios
+    //             .get(
+    //                 `http://${base_url}:8000/api/stylists/appointments/${user.id}`
+    //             )
+    //             .then(res => {
+    //                 const appts = res.data.appointments;
+    //                 setAppointments(appts);
+    //             });
+    //     };
+    //     fetchAppointments();
+    // }, [appointments]);
     return (
         <div
             className='container justify-content-center align-items-center h-100'

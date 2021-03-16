@@ -29,6 +29,13 @@ router.use(function timeLog (req, res, next) {
 const config = {
   name: "hartBE"
 }
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({
+   extended: false
+}));
+
+app.use(bodyParser.json());
 const logger = log({ console: true, file: false, label: config.name });
 routes(app, logger);
 student(app, logger);
