@@ -17,15 +17,16 @@ class Login extends Component {
             password: "",
             modalShow: false,
             error: {},
-            isStudent: false,
             loggedIn: {},
+            user: {}
         };
     }
 
     componentDidMount() {
         // If logged in and user navigates to Login page, should redirect them to dashboard
-        if (this.props.auth.isAuthenticated) {
-            if (this.state.isStudent === false){
+        if (this.state.user.accessToken) {
+            console.log("poops", this.props);
+            if (this.state.user.info.isStudent === false){
             this.props.history.push(`/admin/home/}`); // push user to dashboard when they login
             } else {
                 // this.props.history.push(`/student/home/smu_id=${this.props.auth.user.smu_id}`);
@@ -42,7 +43,28 @@ class Login extends Component {
             smu_email: this.state.email,
             smu_id: this.state.password,
         };
-        this.props.login(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+        try {
+            const t =  login(userData, this.props.history).then((result) => {return result}).then(t => {
+                this.setState({user: t})
+                console.log("user", this.state.user);
+                if (this.state.user.user.isStudent == true){
+                this.props.history.push(`/student/home`); 
+            } else {
+                this.props.history.push(`/admin/home`)} 
+        }) 
+            
+        //     console.log("tttt", t);
+        //   if (t) { 
+        //         this.setState({user: t})
+        //         console.log("user", this.state.user);
+        //         if (this.state.user.isStudent == true){
+        //         this.props.history.push(`/student/home`)} 
+        //     } else {
+        //         this.props.history.push(`/admin/home`)} 
+        } catch (e){
+            console.log(e);
+        }
+               // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
     };
 
     render() {
@@ -102,5 +124,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
     mapStateToProps,
-    {login}
+    null
 )(Login);

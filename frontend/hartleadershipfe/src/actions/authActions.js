@@ -5,6 +5,7 @@ import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from './types';
 import {HartAPIPrefix } from "../prefixes/hart";
 // Register User
 axios.defaults.baseURL = HartAPIPrefix;
+
 // Change Password
 // export const changePassword = (userData, history) => dispatch => {
 //     axios
@@ -17,37 +18,59 @@ axios.defaults.baseURL = HartAPIPrefix;
 //             })
 //         );
 // };
-export const login = userData => dispatch => {
-        axios
-            .post('/login/', userData)
-            .then(res => {
-                // if (localStorage.getItem('user', token)){
-                //     console.log("What does thi smean?");
-                // }
-                // Save to localStorage
-                // Set token to localStorage
-                 console.log(res.data);
-                if (res.data.accessToken){
-                    const token=res.data.accessToken;
-                localStorage.setItem('accessToken', res.data.accessToken);
 
-                // Set token to Auth header
-                setAuthToken(token);
-                // Decode token to get user data
-                const decoded = jwt_decode(token);
-                console.log("decoded", decoded);
-                // Set current user
-                dispatch(setCurrentUser(res.data.user));
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err,
-                });
-            });
+/*
+        /*
+import axios from "axios";
+const setAuthToken = token => {
+    if (token) {
+        // Apply authorization token to every request if logged in
+        axios.defaults.headers.common["Authorization"] = token;
+    } else {
+        // Delete auth header
+        delete axios.defaults.headers.common["Authorization"];
+    }
 };
+export default setAuthToken;
+*/
+
+
+export function login (userData, dispatch) {
+    return new Promise( (resolve, reject) => { 
+        axios
+        .post('/login/', userData)
+        .then(res => {
+            if (res.err) reject();
+            // Save to localStorage
+            // Set token to localStorage
+             console.log(res.data);
+             console.log("response::::", res, "a;lsdkj");
+            if (res.data.accessToken){
+            localStorage.setItem('user', res.data);
+            // Set token to Auth header
+            // setAuthToken(token);
+            const decoded = jwt_decode(res.data.accessToken);
+                    // Set current user
+                    setAuthToken(decoded);
+            // Decode token to get user data
+            // Set current user
+            console.log(res.data);
+            return resolve(res.data);
+            }
+
+        })
+        .catch(err => {
+            console.log(err);
+            // dispatch({
+            //     type: GET_ERRORS,
+            //     payload: err,
+            // });
+        })
+    }, function (error, results, fields) {
+        return results;
+    })
+};
+        
 // Set logged in user
 export const setCurrentUser = user => {
     return {

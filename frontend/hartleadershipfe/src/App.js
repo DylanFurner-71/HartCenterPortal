@@ -19,20 +19,21 @@ import { ROUTES } from './routes';
 // Check for token to keep user logged in
 if (localStorage.getItem('accessToken')) {
     // Set auth token header auth
-    const token = localStorage.getItem("accessToken");
-    setAuthToken(token);
-    // Decode token and get user info and exp
-    // const decoded = jwt_decode(token);
-    // // Set user and isAuthenticated
-    store.dispatch(setCurrentUser(token));
-    // Check for expired token
-    const currentTime = Date.now() / 1000; // to get in milliseconds
-    if (token.exp < currentTime) {
-        // Logout user
-        store.dispatch(logoutUser());
-        //Redirect to login
-        window.location.href = '/login/';
-    }
+    logoutUser();
+    // const token = localStorage.getItem("accessToken");
+    // setAuthToken(token);
+    // // Decode token and get user info and exp
+    // // const decoded = jwt_decode(token);
+    // // // Set user and isAuthenticated
+    // store.dispatch(setCurrentUser(token));
+    // // Check for expired token
+    // const currentTime = Date.now() / 1000; // to get in milliseconds
+    // if (token.exp < currentTime) {
+    //     // Logout user
+    //     store.dispatch(logoutUser());
+    //     //Redirect to login
+    //     window.location.href = '/login/';
+    // }
 }
 
 function App() {
