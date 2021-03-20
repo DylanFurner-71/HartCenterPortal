@@ -99,9 +99,10 @@ if (user.user.isStudent === false){
         <NavDropdown.Item href ="/hartassessmentslink"> Survey 1</NavDropdown.Item>
         <NavDropdown.Item href ="/hartassessmentslink"> Survey 2</NavDropdown.Item>
 </NavDropdown>
-  <Nav.Link href ="studenthelpsme"> 
-        My Leadership
-  </Nav.Link>
+  <NavDropdown title ="My Leadership" id = "basic-nav-dropdown">
+  <NavDropdown.Item href ="/leadership/me/"> My Leadership Dashboard </NavDropdown.Item>
+  <NavDropdown.Item href ="/competency/library/"> Competency Library </NavDropdown.Item>
+  </NavDropdown>
   <Nav.Link href ="studenthelpsme"> 
         Career
   </Nav.Link>
