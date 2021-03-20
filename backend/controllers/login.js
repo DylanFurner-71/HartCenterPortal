@@ -19,7 +19,9 @@ module.exports = function login(app, logger) {
    try {
       callLogin(smu_email, smu_id).then(response => { //once I finish this I will add a check to see i the user is admin and thenn call an admin login
         if (response && response.length > 0) {
-        let user = {info: response[0], isStudent: true};
+          const isStudent = response[0].role.includes('admin') ? false : true;
+          console.log("Is Studnent", isStudent);
+        let user = {info: response[0], isStudent};
       let accessToken = jwt.sign({"user": user}, process.env.ACCESS_TOKEN_SECRET,  { algorithm: 'HS256' });
         return res.send({accessToken, user});
       }

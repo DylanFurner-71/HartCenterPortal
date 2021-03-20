@@ -30,7 +30,9 @@ const Navigation = props => {
     const dispatch = useDispatch();
     console.log("user i avigatio", user);
     const onLogout = () => {
-        dispatch(logoutUser())
+        dispatch(logoutUser());
+        window.location.href = '/login/';
+
     };
     if (localStorage.getItem("accessToken")){
 if (user.user.isStudent === false){
