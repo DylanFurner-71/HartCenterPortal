@@ -1,6 +1,6 @@
 import Landing from './components/landing.js'
 import Login from './components/Login'
-import CompetencyLibrary from "./components/student/"
+import CompetencyLibrary from "./components/student/CompetencyLibrary"
 // this is the private route
 import StudentHome from "./components/student/studentLanding";
 export const ROUTES = [

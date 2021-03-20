@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../actions/authActions.js';
 import {HartAPIPrefix} from '../../prefixes/hart';
 import { Link } from 'react-router-dom';
+import Col from "react-bootstrap/Col"
 const competencyCard = props => {
     return <div> This will someday be card for each competency </div>
 }
