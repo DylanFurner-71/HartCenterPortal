@@ -4,22 +4,38 @@ import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from "react-bootstr
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {logoutUser} from "../actions/authActions";
 import logo from "../hartCenterLogo.jpg";
+import jwt_decode from 'jwt-decode';
 
 /*
 To Do -- Logout functionality
-    Add profile picture in top right for student and admin
     create an algorithm to map and array of category names to a nav drop down menu so when she adds something its there
 */
 
+function renderLogout(onLogout) {
+    localStorage.getItem("accessToken") != null ? (
+        <button
+            onClick={onLogout}
+            className='btn btn-warning mx-2'
+        >
+            Logout
+        </button>
+    ) : (
+        <></>
+    )
 
-const Navigation = () => {
-//     const [name, setName] = useState('');
-    const user = useSelector(state => state.auth);
+}
+const Navigation = props => {
+    // const [user, setUser] = useState({});
+    const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    console.log("user i avigatio", user);
     const onLogout = () => {
-        dispatch(logoutUser())
+        dispatch(logoutUser());
+        window.location.href = '/login/';
+
     };
-if (user.isAdmin){
+    if (localStorage.getItem("accessToken")){
+if (user.user.isStudent === false){
     return (
 <div style={{  position: "sticky",
   top: "0"}}> 
@@ -46,20 +62,21 @@ if (user.isAdmin){
         </NavDropdown>
 <Nav.Link href="/students/"> Student Management </Nav.Link>
 </Nav>
+{localStorage.getItem("accessToken") != null ? (
+        <button
+            onClick={onLogout}
+            className='btn btn-warning mx-2'
+        >
+            Logout
+        </button>
+    ) : (
+        <></>
+    )}
 </Navbar>
-{user.isAuthenticated ? (
-                        <button
-                            onClick={onLogout}
-                            className='btn btn-warning mx-2'
-                        >
-                            Logout
-                        </button>
-                    ) : (
-                        <></>
-                    )}
+
 </div>
 )
-} else if (user.isStudent) {
+} else if (user.user.isStudent === true) {
     return (
 <div style={{  position: "sticky",
   top: "0"}}> 
@@ -94,25 +111,25 @@ if (user.isAdmin){
   <Nav.Link href ="studenthelpsme"> 
         Contact us
   </Nav.Link>
-
 </Nav>
+{localStorage.getItem("accessToken") != null ? (
+        <button
+            onClick={onLogout}
+            className='btn btn-warning mx-2'
+        >
+            Logout
+        </button>
+    ) : (
+        <></>
+    )}
 </Navbar>
-{user.isAuthenticated ? (
-                        <button
-                            onClick={onLogout}
-                            className='btn btn-warning mx-2'
-                        >
-                            Logout
-                        </button>
-                    ) : (
-                        <></>
-                    )}
-</div>
+
+    </div>
     );
+} 
 } else {
     return <div></div>
 }
-
 }
 
 export default Navigation;

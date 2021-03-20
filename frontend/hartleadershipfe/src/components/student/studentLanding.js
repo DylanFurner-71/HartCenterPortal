@@ -9,22 +9,22 @@ import { Link } from 'react-router-dom';
 
 const StudentLanding = () => {
     // const ourStudent = useDispatch() //maybe?
-    const user = localStorage.getItem('user');
-    // const { user } = useSelector(state => state.auth);
+    // const user = localStorage.getItem('user');
+    const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
     const [students, setStudents] = useState([]);
-    useEffect(() => {
-        const fetchStudent = async () => {
-            await axios
-                .get(`${HartAPIPrefix}/student/${user.info.smu_id}`)
-                .then(res => {
-                    const students = res.data.students;
-                    console.log(students);
-                     setStudents(students.body);
-                });
-        };
-        fetchStudent();
-    }, [students]);
+    // useEffect(() => {
+    //     const fetchStudent = async () => {
+    //         await axios
+    //             .get(`${HartAPIPrefix}/student/${user.info.smu_id}`)
+    //             .then(res => {
+    //                 const students = res.data.students;
+    //                 console.log(students);
+    //                  setStudents(students);
+    //             });
+    //     };
+    //     fetchStudent();
+    // }, [students]);
 return (
     <div
         className='container justify-content-center align-items-center h-100'
@@ -34,7 +34,7 @@ return (
             <div className='justify-content-center container valign-wrapper'>
                 <h1>
                     {' '}
-                    Hello {`${user.firstName}  ${user.lastName}`} welcome to the Hart Leadership Assessment Portal
+                    Hello {`${user.info.first_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
                 </h1>
                 <div className='container'></div>
                 <div>
@@ -42,7 +42,7 @@ return (
                         <div className='col center-align'>
                             link A
                             <Link
-                                to={`/stylists/stylistCalendar/stylistId=${user.id}`}
+                                to={`/stylists/stylistCalendar/stylistId=${user.info.smu_id}`}
                                 style={{
                                     width: '140px',
                                     borderRadius: '3px',

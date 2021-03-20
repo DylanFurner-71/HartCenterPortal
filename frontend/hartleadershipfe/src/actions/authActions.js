@@ -35,40 +35,37 @@ export default setAuthToken;
 */
 
 
-export function login (userData, dispatch) {
-    return new Promise( (resolve, reject) => { 
+export const login = userData => dispatch => {
         axios
         .post('/login/', userData)
         .then(res => {
-            if (res.err) reject();
             // Save to localStorage
             // Set token to localStorage
              console.log(res.data);
              console.log("response::::", res, "a;lsdkj");
             if (res.data.accessToken){
-            localStorage.setItem('user', res.data);
+            // localStorage.setItem('user', res.data);
+            localStorage.setItem('accessToken', res.data.accessToken);
             // Set token to Auth header
             // setAuthToken(token);
             const decoded = jwt_decode(res.data.accessToken);
                     // Set current user
-                    setAuthToken(decoded);
+            setAuthToken(res.data.accessToken);
             // Decode token to get user data
+            
             // Set current user
-            console.log(res.data);
-            return resolve(res.data);
+            console.log(decoded);
+            dispatch(setCurrentUser(decoded));
             }
 
         })
         .catch(err => {
             console.log(err);
-            // dispatch({
-            //     type: GET_ERRORS,
-            //     payload: err,
-            // });
+            dispatch({
+                type: GET_ERRORS,
+                payload: err,
+            });
         })
-    }, function (error, results, fields) {
-        return results;
-    })
 };
         
 // Set logged in user
@@ -87,7 +84,7 @@ export const setUserLoading = () => {
 // Log user out
 export const logoutUser = () => dispatch => {
     // Remove token from local storage
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('accessToken');
     // Remove auth header for future requests
     setAuthToken(false);
     // Set current user to empty object {} which will set isAuthenticated to false
