@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 const StudentLanding = () => {
     // const ourStudent = useDispatch() //maybe?
     // const user = localStorage.getItem('user');
+    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
     const [students, setStudents] = useState([]);

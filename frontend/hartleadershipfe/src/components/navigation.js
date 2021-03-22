@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Button, Navbar, Nav, NavDropdown, Form, FormControl} from "react-bootstrap"
 import {useDispatch, useSelector, useStore} from "react-redux";
 import {logoutUser} from "../actions/authActions";
-import logo from "../hartCenterLogo.jpg";
+import logo from "../images/hartCenterLogo.jpg";
 import jwt_decode from 'jwt-decode';
 
 /*
@@ -34,7 +34,7 @@ const Navigation = props => {
         window.location.href = '/login/';
 
     };
-    if (localStorage.getItem("accessToken")){
+    if (localStorage.getItem("accessToken") != null){
 if (user.user.isStudent === false){
     return (
 <div style={{  position: "sticky",
@@ -109,7 +109,7 @@ if (user.user.isStudent === false){
   <Nav.Link href ="studenthelpsme"> 
         About
   </Nav.Link>
-  <Nav.Link href ="studenthelpsme"> 
+  <Nav.Link href ="/contact/"> 
         Contact us
   </Nav.Link>
 </Nav>

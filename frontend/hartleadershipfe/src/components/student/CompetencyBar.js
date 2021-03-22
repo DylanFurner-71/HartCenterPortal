@@ -13,12 +13,11 @@ const competencyCard = props => {
 const CompetencyBar = (props) => {
     // const ourStudent = useDispatch() //maybe?
     // const user = localStorage.getItem('user');
-    const { user } = useSelector(state => state.auth.user);
-    console.log("USER ----->", user);
-    const [competencies, setCompetencies] = useState([]);
+    // const { user } = useSelector(state => state.auth.user);
+    // console.log("USER ----->", user);
+    console.log("PROPS, ", props);
 return (
     <span className="competency">
-        
         <h2>{props.competencyArea}</h2>
         {props.competencies.map(x=> {
                 <Col>
