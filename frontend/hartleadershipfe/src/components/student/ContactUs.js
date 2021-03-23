@@ -18,7 +18,7 @@ return (
         className='container justify-content-center align-items-center h-100'
     >
         <div className='row'>
-            <div className='justify-content-center container valign-wrapper'>
+            <div className='justify-content-center container align-wrapper'>
                 <h2>
                 Hart Center for Engineering Leadership
                 </h2>
@@ -35,10 +35,10 @@ return (
             </div>
             </div>
             <div className='row'> 
-        <Card style={{width: "50%"}}>
+        <Card style={{width: "44%", margin: "3%", border: "dark", }}>
             <div className="row">
-                <div className="col">
-            <Card.Img variant="left" src={Kathy} />
+                <div className="col align-items-center border border-dark">
+            <Card.Img  src={Kathy} style={{borderRadius: "50%", width: "5rem"}}/>
             </div>
             <div className="col">
             <Card.Body>
@@ -50,12 +50,12 @@ return (
             </div>
             </div>
         </Card>
-        <Card style={{width: "50%"}}>
-        <div className="row">
-                <div className="col">
-            <Card.Img variant="left" src={Assoc}/>
+        <Card style={{width: "44%", margin: "3%", border: "dark", }}>
+            <div className="row">
+                <div className="col align-items-center border border-dark">
+            <Card.Img  src={Assoc} style={{borderRadius: "50%", width: "5rem"}}/>
             </div>
-                <div className="col">
+            <div className="col">
             <Card.Body>
                 <Card.Text>Katie DeSimone</Card.Text>
                 <Card.Text>Assistant Director</Card.Text>

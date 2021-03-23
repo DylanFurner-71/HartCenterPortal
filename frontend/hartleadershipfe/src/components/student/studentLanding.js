@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../actions/authActions.js';
 import {HartAPIPrefix} from '../../prefixes/hart';
 import { Link } from 'react-router-dom';
-
+import Loading from "../Loading";
 const StudentLanding = () => {
     // const ourStudent = useDispatch() //maybe?
     // const user = localStorage.getItem('user');
@@ -14,28 +14,33 @@ const StudentLanding = () => {
     const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
     const [students, setStudents] = useState([]);
-    // useEffect(() => {
-    //     const fetchStudent = async () => {
-    //         await axios
-    //             .get(`${HartAPIPrefix}/student/${user.info.smu_id}`)
-    //             .then(res => {
-    //                 const students = res.data.students;
-    //                 console.log(students);
-    //                  setStudents(students);
-    //             });
-    //     };
-    //     fetchStudent();
-    // }, [students]);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        const fetchStudents = async () => {
+            await axios
+                .get(`${HartAPIPrefix}/student/`)
+                .then(res => {
+                    const students = res.data;
+                     setStudents(students);
+                     setIsLoading(false);
+                }).catch(err=> console.log(err))
+        };
+        fetchStudents();
+    }, []);
 return (
     <div
         className='container justify-content-center align-items-center h-100'
         style={{ marginTop: '3%' }}
     >
+        {isLoading ? (
+            <Loading />
+        ) : (
         <div className='row'>
-            <div className='justify-content-center container valign-wrapper'>
+            <div className='justify-content-center container align-wrapper'>
                 <h1>
                     {' '}
-                    Hello {`${user.info.first_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
+                    Hello {`${user.info.last_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
+                
                 </h1>
                 <div className='container'></div>
                 <div>
@@ -74,6 +79,7 @@ return (
                 </div>
             </div>
         </div>
+        )}
     </div>
 );
 };

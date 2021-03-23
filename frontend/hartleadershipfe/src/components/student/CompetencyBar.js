@@ -20,9 +20,7 @@ return (
     <span className="competency">
         <h2>{props.competencyArea}</h2>
         {props.competencies.map(x=> {
-                <Col>
-                {x.competency}
-                </Col>
+                return <div>{x.competency} </div>
         })}
     </span>
 );
