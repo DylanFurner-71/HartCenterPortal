@@ -30,6 +30,7 @@ const config = {
   name: "hartBE"
 }
 var bodyParser = require('body-parser');
+const mongooseConnect = require("./mongooseConnect.js");
 
 app.use(bodyParser.urlencoded({
    extended: false
@@ -37,7 +38,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 const logger = log({ console: true, file: false, label: config.name });
-routes(app, logger);
+//mongooseConnect();
+// routes(app); //this is where we route to our mongodbConnection, unfinished
 student(app, logger);
 admin(app, logger);
 login(app, logger);

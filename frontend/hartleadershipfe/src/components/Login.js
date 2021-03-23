@@ -40,7 +40,6 @@ class Login extends Component {
             if (this.props.auth.user.isStudent === false){
             this.props.history.push(`/admin/home/}`); // push user to dashboard when they login
             } else {
-                // this.props.history.push(`/student/home/smu_id=${this.props.auth.user.smu_id}`);
                 this.props.history.push(`/student/home/`);
             }
         }
