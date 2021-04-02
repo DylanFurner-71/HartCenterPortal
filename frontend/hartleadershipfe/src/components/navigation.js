@@ -106,7 +106,7 @@ if (user.user.isStudent === false){
   <Nav.Link href ="studenthelpsme"> 
         Career
   </Nav.Link>
-  <Nav.Link href ="studenthelpsme"> 
+  <Nav.Link href ="/about/"> 
         About
   </Nav.Link>
   <Nav.Link href ="/contact/"> 
