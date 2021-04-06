@@ -10,7 +10,6 @@ import {Card} from "react-bootstrap";
 import Kathy from "../../images/coacher.ec7dc45b3a35077c4368145c68a7719b.jpg";
 import Assoc from "../../images/contact-2.32b96c2dc3afde4dd53b201c98f828ff.png"
 const ContactUs = () => {
-    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
 return (
