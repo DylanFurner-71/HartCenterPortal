@@ -22,11 +22,11 @@ const CompetencyBar = (props) => {
             }
         },[props]);
 return (
-    <Container className="competency">
+    <Container className="competency border border-dark rounded mb-0 mx-sm my-sm" style={{zIndex:'950', margin: "1rem"}}>
          {isLoading ? (
                     <Loading/> 
                  ) : (
-                     <div >
+                     <div>
         <h2>{props.competencyArea}</h2>
                 <Row>
         {props.competencies.map(x=> {
