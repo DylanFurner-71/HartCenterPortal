@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import classnames from "classnames";
 import { HartPrefix } from "../prefixes/hart";
-// import "../register/register.css"
-// import RegisterPopup from "../register/registerPopup";
 import {login} from "../actions/authActions";
 class Login extends Component {
     constructor() {
@@ -22,10 +20,8 @@ class Login extends Component {
         };
     }
     componentWillReceiveProps(nextProps) {
-        console.log("ext, ", nextProps.auth);
         if (nextProps.auth.isAuthenticated){
             const {user} = nextProps.auth.user;
-            console.log("WEWEWEEWE", user.isStudent);
         if (user.isStudent === true){ 
 
             this.props.history.push(`/student/home`); 

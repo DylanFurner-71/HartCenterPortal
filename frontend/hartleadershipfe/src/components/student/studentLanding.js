@@ -39,7 +39,7 @@ return (
             <div className='justify-content-center container align-wrapper'>
                 <h1>
                     {' '}
-                    Hello {`${user.info.last_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
+                    Hello {`${user.info.first_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
                 
                 </h1>
                 <div className='container'></div>
