@@ -10,6 +10,7 @@ import Landing from './components/landing';
 // import Login from './components/login/login';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
+import ViewReportTable from './components/admin/ViewReportTable';
 import store from './store';
 import { ROUTES } from './routes';
 // import SendPassword from './components/sendPassword';
