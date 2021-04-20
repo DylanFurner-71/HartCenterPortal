@@ -50,7 +50,7 @@ if (user.user.isStudent === false){
 </Navbar.Brand>
 <Nav className="mr-auto"> 
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-<Nav.Link href="/statistics/"> Statistics </Nav.Link>
+<Nav.Link href="/viewReport/"> Statistics </Nav.Link>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
         <NavDropdown.Item href ="/edit/other_survey/survey1"> Survey 1</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
