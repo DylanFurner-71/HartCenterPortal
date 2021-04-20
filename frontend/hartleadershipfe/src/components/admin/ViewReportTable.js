@@ -1,6 +1,5 @@
 import React from 'react'
 import { CSVLink, CSVDownload } from "react-csv";
-import { Button } from 'reactstrap';
 import { 
   useTable, 
   usePagination,
@@ -10,7 +9,7 @@ import {
   useAsyncDebounce, 
   useRowSelect } from 'react-table'
 // A great library for fuzzy filtering/sorting items
-import matchSorter from 'match-sorter';
+import {matchSorter} from 'match-sorter';
 
 //Checkbox for selecting
 const IndeterminateCheckbox = React.forwardRef(
@@ -200,19 +199,19 @@ function NumberRangeColumnFilter({
   )
 }
 
-// function fuzzyTextFilterFn(rows, id, filterValue) {
-//   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
-// }
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
+}
 
 // // Let the table remove the filter if the string is empty
-// fuzzyTextFilterFn.autoRemove = val => !val
+fuzzyTextFilterFn.autoRemove = val => !val
 
 // Our table component
 function Table({ columns, data }) {
   const filterTypes = React.useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
-      // fuzzyText: fuzzyTextFilterFn,
+      fuzzyText: fuzzyTextFilterFn,
       // Or, override the default text filter to use
       // "startWith"
       text: (rows, id, filterValue) => {
@@ -428,20 +427,6 @@ function Table({ columns, data }) {
   )
 }
 
-// Define a custom filter filter function!
-function filterGreaterThan(rows, id, filterValue) {
-  return rows.filter(row => {
-    const rowValue = row.values[id]
-    return rowValue >= filterValue
-  })
-}
-
-// This is an autoRemove method on the filter function that
-// when given the new filter value and returns true, the filter
-// will be automatically removed. Normally this is just an undefined
-// check, but here, we want to remove the filter if it's not a number
-filterGreaterThan.autoRemove = val => typeof val !== 'number'
-
 
 const columns = [
   {
@@ -470,7 +455,8 @@ const columns = [
         Header: 'Class',
         accessor: 'class',
         Filter: SelectColumnFilter,
-        filter: "includes"
+        filter: "fuzzyText",
+        
       },
       {
         Header: 'Survey Completion Status',
@@ -488,7 +474,7 @@ const columns = [
         Header: 'Batch',
         accessor: 'batch',
         Filter: SelectColumnFilter,
-        filter: "includes"
+        filter: "fuzzyText"
       },
       {
         Header: 'Phone Number',
