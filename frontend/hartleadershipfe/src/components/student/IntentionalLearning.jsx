@@ -10,9 +10,39 @@ import Col from "react-bootstrap/Col"
 import { Button } from 'react-bootstrap';
 import Loading from "../Loading";
 import { Redirect } from 'react-router-dom'
+import { Component } from 'react';
+import {connect} from 'react-redux';
+class IntentionalLearning extends Component {
+    constructor() {
+        super();
+        // this.state = {
+        //     user: {},
+        //     competency: {}
+        // };
+    }
+    componentDidMount(){
+        console.log("Competency: ", this.props.competency);
+    }
+    componentWillMount(){
+        console.log("Competency: ", this.props.competency);
+    }
 
-const IntentionalLearning = (props) => {
-
+render(){
+ return (
+     <>
+    <div
+    className='container justify-content-center align-items-center h-100'
+>
+     <div>
+HELLO FROM INTENTIONAL LEARNING     
+</div>
+</div>
+</>
+ )
+}
 };
-
-export default IntentionalLearning;
+const mapStateToProps = (state) =>
+{
+    return { user: state.user, competency: state.competency}
+}
+export default connect(mapStateToProps, null)(IntentionalLearning);
