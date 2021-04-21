@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import HartArch from "../../images/HartLeadership.png"
 
 const HartLeadershipInfo = () => {
     const { user } = useSelector(state => state.auth.user);
@@ -10,6 +10,7 @@ return (
     <div
         className='container justify-content-center align-items-center h-100'
     >
+               <img src={HartArch}></img>
         <div className='row'>
             <div className='justify-content-center container align-wrapper'>
                 <h2>
