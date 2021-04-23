@@ -19,12 +19,9 @@
     "is-empty": "^1.2.0",
     "jquery": "^3.5.1",
     "jwt-decode": "^3.0.0-beta.2",
-<<<<<<< HEAD
     "match-sorter": "^6.3.0",
     "namor": "^2.0.2",
-=======
     "node-sass": "^5.0.0",
->>>>>>> 7fdd85aec213d181cde129465434f9bb5103bf5b
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
@@ -41,6 +38,7 @@
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "sass": "^1.32.11",
     "styled-components": "^5.2.2",
     "web-vitals": "^1.1.0"
   },

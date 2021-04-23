@@ -13,6 +13,8 @@ import Login from './components/Login';
 import ViewReportTable from './components/admin/ViewReportTable';
 import store from './store';
 import { ROUTES } from './routes';
+import HartLeadershipFramework from "./components/info/HartLeadershipFramework";
+import AboutUs from "./components/info/AboutUs";
 // import SendPassword from './components/sendPassword';
 // import ChangePassword from './components/changePassword';
 // import StylistsList from './components/search/stylistsList';
@@ -48,6 +50,8 @@ function App() {
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/home' component={Landing} />
                   <Route exact path='/login/' component={Login} />
+                  {/* <Route exact path='/fwk/' component={HartLeadershipFramework} /> 
+                <Route exact path='/abt/' component={AboutUs}/> */}
                   
                     {/* <Route
                         exact

@@ -16,6 +16,7 @@ const login = require("./controllers/login");
 const admin = require("./controllers/admin");
 const response = require("./controllers/response");
 const competency = require("./controllers/competency");
+const other = require("./controllers/other");
 const publicPath = path;
 app.use(express.json());
 app.use(express.static(publicPath));
@@ -45,6 +46,7 @@ admin(app, logger);
 login(app, logger);
 response(app, logger);
 competency(app, logger);
+other(app, logger);
 var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });
