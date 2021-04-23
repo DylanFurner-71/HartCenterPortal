@@ -8,18 +8,18 @@ import {Row, Container, Col} from "react-bootstrap/";
 const OtherSurveyCard = (props) => {
   const { user } = useSelector(state => state.auth.user);
   const [isStudent, setIsStudent] = useState(true);
-  const [survey, setSurvey] = useState(props.other)
-    const [state, setState] = useState(props.other)
-    async function deleteSurvey() {
-      console.log(survey);
+  const [survey, setSurvey] = useState({})
+    useEffect(
+      () => {
+       setSurvey(props.other);
+      },[]);
+     function deleteSurvey() {
 
        try {
         const req = {
-          body: {
-            survey: survey,
-          }
+          body: survey,
         }
-await axios
+ axios
         .delete(`${HartAPIPrefix}/other/survey/`, req)
         .then(res => {
           console.log("DELETE ITEM RESPONSE", res);

@@ -21,9 +21,9 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
         }
     })
 })
-deleteOtherSurvey = (req) => new Promise((resolve, reject) => {
+deleteOtherSurvey = async (req) => new Promise((resolve, reject) => {
     console.log(req.body)
-    pool.query("DELETE FROM Other_surveys WHERE title = ? VALUES (?)", [req.body], 
+    pool.query("DELETE FROM `Other_surveys` WHERE title = ?", req.body, 
     function (error, results, fields){
         if (error){
             reject();
@@ -36,5 +36,6 @@ deleteOtherSurvey = (req) => new Promise((resolve, reject) => {
 
 module.exports = {
     getOtherSurveys,
-    AddOtherSurvey
+    AddOtherSurvey,
+    deleteOtherSurvey
 }
