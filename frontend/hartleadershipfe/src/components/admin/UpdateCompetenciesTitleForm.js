@@ -4,19 +4,18 @@ import {editQuote} from "../../actions/authActions";
 import axios from 'axios';
 
 export function UpdateCompetenciesTitleForm(props) {
-    const { value:newQuote, bind:bindNewQuote, reset:resetNewQuote } = useInput('');    
+    const { value:newQuote, bind:bindNewQuote, reset:resetNewQuote } = useInput('');   
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Quote ${newQuote}`);
-        // submitNewQuote(newQuote, props.competency_id)
-        //call a post to submit the new quote through the API!
-        // resetNewQuote();
         try {
           const req = {
-            quote: newQuote,
+            title: newQuote,
             competency_id: props.competency_id
           }
-axios.put('/competency/edit/title', req).then(resp => console.log(resp))
+axios.put('/competency/edit/title', req).then(resp => {
+    props.updateVar(newQuote);
+});
         }  catch (e){
           console.log(e);
       }

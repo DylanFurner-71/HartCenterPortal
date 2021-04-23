@@ -13,7 +13,7 @@ export function UpdateCompetenciesDescriptionForm(props) {
         // resetNewQuote();
         try {
           const req = {
-            quote: newQuote,
+            competency_desc: newQuote,
             competency_id: props.competency_id
           }
 axios.put('/competency/edit/desc', req).then(resp => console.log(resp))

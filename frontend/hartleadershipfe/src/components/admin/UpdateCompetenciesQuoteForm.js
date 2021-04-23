@@ -8,9 +8,6 @@ export function UpdateCompetenciesQuoteForm(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Quote ${newQuote}`);
-        // submitNewQuote(newQuote, props.competency_id)
-        //call a post to submit the new quote through the API!
-        // resetNewQuote();
         try {
           const req = {
             quote: newQuote,
@@ -27,7 +24,7 @@ axios.put('/competency/edit/quote', req).then(resp => console.log(resp))
         <label>
           New Quote:
           <input type="text" {...bindNewQuote}
-          placeholder={`${props.initQuote}`}/>
+          placeholder={`${props.init}`}/>
         </label>
         <input type="submit" value="Submit" />
       </form>

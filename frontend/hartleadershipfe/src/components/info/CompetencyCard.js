@@ -11,7 +11,6 @@ import {Row, Container, Col} from "react-bootstrap/";
 import { Button } from 'react-bootstrap';
 import { setCurrentCompetency } from '../../actions/authActions.js';
 import { Redirect } from 'react-router-dom'
-
 import sa from "../../images/library/sa.jpg";
 import il from "../../images/library/il.jpg";
 import ec from "../../images/library/ec.jpg";
@@ -86,16 +85,6 @@ return (
   {redirect ? <Redirect to={{pathname: `/competency/edit/competency`}}/>: null}
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
-              {/* <iframe
-                  width="400px"
-                  height="200px"
-                  src={props.video_link}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title="Embedded youtube"
-                  style={{display: "block"}}
-                />          */}
                 {renderImage()}
     <Col>
     {`${props.competency.competency}`}
@@ -103,6 +92,7 @@ return (
             {`${props.competency.quote}`}
             <br></br>
             {`${props.competency.competency_desc}`}
+            <br></br>
             <Button onClick={onClickButton} variant="light">
               Edit
               </Button>
