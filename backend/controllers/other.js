@@ -7,10 +7,12 @@ module.exports = function other(app, logger) {
         return res.send({response})
     });
     })
-    .post((req, res, next) => { //probably append a new students list to the existing one
-      AddOtherSurvey(req)
-        }) 
-        .all((req, res, next) => { //idk
-        res.send('Other requests called'); 
-        })
+    .post((req, res, next)=> { //probably append a new students list to the existing one
+     try{
+
+      AddOtherSurvey(req).then(resp => res.send(resp))
+      } catch(error){
+        console.log(error);
+      }
+    })
 }

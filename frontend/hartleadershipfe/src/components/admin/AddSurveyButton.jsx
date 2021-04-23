@@ -17,12 +17,11 @@ export function AddSurveyButton(props) {
         try {
           const req = {
             title: newTitle,
-            desc: newDesc,
+            description: newDesc,
             link: newLink,
           }
 axios.post('/other/survey', req).then(resp => {
     console.log(resp)
-    props.updateVar();
 })
 
         }  catch (e){

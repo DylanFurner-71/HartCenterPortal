@@ -27,7 +27,6 @@ const AddOtherSurvey = (props) => {
             await axios
             .get(`${HartAPIPrefix}/other/survey/`)
             .then(res => {
-                console.log(res.data.response)
                     setSurveys(res.data.response);
                      setIsLoading(false);
                 }).catch(err=> console.log(err))
