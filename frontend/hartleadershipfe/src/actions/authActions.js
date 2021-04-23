@@ -42,25 +42,6 @@ export const setCurrentCompetency = competency => {
 export const competencies = data => dispatch => {
 
 }
-export const editQuote = body => dispatch => {
-    console.log("HELLO WORLD");
-    axios
-    .put('/competency/edit/quote', body)
-    .then(res => {
-        // Save to localStorage
-        // Set token to localStorage
-         console.log(res.data);
-         console.log("response::::", res, "a;lsdkj");
-
-    })
-    .catch(err => {
-        console.log(err);
-        dispatch({
-            type: GET_ERRORS,
-            payload: err,
-        });
-    })
-};
 export const login = userData => dispatch => {
         axios
         .post('/login/', userData)
