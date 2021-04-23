@@ -15,4 +15,13 @@ module.exports = function other(app, logger) {
         console.log(error);
       }
     })
+    .delete((req, res, next) => {
+      try {
+        deleteOtherSurvey(req).then(response => {
+          return res.send({response});
+        })
+      } catch(error){
+        console.log(error)
+      }
+    })
 }
