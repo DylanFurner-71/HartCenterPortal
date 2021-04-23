@@ -1,5 +1,4 @@
 const pool = require('../db')
-const hartPrefix = "/hartBE/v1";
 
 module.exports = function admin(app, logger) {
     app.route(`${process.env.HART}/admin/`) 

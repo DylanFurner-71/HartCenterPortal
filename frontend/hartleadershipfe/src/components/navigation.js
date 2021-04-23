@@ -95,10 +95,9 @@ if (user.user.isStudent === false){
 <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/hartassessmentslink"> Hart Leadership Survey </NavDropdown.Item>
 </NavDropdown>
-<NavDropdown title = "Other Assessments" id="basic-nav-dropdown">
-        <NavDropdown.Item href ="/hartassessmentslink"> Survey 1</NavDropdown.Item>
-        <NavDropdown.Item href ="/hartassessmentslink"> Survey 2</NavDropdown.Item>
-</NavDropdown>
+<Nav.Link href ="/other/survey"> 
+        Other Surveys
+</Nav.Link>
   <NavDropdown title ="My Leadership" id = "basic-nav-dropdown">
   <NavDropdown.Item href ="/leadership/me/"> My Leadership Dashboard </NavDropdown.Item>
   <NavDropdown.Item href ="/competency/library/"> Competency Library </NavDropdown.Item>
