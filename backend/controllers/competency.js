@@ -24,14 +24,39 @@ module.exports = function competency(app, logger) {
   })
   app.route(`${process.env.HART}/competency/insert/video`) 
   .post( (req, res, next) => {
-    console.log("REQUEST", req.body)
     setCompetencyVideo(req).then(response => {
-      console.log("RESPONSE:::::", response);
       return res.send({response});
   })    
   .catch((e)=>{
     return res.status(400).send(e);
   });
+})
+app.route(`${process.env.HART}/competency/edit/quote`) 
+.put( (req, res, next) => {
+  setCompetencyQuote(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+});
+})
+app.route(`${process.env.HART}/competency/edit/title`) 
+.put( (req, res, next) => {
+  setCompetencyTitle(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+});
+})
+app.route(`${process.env.HART}/competency/edit/desc`) 
+.put( (req, res, next) => {
+  setCompetencyDesc(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+});
 })
 
 }

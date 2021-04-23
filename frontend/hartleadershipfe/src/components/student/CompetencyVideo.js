@@ -10,7 +10,7 @@ import CompetencyButton from "./CompetencyButton";
 import Loading from "../Loading";
 import {Row, Container, Col} from "react-bootstrap/";
 
-const CompetencyBar = (props) => {
+const CompetencyVideo = (props) => {
 return (
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
@@ -36,4 +36,4 @@ return (
 );
 };
 
-export default CompetencyBar;
+export default CompetencyVideo;

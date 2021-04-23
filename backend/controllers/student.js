@@ -7,8 +7,6 @@ module.exports = function student(app, logger) {
       pool.query(
         "SELECT * FROM Student", (err, result) => {
           if (err) throw err;
-          console.log(req);
-          console.log("inside of student");
           res.end(JSON.stringify(result));
           });   
     }) 

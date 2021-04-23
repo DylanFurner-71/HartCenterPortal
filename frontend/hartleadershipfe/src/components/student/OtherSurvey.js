@@ -20,7 +20,7 @@ const OtherSurvey = (props) => {
         () => {
             const fetchVideos = async () => {
             await axios
-                .get(`${HartAPIPrefix}/competency/get/video/`)
+                .get(`${HartAPIPrefix}/other/survey/`)
                 .then(res => {
                     const videos = res.data.response;
                     const vidf = videos.filter(vid => 

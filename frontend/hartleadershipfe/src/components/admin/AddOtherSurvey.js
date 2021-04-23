@@ -13,19 +13,16 @@ import Loading from "../Loading";
 import { Redirect } from 'react-router-dom'
 import { Component } from 'react';
 import {connect} from 'react-redux';
-import CompetencyVideo from "./CompetencyVideo"
-const Competency = (props) => {
+import OtherSurvey from "../student/OtherSurvey";
+const AddOtherSurvey = (props) => {
     const { user } = useSelector(state => state.auth.user);
-    const { competency } = useSelector(state => state.competency);
-    const [videos, setVideos]= useState([]);
-    const prevProps = useRef(props);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(
         () => {
             const fetchVideos = async () => {
             await axios
-                .get(`${HartAPIPrefix}/competency/get/video/`)
-                .then(res => {
+            .get(`${HartAPIPrefix}/other/survey/`)
+            .then(res => {
                     const videos = res.data.response;
                     const vidf = videos.filter(vid => 
                         vid.competency_id === competency.competency_id
@@ -44,12 +41,10 @@ return (
                     <Loading/> 
                  ) : (
  <div>
-                    <h1><b>{competency.competency}</b></h1> 
-                   <p className="text-secondary">{competency.quote}
-            </p>
-                    {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
-                    })}
+                    <h1><b>Edit/Add/Delete Other Surveys</b></h1> 
+                    <p> Here is what the student sees: </p>
+                    <OtherSurvey></OtherSurvey>
+           
             </div>
                  ) 
                 }
@@ -58,4 +53,4 @@ return (
 );
 };
 
-export default Competency;
+export default AddOtherSurvey;

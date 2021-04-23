@@ -23,9 +23,42 @@ setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
         }
     })
 })
+setCompetencyQuote = async (info) => new Promise((resolve, reject) => {
+    console.log("Updating quote");
+    db.query("UPDATE Competency SET quote = ? WHERE competency_id = ?",
+    [info.body.quote, info.body.competency_id],
+     function (error, results, fields){
+        if (error){
+            reject();
+        }else {
+            resolve();
+        }
+    })
+})
+setCompetencyTitle = async (info) => new Promise((resolve, reject) => {
+    db.query("UPDATE Competency SET competency = ? WHERE competency_id = ?",
+    [info.body.quote, info.body.competency_id],
+     function (error, results, fields){
+        if (error){
+            reject();
+        }else {
+            resolve();
+        }
+    })
+})
+setCompetencyDesc = async (info) => new Promise((resolve, reject) => {
+    db.query("UPDATE Competency SET competency_desc = ? WHERE competency_id = ?",
+    [info.body.quote, info.body.competency_id],
+     function (error, results, fields){
+        if (error){
+            reject();
+        }else {
+            resolve();
+        }
+    })
+})
 getCompetenciesVideo = () => new Promise((resolve, reject) => {
     db.query('SELECT * FROM Competency_Videos', function (error, results, fields) {
-        console.log("Getting competency videos")
         if (error){
             reject();
         }else{
@@ -37,5 +70,9 @@ getCompetenciesVideo = () => new Promise((resolve, reject) => {
 module.exports = {
     getCompetencies,
     setCompetencyVideo,
-    getCompetenciesVideo
+    getCompetenciesVideo,
+    setCompetencyQuote,
+    setCompetencyDesc,
+    setCompetencyTitle,
+
 }

@@ -38,7 +38,7 @@ const Navigation = props => {
 if (user.user.isStudent === false){
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:0}}> 
+  top: "0", zIndex:999}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/admin/home">
     <img src={logo}
@@ -79,7 +79,7 @@ if (user.user.isStudent === false){
 } else if (user.user.isStudent === true) {
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:0}}> 
+  top: "0", zIndex:999}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/student/home">
     <img src={logo}
@@ -95,7 +95,7 @@ if (user.user.isStudent === false){
 <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/hartassessmentslink"> Hart Leadership Survey </NavDropdown.Item>
 </NavDropdown>
-<Nav.Link href ="/other/survey"> 
+<Nav.Link href ="/other/survey/"> 
         Other Surveys
 </Nav.Link>
   <NavDropdown title ="My Leadership" id = "basic-nav-dropdown">
