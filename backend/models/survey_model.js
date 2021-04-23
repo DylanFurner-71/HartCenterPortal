@@ -10,9 +10,9 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
     }
     });
   });
-  AddOtherSurvey = async (info) => new Promise((resolve, reject) => {
-    pool.query("INSERT INTO Other_surveys (title, link, description) VALUES (?, ?, ?)",
-    [info.body.title, info.body.link, info.body.description],
+  postResult = async (info) => new Promise((resolve, reject) => {
+    pool.query("INSERT INTO students (survey_result) VALUES (?)",
+    [info.body.result],
      function (error, results, fields){
         if (error){
             reject();
@@ -24,6 +24,5 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
  
 
 module.exports = {
-    getOtherSurveys,
-    AddOtherSurvey
+    postResult
 }

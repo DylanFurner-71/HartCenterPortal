@@ -1,38 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../actions/authActions.js';
+import {HartAPIPrefix} from '../../prefixes/hart';
+import { Link } from 'react-router-dom';
+import {Card} from "react-bootstrap";
 import Kathy from "../../images/coacher.ec7dc45b3a35077c4368145c68a7719b.jpg";
-import Assoc from "../../images/contact-2.32b96c2dc3afde4dd53b201c98f828ff.png";
-import ContactHeader from "../../images/contact-header.87c70e4ae6c286c3f60af60252764a87.png";
-import ContactCard from "./ContactCard";
-import {Card, Image} from "react-bootstrap";
-
-const Administrator = {
-    name: "Kathy Hubbard",
-    email: "khubbard@smu.edu",
-    image: Kathy,
-    phoneNumber: "(214)768-3033",
-    jobTitle: "Director",
-}
-const associate = { //need to store in api 
-    name: "Katie DeSimone",
-    email:"kdesimone@smu.edu",
-    image: Assoc,
-    phoneNumber: "(214)768-1842",
-    jobTitle: "Assistant Director",
-}
+import Assoc from "../../images/contact-2.32b96c2dc3afde4dd53b201c98f828ff.png"
 const ContactUs = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
 return (
-
     <div
         className='container justify-content-center align-items-center h-100'
     >
-            {/* <div className="row">
-            <div class="col-md-6 col-md-offset-3">
-<Image src={ContactHeader} style={{width: "100%"}}></Image>
-</div>
-    </div> */}
         <div className='row'>
             <div className='justify-content-center container align-wrapper'>
                 <h2>
@@ -51,8 +35,36 @@ return (
             </div>
             </div>
             <div className='row'> 
-            <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={Administrator.image} jobTitle={Administrator.jobTitle}/>
-            <ContactCard name={associate.name} email={associate.email} phoneNumber={associate.phoneNumber} image={associate.image} jobTitle={associate.jobTitle}/>
+        <Card style={{width: "44%", margin: "3%", border: "dark", }}>
+            <div className="row">
+                <div className="col align-items-center border border-dark">
+            <Card.Img  src={Kathy} style={{borderRadius: "50%", width: "5rem"}}/>
+            </div>
+            <div className="col">
+            <Card.Body>
+                <Card.Text>Kathy Hubbard</Card.Text>
+                <Card.Text>Director</Card.Text>
+                <Card.Text><a href="mailto:khubbard@smu.edu">khubbard@smu.edu</a></Card.Text>
+                <Card.Text>(214)768-3033</Card.Text>
+            </Card.Body>
+            </div>
+            </div>
+        </Card>
+        <Card style={{width: "44%", margin: "3%", border: "dark", }}>
+            <div className="row">
+                <div className="col align-items-center border border-dark">
+            <Card.Img  src={Assoc} style={{borderRadius: "50%", width: "5rem"}}/>
+            </div>
+            <div className="col">
+            <Card.Body>
+                <Card.Text>Katie DeSimone</Card.Text>
+                <Card.Text>Assistant Director</Card.Text>
+                <Card.Text><a href="mailto:kdesimone@smu.edu">kdesimone@smu.edu</a></Card.Text>
+                <Card.Text>(214)768-1842</Card.Text>
+            </Card.Body>
+            </div>
+            </div>
+        </Card>
             </div>
     </div>
 );
