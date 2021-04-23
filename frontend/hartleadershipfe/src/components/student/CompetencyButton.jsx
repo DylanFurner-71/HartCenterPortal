@@ -37,7 +37,7 @@ const CompetencyButton = (props) => {
             return <img src={sa} style={{height:"5rem", width:"5rem"}}></img>
 
         }
-        if (competency.props.competency === "Intentional Learning"){
+        if (competency.props.competency_id === 2){
             return <img src={il} style={{height:"5rem", width:"5rem"}}></img>
 
         }

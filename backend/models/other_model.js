@@ -1,6 +1,6 @@
 var pool = require('../db');
 
-getOtherSurveys = async () => await new Promise((resolve, reject) => {
+getOtherSurveys = async () => new Promise((resolve, reject) => {
     pool.query('SELECT * FROM Other_surveys',
     function(err, result, fields) {
       if (err){
@@ -10,9 +10,9 @@ getOtherSurveys = async () => await new Promise((resolve, reject) => {
     }
     });
   });
-  addOtherSurvey = async (info) => new Promise((resolve, reject) => {
-    db.query("INSERT INTO Other_surveys (title, link) VALUES (?, ?)",
-    [info.body.title, info.body.link],
+  AddOtherSurvey = async (info) => new Promise((resolve, reject) => {
+    pool.query("INSERT INTO Other_surveys (title, link) VALUES (?, ?)",
+    [info.body.title, info.body.link, info.body.desc],
      function (error, results, fields){
         if (error){
             reject();
@@ -24,5 +24,6 @@ getOtherSurveys = async () => await new Promise((resolve, reject) => {
  
 
 module.exports = {
-    getOtherSurveys
+    getOtherSurveys,
+    AddOtherSurvey
 }

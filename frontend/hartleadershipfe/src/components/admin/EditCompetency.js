@@ -22,6 +22,9 @@ const EditCompetency = (props) => {
     const { competency } = useSelector(state => state.competency);
     const [videos, setVideos]= useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [title, setTitle] = useState(competency.competency)
+    const [desc, setDesc] = useState(competency.competency_desc);
+    const [quote, setQuote] = useState(competency.quote);
     useEffect(
         () => {
             const fetchVideos = async () => {
@@ -33,8 +36,6 @@ const EditCompetency = (props) => {
                     const vidf = videos.filter(vid => 
                         vid.competency_id === competency.competency_id
                     )
-                    console.log(vidf, "vidf");
-                    console.log(competency)
                      setVideos(vidf);
                      setIsLoading(false);
                 }).catch(err=> console.log(err))
@@ -49,19 +50,26 @@ return (
                     <Loading/> 
                  ) : (
  <div>
-                    <h1><b>Competency Title: {competency.competency}</b></h1> 
+                    <h1><b>Competency Title: {title}</b></h1> 
             <br></br>
-            <p>Competency Description: {`${competency.competency_desc}`}</p>                    
+            <p> <b>Description:</b> {desc} </p>                    
             <p> This will someday allow you to update the competency image here</p>
-            <UpdateCompetenciesTitleForm init={competency.title} competency_id={competency.competency_id}>
+                 <p>Quote: {quote}</p>
+            <div
+        className='container justify-content-center align-items-center h-100 border border-dark'
+    >
+            <UpdateCompetenciesTitleForm init={competency.competency} competency_id={competency.competency_id} updateVar={setTitle}>
                 </UpdateCompetenciesTitleForm>
-            <UpdateCompetenciesDescriptionForm init={competency.desc} competency_id={competency.competency_id}>
+            <UpdateCompetenciesDescriptionForm init={competency.competency_desc} competency_id={competency.competency_id}>
                 </UpdateCompetenciesDescriptionForm>
             <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id}>
-
     </UpdateCompetenciesQuoteForm>
+    </div>
+    <div>
+        To add more videos and quizzes, use the features below
+        <h3><b>Add new video and quiz</b></h3>
+    </div>
     <br></br>
-    <p>Quote: {competency.quote} </p>
                     {videos.map(vid =>{
                         return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
                     })}

@@ -14,25 +14,27 @@ import { Redirect } from 'react-router-dom'
 import { Component } from 'react';
 import {connect} from 'react-redux';
 import OtherSurvey from "../student/OtherSurvey";
+import OtherSurveyCard from "../info/OtherSurveyCard"
+import {AddSurveyButton} from "./AddSurveyButton";
 const AddOtherSurvey = (props) => {
     const { user } = useSelector(state => state.auth.user);
     const [isLoading, setIsLoading] = useState(true);
+    const [surveys, setSurveys] = useState([]);
+ 
     useEffect(
         () => {
-            const fetchVideos = async () => {
+            const fetchSurveys = async () => {
             await axios
             .get(`${HartAPIPrefix}/other/survey/`)
             .then(res => {
-                    const videos = res.data.response;
-                    const vidf = videos.filter(vid => 
-                        vid.competency_id === competency.competency_id
-                    )
-                     setVideos(vidf);
+                console.log(res.data.response)
+                    setSurveys(res.data.response);
                      setIsLoading(false);
                 }).catch(err=> console.log(err))
             };
-                fetchVideos();
-        },[]);
+            fetchSurveys();
+        },[surveys]);
+
 return (
     <div
         className='container justify-content-center align-items-center h-100'
@@ -43,8 +45,12 @@ return (
  <div>
                     <h1><b>Edit/Add/Delete Other Surveys</b></h1> 
                     <p> Here is what the student sees: </p>
-                    <OtherSurvey></OtherSurvey>
-           
+                    {surveys.map(survey =>{
+                            return <div className="m-1"><OtherSurveyCard other={survey} updateVar={setSurveys}/></div>
+                        })
+                    }
+                    <AddSurveyButton/>
+
             </div>
                  ) 
                 }

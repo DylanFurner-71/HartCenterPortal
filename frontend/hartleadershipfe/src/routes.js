@@ -11,6 +11,8 @@ import HartLeadershipFramework from "./components/info/HartLeadershipFramework";
 import HartLeadershipInfo from "./components/info/HartLeadershipInfo";
 import UpdateCompetenciesForm from './components/admin/UpdateCompetenciesForm.js';
 import EditCompetency from './components/admin/EditCompetency';
+import AddOtherSurvey from "./components/admin/AddOtherSurvey";
+import OtherSurvey from './components/student/OtherSurvey.js';
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -22,6 +24,8 @@ export const ROUTES = [
     { path: '/about/surveyinfo', component: HartLeadershipInfo},
     { path: '/viewReport/', component:GetReportData},
     { path: '/comp/', component: UpdateCompetenciesForm},
-    { path: '/competency/edit/competency', component: EditCompetency}
+    { path: '/competency/edit/competency', component: EditCompetency},
+    { path: '/other/AddSurvey/', component: AddOtherSurvey},
+    { path: '/other/survey/', component: OtherSurvey}
 
 ]

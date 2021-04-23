@@ -104,7 +104,7 @@ return (
                     <h1><b>{competency.competency}</b></h1> 
                     {renderQuote()}
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
+                        // return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
                     })}
             </div>
                  ) 
