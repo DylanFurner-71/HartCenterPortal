@@ -1,7 +1,7 @@
 const pool = require('../db')
 const hartPrefix = "/hartBE/v1";
 const jwt = require('jsonwebtoken');
-const { getCompetencies, setCompetencyVideo, getCompetenciesVideo, setCompetencyTitle, setCompetencyDesc } = require("../models/comptencies_model");
+const { getCompetencies, setCompetencyVideo, getCompetenciesVideo,DeleteCompetencyVideo, setCompetencyTitle, setCompetencyDesc } = require("../models/comptencies_model");
 
 module.exports = function competency(app, logger) {
   app.route(`${process.env.HART}/competency/get/video`) 
@@ -40,6 +40,16 @@ app.route(`${process.env.HART}/competency/edit/quote`)
   return res.status(400).send(e);
 });
 })
+    .delete((req, res, next) => {
+      let title = req.params.id
+      try {
+        deleteOtherSurvey(title).then(response => {
+          return res.send({response});
+        })
+      } catch(error){
+        console.log(error)
+      }
+    })
 app.route(`${process.env.HART}/competency/edit/title`) 
 .put( (req, res, next) => {
   setCompetencyTitle(req).then(response => {
@@ -58,5 +68,15 @@ app.route(`${process.env.HART}/competency/edit/desc`)
   return res.status(400).send(e);
 });
 })
-
+app.route(`${process.env.HART}/competency/video/:id`) 
+.delete((req, res, next) => {
+  let title = req.params.id
+  try {
+    DeleteCompetencyVideo(title).then(response => {
+      return res.send({response});
+    })
+  } catch(error){
+    console.log(error)
+  }
+})
 }

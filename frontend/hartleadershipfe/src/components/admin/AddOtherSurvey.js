@@ -20,7 +20,7 @@ const AddOtherSurvey = (props) => {
     const { user } = useSelector(state => state.auth.user);
     const [isLoading, setIsLoading] = useState(true);
     const [surveys, setSurveys] = useState([]);
- 
+
     useEffect(
         () => {
             const fetchSurveys = async () => {
@@ -45,7 +45,7 @@ return (
                     <h1><b>Edit/Add/Delete Other Surveys</b></h1> 
                     <p> Here is what the student sees: </p>
                     {surveys.map(survey =>{
-                            return <div className="m-1"><OtherSurveyCard other={survey} updateVar={setSurveys}/></div>
+                            return <div className="m-1"><OtherSurveyCard other={survey} updateVar={setSurveys} /></div>
                         })
                     }
                     <AddSurveyButton/>

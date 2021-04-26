@@ -17,6 +17,7 @@ import {UpdateCompetenciesQuoteForm} from "./UpdateCompetenciesQuoteForm"
 import {UpdateCompetenciesTitleForm} from "./UpdateCompetenciesTitleForm";
 import {UpdateCompetenciesDescriptionForm} from "./UpdateCompetenciesDescriptionForm";
 import CompetencyVideo from "../student/CompetencyVideo"
+import {AddVideosForm} from "./AddVideosForm";
 const EditCompetency = (props) => {
     const { user } = useSelector(state => state.auth.user);
     const { competency } = useSelector(state => state.competency);
@@ -25,23 +26,25 @@ const EditCompetency = (props) => {
     const [title, setTitle] = useState(competency.competency)
     const [desc, setDesc] = useState(competency.competency_desc);
     const [quote, setQuote] = useState(competency.quote);
+    const fetchVideos = async () => {
+        await axios
+            .get(`${HartAPIPrefix}/competency/get/video/`)
+            .then(res => {
+                const videos = res.data.response;
+                console.log(videos)
+                const vidf = videos.filter(vid => 
+                    vid.competency_id === competency.competency_id
+                )
+
+                 setVideos(vidf);
+                 setIsLoading(false);
+            }).catch(err=> console.log(err))
+        };
     useEffect(
         () => {
-            const fetchVideos = async () => {
-            await axios
-                .get(`${HartAPIPrefix}/competency/get/video/`)
-                .then(res => {
-                    const videos = res.data.response;
-                    console.log(videos[0])
-                    const vidf = videos.filter(vid => 
-                        vid.competency_id === competency.competency_id
-                    )
-                     setVideos(vidf);
-                     setIsLoading(false);
-                }).catch(err=> console.log(err))
-            };
                 fetchVideos();
         },[]);
+
 return (
     <div
         className='container justify-content-center align-items-center h-100'
@@ -60,18 +63,21 @@ return (
     >
             <UpdateCompetenciesTitleForm init={competency.competency} competency_id={competency.competency_id} updateVar={setTitle}>
                 </UpdateCompetenciesTitleForm>
-            <UpdateCompetenciesDescriptionForm init={competency.competency_desc} competency_id={competency.competency_id}>
+            <UpdateCompetenciesDescriptionForm init={competency.competency_desc} competency_id={competency.competency_id} updateVar={setDesc}>
                 </UpdateCompetenciesDescriptionForm>
-            <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id}>
+            <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id} updateVar={setQuote}>
     </UpdateCompetenciesQuoteForm>
     </div>
     <div>
         To add more videos and quizzes, use the features below
         <h3><b>Add new video and quiz</b></h3>
+        <AddVideosForm updateVar={fetchVideos} competency_id={competency.competency_id}>
+
+        </AddVideosForm>
     </div>
     <br></br>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} isAdmin={true}/></div>
                     })}
             </div>
                  ) 
