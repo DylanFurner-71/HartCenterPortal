@@ -60,9 +60,9 @@ return (
     >
             <UpdateCompetenciesTitleForm init={competency.competency} competency_id={competency.competency_id} updateVar={setTitle}>
                 </UpdateCompetenciesTitleForm>
-            <UpdateCompetenciesDescriptionForm init={competency.competency_desc} competency_id={competency.competency_id}>
+            <UpdateCompetenciesDescriptionForm init={competency.competency_desc} competency_id={competency.competency_id} updateVar={setDesc}>
                 </UpdateCompetenciesDescriptionForm>
-            <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id}>
+            <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id} updateVar={setQuote}>
     </UpdateCompetenciesQuoteForm>
     </div>
     <div>

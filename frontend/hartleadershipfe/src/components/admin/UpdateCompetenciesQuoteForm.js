@@ -18,6 +18,8 @@ axios.put('/competency/edit/quote', req).then(resp => console.log(resp))
           console.log(e);
       }
       resetNewQuote();
+      props.updateVar(newQuote);
+
     }
     return (
       <form onSubmit={handleSubmit}>

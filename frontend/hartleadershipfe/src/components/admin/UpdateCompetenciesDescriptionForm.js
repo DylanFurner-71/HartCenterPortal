@@ -20,6 +20,7 @@ axios.put('/competency/edit/desc', req).then(resp => console.log(resp))
         }  catch (e){
           console.log(e);
       }
+      props.updateVar(newQuote);
       resetNewQuote();
     }
     return (

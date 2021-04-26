@@ -14,10 +14,11 @@ module.exports = function other(app, logger) {
         console.log(error);
       }
     })
+    app.route(`${process.env.HART}/other/survey/:id`) 
     .delete((req, res, next) => {
-      console.log("TRYING TO DELETE", req);
+      let title = req.params.id
       try {
-        deleteOtherSurvey(req).then(response => {
+        deleteOtherSurvey(title).then(response => {
           return res.send({response});
         })
       } catch(error){
