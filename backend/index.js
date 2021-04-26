@@ -5,7 +5,6 @@ const express = require("express");
 // var path = require('path');
 const cors = require("cors");
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-const routes = require('./routes.js');
 const app = express();
 const path = "./public";
 app.use(cors());
@@ -31,7 +30,6 @@ const config = {
   name: "hartBE"
 }
 var bodyParser = require('body-parser');
-const mongooseConnect = require("./mongooseConnect.js");
 
 app.use(bodyParser.urlencoded({
    extended: false
@@ -39,8 +37,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 const logger = log({ console: true, file: false, label: config.name });
-//mongooseConnect();
-// routes(app); //this is where we route to our mongodbConnection, unfinished
 student(app, logger);
 admin(app, logger);
 login(app, logger);

@@ -22,8 +22,7 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
     })
 })
 deleteOtherSurvey = (req) => new Promise((resolve, reject) => {
-    console.log(req)
-    pool.query("DELETE FROM Other_surveys WHERE id = ?", [req], 
+        pool.query("DELETE FROM Other_surveys WHERE id = ?", [req], 
     function (error, results, fields){
         if (error){
             reject();
