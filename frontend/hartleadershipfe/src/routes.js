@@ -6,15 +6,18 @@ import CompetencyLibrary from "./components/student/CompetencyLibrary"
 import StudentHome from "./components/student/studentLanding";
 import ContactUs from './components/student/ContactUs.js';
 import IntentionalLearning from "./components/student/IntentionalLearning";
+import AddStudents from './components/admin/AddStudents.js';
+import DebriefThankYou from './components/admin/DebriefThankYou.js';
+import SurveyStatistics from './components/admin/SurveyStatistics.js';
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
     { path: '/competency/library', component: CompetencyLibrary},
     { path: '/contact/', component: ContactUs},
-<<<<<<< HEAD
-    { path: '/viewReport/', component:GetReportData}
+    { path: '/viewReport/', component: GetReportData},
+    { path: '/uploadNewStudents/', component: AddStudents},
+    { path: '/debrief-thankyou/', component: DebriefThankYou},
+    { path: '/surveyStatistics/', component: SurveyStatistics},
 
-=======
     { path: '/competency/library/Intentional%20Learning', component: IntentionalLearning}
->>>>>>> 7fdd85aec213d181cde129465434f9bb5103bf5b
 ]

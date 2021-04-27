@@ -401,8 +401,11 @@ function Table({ columns, data }) {
         </select>
       </div>
       <br />
-      <CSVLink style={{border:"3px solid black", padding:"5px"}}data={selectedFlatRows.map(
-                d => d.original)}>Student Report</CSVLink>
+      <CSVLink 
+        style={{border:"3px solid black", padding:"7px", borderRadius:"1em", color:"black"}}
+        data={selectedFlatRows.map(d => d.original)}
+        filename='student_report.csv'
+        >Student Report</CSVLink>
       {/* <div>
         <pre>
           <code>{JSON.stringify(state.filters, null, 2)}</code>
@@ -435,12 +438,12 @@ const columns = [
       {
         Header: 'First Name',
         accessor: 'first_name',
-        filterable: false,
+        disableFilters: true,
       },
       {
         Header: 'Last Name',
         accessor: 'last_name',
-        filterable: false,
+        disableFilters: true,
       },
     ],
   },
@@ -450,7 +453,20 @@ const columns = [
       {
         Header: 'SMU ID',
         accessor: 'smu_id',
+        disableFilters: true,
       },
+      {
+        Header: 'Gender',
+        accessor: 'gender',
+        Filter: SelectColumnFilter,
+        filter: "fuzzyText",
+      },
+      // {
+      //   Header: 'Ethnicity',
+      //   accessor: 'ethnicity',
+      //   Filter: SelectColumnFilter,
+      //   filter: "fuzzyText",
+      // },
       {
         Header: 'Class',
         accessor: 'class',
@@ -461,14 +477,19 @@ const columns = [
       {
         Header: 'Survey Completion Status',
         accessor: 'surv_status',
+        Filter: SelectColumnFilter,
+        filter: "fuzzyText",
       },
       {
         Header: 'Email',
         accessor: 'smu_email',
+        disableFilters: true,
       },
       {
         Header: 'Study',
         accessor: 'study',
+        Filter: SelectColumnFilter,
+        filter: "fuzzyText",
       },
       {
         Header: 'Batch',
@@ -476,10 +497,22 @@ const columns = [
         Filter: SelectColumnFilter,
         filter: "fuzzyText"
       },
-      {
-        Header: 'Phone Number',
-        accessor: 'phonenumber',
-      },
+      // {
+      //   Header: 'Competency 1',
+      //   accessor: 'competency1',
+      //   Filter: SelectColumnFilter,
+      //   filter: "fuzzyText"
+      // },
+      // {
+      //   Header: 'Competency 2',
+      //   accessor: 'competency2',
+      //   Filter: SelectColumnFilter,
+      //   filter: "fuzzyText"
+      // },
+      // {
+      //   Header: 'Phone Number',
+      //   accessor: 'phonenumber',
+      // },
     ],
   },
 ]
