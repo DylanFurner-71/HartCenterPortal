@@ -13,79 +13,8 @@ class Surveys extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            th: this.props.info,
-            info: [
-                {
-                    type: 0,
-                    name: "birthdate",
-                    title: "Your birthdate:",
-                    input: "date",
-                    auto: "bdate"
-                },
-                {
-                    type: 0,
-                    name: "smuID",
-                    title: "Enter your SMU ID:",
-                    input: "text",
-                    auto: "name"
-                },
-                {
-                    title: "question 3",
-                    type: 0,
-                    name: "name",
-                    title: "Please enter your name:",
-                    input: "name",
-                    auto: "name"
-                },
-                {
-                    title: "question 4",
-                    type: 2,
-                    name: "test112",
-                    title: "What school do you go to?",
-                    choices: [
-                        "None",
-                        "Cox",
-                        "Lyle",
-                        "Other"
-                    ]
-                },
-                {
-                    title: "Is this your first time taking the exam?",
-                    type: 3,
-                    name: "test115"
-                },
-                {
-                    title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
-                    type: 1,
-                    name: "Candid Self Appraisal",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Management: Avoids spreading self too thin",
-                    type: 1,
-                    name: "Self Management",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Disciplined: Stays on task even under difficult circumstances",
-                    type: 1,
-                    name: "Self Disciplined",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Optimistic: Believes most problems can be solved",
-                    type: 1,
-                    name: "Optomistic",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Open to Feedback: Willing to receive constructive criticism",
-                    type: 1,
-                    name: "Open to Feedback",
-                    choice: ["GL", "User", "BL"]
-                }
-            ],
-            questionHolder: []
+            info: this.props.questions,
+            showing: false,
             
               
         };
@@ -100,10 +29,18 @@ class Surveys extends Component {
   componentDidMount(){
       
   }
+  
+  getData(){
 
+  }
 
   render() {
-    var json = { title: "Leader Comparision", showProgressBar: "top", pages: []};    
+    if(this.state.info == 'a'){
+        console.log("here");
+        return null;
+    }
+    else{
+        var json = { title: "Leader Comparision", showProgressBar: "top", pages: []};    
     var pageHolder = {questions:[]};
     for(const [index,value] of this.state.info.entries()){
         console.log(value);
@@ -188,13 +125,23 @@ class Surveys extends Component {
         var surveyData = sender.data;
         console.log(mySurvey);
         console.log(surveyData);
+        this.handleResults();
+        
     });  
     return (
+        <div>
       <Survey.Survey model={model}/>
-    );
-  }
-}
 
+      
+    </div>
+    );
+    }
+  }
+  
+}
+Surveys.defaultProps = {
+    questions: 'a'
+  };
 render(<Surveys />, document.getElementById('root'));
 export default
 (Surveys);
