@@ -3,3 +3,5 @@ node_modules
 backend/package-lock.json
 frontend/hartleadershipfe/package-lock.json
 frontend/package-lock.json
+.DS_store
+frontend./DS_store
