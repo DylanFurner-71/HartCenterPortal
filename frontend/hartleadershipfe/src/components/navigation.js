@@ -7,14 +7,20 @@ import logo from "../images/hartCenterLogo.jpg";
 import jwt_decode from 'jwt-decode';
 <<<<<<< HEAD
 import "../styles/navbar.scss"
+<<<<<<< HEAD
 =======
 
+=======
+>>>>>>> parent of d97d485... Final commit before showcase
 /*
 To Do -- Logout functionality
     create an algorithm to map and array of category names to a nav drop down menu so when she adds something its there
 */
 
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+>>>>>>> parent of d97d485... Final commit before showcase
 function renderLogout(onLogout) {
     localStorage.getItem("accessToken") != null ? (
         <button
@@ -29,6 +35,7 @@ function renderLogout(onLogout) {
 
 }
 const Navigation = props => {
+    // const [user, setUser] = useState({});
     const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
     console.log("user i avigatio", user);
@@ -61,7 +68,7 @@ if (user.user.isStudent === false){
 <Nav.Link href="/statistics/"> Statistics </Nav.Link>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
-        <NavDropdown.Item href ="/other/AddSurvey/"> Other Surveys</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
+        <NavDropdown.Item href ="other/AddSurvey/"> Other Surveys</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
         <NavDropdown.Item href ="/comp/"> Competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
         <NavDropdown.Item href ="/edit/career/"> Career</NavDropdown.Item>
         <NavDropdown.Item href ="/edit/about/"> About</NavDropdown.Item>
