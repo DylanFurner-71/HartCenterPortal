@@ -8,7 +8,7 @@ const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const app = express();
 const path = "./public";
 app.use(cors());
-
+const contact = require("./controllers/contact");
 //controller imports 
 const student = require("./controllers/student");
 const login = require("./controllers/login");
@@ -43,6 +43,7 @@ login(app, logger);
 response(app, logger);
 competency(app, logger);
 other(app, logger);
+contact(app, logger);
 var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });
