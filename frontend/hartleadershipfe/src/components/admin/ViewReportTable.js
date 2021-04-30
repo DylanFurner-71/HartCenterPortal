@@ -12,17 +12,14 @@ import {
   useRowSelect } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import {matchSorter} from 'match-sorter';
-
 //Checkbox for selecting
 const IndeterminateCheckbox = React.forwardRef(
   ({ indeterminate, ...rest }, ref) => {
     const defaultRef = React.useRef()
     const resolvedRef = ref || defaultRef
-
     React.useEffect(() => {
       resolvedRef.current.indeterminate = indeterminate
     }, [resolvedRef, indeterminate])
-
     return (
       <>
         <input type="checkbox" ref={resolvedRef} {...rest} />
@@ -30,7 +27,6 @@ const IndeterminateCheckbox = React.forwardRef(
     )
   }
 )
-
 // Define a default UI for filtering
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -42,7 +38,6 @@ function GlobalFilter({
   const onChange = useAsyncDebounce(value => {
     setGlobalFilter(value || undefined)
   }, 200)
-
   return (
     <span>
       Search:{' '}
@@ -62,13 +57,11 @@ function GlobalFilter({
     </span>
   )
 }
-
 // Define a default UI for filtering
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
 }) {
   const count = preFilteredRows.length
-
   return (
     <input
       value={filterValue || ''}
@@ -79,7 +72,6 @@ function DefaultColumnFilter({
     />
   )
 }
-
 // This is a custom filter UI for selecting
 // a unique option from a list
 function SelectColumnFilter({
@@ -94,7 +86,6 @@ function SelectColumnFilter({
     })
     return [...options.values()]
   }, [id, preFilteredRows])
-
   // Render a multi-select box
   return (
     <select
@@ -112,15 +103,11 @@ function SelectColumnFilter({
     </select>
   )
 }
-
-
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
 }
-
 // // Let the table remove the filter if the string is empty
 fuzzyTextFilterFn.autoRemove = val => !val
-
 // Our table component
 function Table({ columns, data }) {
   const filterTypes = React.useMemo(
@@ -142,7 +129,6 @@ function Table({ columns, data }) {
     }),
     []
   )
-
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -150,7 +136,6 @@ function Table({ columns, data }) {
     }),
     []
   )
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -212,11 +197,9 @@ function Table({ columns, data }) {
       ])
     }
   )
-
   // We don't want to render all of the rows for this example, so cap
   // it for this use case
   // const firstPageRows = rows.slice(0, 10)
-
   return (
     <div>
       <div style={{padding:'1em', maxWidth:'99%', overflowX:'auto'}}>
@@ -237,7 +220,7 @@ function Table({ columns, data }) {
                         : ''}
                     </span>
                   </div>
-                  
+                 
                   {/* Render the columns filter UI */}
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </th>
@@ -346,8 +329,6 @@ function Table({ columns, data }) {
     </div>
   )
 }
-
-
 const columns = [
       {
         Header: 'First Name',
@@ -381,7 +362,7 @@ const columns = [
       //   accessor: 'class',
       //   Filter: SelectColumnFilter,
       //   filter: "fuzzyText",
-        
+       
       // },
       {
         Header: 'Survey Completion Status',
@@ -435,7 +416,6 @@ const columns = [
       //   accessor: 'phonenumber',
       // },
 ]
-
 export const ViewReportTable = ({students}) => {
   return (
     <div>
