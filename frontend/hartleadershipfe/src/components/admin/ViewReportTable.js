@@ -303,6 +303,8 @@ function Table({ columns, data }) {
   // const firstPageRows = rows.slice(0, 10)
 
   return (
+    <div>
+      <div style={{padding:'1em', maxWidth:'99%', overflowX:'auto'}}>
     <>
       <table className="table table-striped table-bordered" {...getTableProps()}>
         <thead>
