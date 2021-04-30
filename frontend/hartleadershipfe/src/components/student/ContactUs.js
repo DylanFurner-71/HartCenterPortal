@@ -30,6 +30,20 @@ const ContactUs = () => {
     const [contactInfo, setContactInfo]= useState({});
     const [contactCardInfo, setContactCardInfo]= useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isStudent, setIsStudent] = useState(true);
+    const fetchContactCardInfo = async () => {
+        await axios
+            .get(`${HartAPIPrefix}/contact/contactCardInfo`)
+            .then(res => {
+                console.log("Entire response", res)
+                const videos = res.data.response;
+                setContactCardInfo(videos);
+                if (!user.isStudent === true){
+                    setIsStudent(false);
+                  }
+                 setIsLoading(false);
+            }).catch(err=> console.log(err))
+        };
     useEffect(
         () => {
             const fetchContactInfo = async () => {
@@ -38,21 +52,10 @@ const ContactUs = () => {
                 .then(res => {
                     const videos = res.data.response;
                     setContactInfo(videos);
-                    // setIsLoading(false);
 
                 }).catch(err=> console.log(err))
             };
-            const fetchContactCardInfo = async () => {
-                await axios
-                    .get(`${HartAPIPrefix}/contact/contactCardInfo`)
-                    .then(res => {
-                        console.log("Entire response", res)
-                        const videos = res.data.response;
-                        setContactCardInfo(videos);
-                        console.log("Contact Card Info::::::", videos);
-                         setIsLoading(false);
-                    }).catch(err=> console.log(err))
-                };
+  
             fetchContactInfo();
             fetchContactCardInfo();
         },[]);
@@ -70,7 +73,7 @@ return (
             {
                 contactCardInfo.map(Administrator => {
                     return (
-                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={associate.image} jobTitle={Administrator.jobTitle}/>
+                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={associate.image} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} updateVar={fetchContactCardInfo}/>
                     )
                 })
             }

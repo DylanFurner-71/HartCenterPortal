@@ -26,7 +26,7 @@ function deleteSurvey(id) {
   })
 } 
 useEffect(() => {
-  if (user.isStudent === true){
+  if (!user.isStudent === true){
     setIsStudent(false);
   }
 })
