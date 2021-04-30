@@ -80,7 +80,7 @@ return (
             {
                 contactCardInfo.map(Administrator => {
                     return (
-                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={Administrator.image} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} updateVar={fetchContactCardInfo}/>
+                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={associate.image} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} updateVar={fetchContactCardInfo}/>
                     )
                 })
             }

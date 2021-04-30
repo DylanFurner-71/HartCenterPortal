@@ -22,7 +22,7 @@ const EditContactPage = (props) => {
 
 return (
  <div>
-                    <h1><b>Edit/Add/Delete Features On The Contact Us Page</b></h1> 
+                    <h1><b>Edit/Add/Delete The Contact Us Page</b></h1> 
                     <p> Here is what the student sees: </p>
                     <ContactUs>
                     </ContactUs>
@@ -33,9 +33,7 @@ return (
                 To change line 5:
                 To add a new contact card:
                 <AddContactCardButton></AddContactCardButton>
-                 <div>
-		</div>
-                 <p> To delete a contact card, simply hit the trash can button.</p>
+                To deleete a contact card, simply hit the trash can button.
             </div>
                  ) 
                  

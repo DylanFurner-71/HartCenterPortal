@@ -68,11 +68,12 @@ if (user.user.isStudent === false){
 <Nav.Link href="/statistics/"> Statistics </Nav.Link>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
-        <NavDropdown.Item href ="other/AddSurvey/"> Other Surveys</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
-        <NavDropdown.Item href ="/comp/"> Competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
+        <NavDropdown.Item href ="/edit/other_survey/survey1"> Survey 1</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
+        <NavDropdown.Item href ="/edit/other_survey/survey2"> Survey 2</NavDropdown.Item>
+        <NavDropdown.Item href ="/edit/myleadership/competency/"> My Leadership - competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
         <NavDropdown.Item href ="/edit/career/"> Career</NavDropdown.Item>
         <NavDropdown.Item href ="/edit/about/"> About</NavDropdown.Item>
-        <NavDropdown.Item href ="/contact/edit/'"> Contact Us</NavDropdown.Item>
+        <NavDropdown.Item href ="/edit/contact/"> Contact Us</NavDropdown.Item>
         </NavDropdown>
 <Nav.Link href="/students/"> Student Management </Nav.Link>
 </Nav>
