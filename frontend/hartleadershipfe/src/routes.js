@@ -26,7 +26,7 @@ export const ROUTES = [
     { path: '/viewReport/', component:GetReportData},
     { path: '/comp/', component: UpdateCompetenciesForm},
     { path: '/competency/edit/competency', component: EditCompetency},
-    { path: '/other/AddSurvey/', component: AddOtherSurvey},
+    { path: '/admin/other/AddSurvey/', component: AddOtherSurvey},
     { path: '/other/survey/', component: OtherSurvey},
     { path: '/contact/edit/', component: EditContactPage}
 

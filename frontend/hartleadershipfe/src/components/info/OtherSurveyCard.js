@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {HartAPIPrefix} from '../../prefixes/hart';
 import axios from 'axios';
-import aa from "../../images/hartCenterLogo.jpg"
+import aa from "../../images/team-roles.png"
 import {Row, Container, Col} from "react-bootstrap/";
 
 const OtherSurveyCard = (props) => {
@@ -34,7 +34,7 @@ return (
   <div>
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
-            <img src={{aa}} style={{width: "5rem", height: "5rem"}}/>
+            <img src={aa} style={{width: "15rem", height: "15rem"}}/>
     <Col>
     <a href={survey.link}> {survey.title}</a>
     <p>{survey.description}</p>
