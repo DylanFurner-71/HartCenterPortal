@@ -38,7 +38,7 @@ const Navigation = props => {
 if (user.user.isStudent === false){
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:0}}> 
+  top: "0", zIndex:999}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/admin/home">
     <img src={logo}
@@ -55,6 +55,7 @@ if (user.user.isStudent === false){
     <NavDropdown.Item href="/debrief-thankyou/"> View/Update De-Brief Session Date and Thank You Note</NavDropdown.Item>
     <NavDropdown.Item href="/surveyStatistics/"> View Survey Result Statistics</NavDropdown.Item>
 </NavDropdown>
+<Nav.Link href="/statistics/"> Statistics </Nav.Link>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
         <NavDropdown.Item href ="/edit/other_survey/survey1"> Survey 1</NavDropdown.Item> {/* need to make this a variable after i figure out logging in*/}
@@ -83,7 +84,7 @@ if (user.user.isStudent === false){
 } else if (user.user.isStudent === true) {
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:0}}> 
+  top: "0", zIndex:999}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/student/home">
     <img src={logo}
@@ -97,12 +98,11 @@ if (user.user.isStudent === false){
 <Nav className="mr-auto"> 
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
-        <NavDropdown.Item href ="/hartassessmentslink"> Leadership Survey </NavDropdown.Item>
+        <NavDropdown.Item href ="/hartassessmentslink"> Hart Leadership Survey </NavDropdown.Item>
 </NavDropdown>
-<NavDropdown title = "Other Assessments" id="basic-nav-dropdown">
-        <NavDropdown.Item href ="/hartassessmentslink"> Survey 1</NavDropdown.Item>
-        <NavDropdown.Item href ="/hartassessmentslink"> Survey 2</NavDropdown.Item>
-</NavDropdown>
+<Nav.Link href ="/other/survey/"> 
+        Other Surveys
+</Nav.Link>
   <NavDropdown title ="My Leadership" id = "basic-nav-dropdown">
   <NavDropdown.Item href ="/leadership/me/"> My Leadership Dashboard </NavDropdown.Item>
   <NavDropdown.Item href ="/competency/library/"> Competency Library </NavDropdown.Item>
