@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import {Card, Image} from "react-bootstrap";
 const ContactCard = (props) => {
 function deleteContactCard(id) {
+    console.log("Hello World')")
     return new Promise((resolve, reject) => {
         axios.delete(`${HartAPIPrefix}/contact/contactCardInfo/${id}`)
             .then(resp => { 
