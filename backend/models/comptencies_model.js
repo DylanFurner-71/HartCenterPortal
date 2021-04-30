@@ -13,7 +13,6 @@ getCompetencies = () => new Promise((resolve, reject) => {
 });
 
 setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
-    console.log("INFFO: ", info);
     db.query("INSERT INTO Competency_Videos(competency_id, video_link, vid_desc) VALUES (?, ?, ?)",
     [info.body.competency_id, info.body.video_link, info.body.video_desc],
      function (error, results, fields){
@@ -25,7 +24,6 @@ setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
     })
 })
 setCompetencyQuote = async (info) => new Promise((resolve, reject) => {
-    console.log("Updating quote");
     db.query("UPDATE Competency SET quote = ? WHERE competency_id = ?",
     [info.body.quote, info.body.competency_id],
      function (error, results, fields){
