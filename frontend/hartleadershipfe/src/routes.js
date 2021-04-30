@@ -25,7 +25,6 @@ export const ROUTES = [
     { path: '/viewReport/', component: GetReportData},
     { path: '/debrief-thankyou/', component: DebriefThankYou},
     { path: '/surveyStatistics/', component: SurveyStatistics},
-    { path: '/competency/library/Intentional%20Learning', component: IntentionalLearning}
     { path: '/competency/library/competency', component: Competency},
     { path: '/about/', component: AboutUs},
     { path: '/about/fmwk', component: HartLeadershipFramework},

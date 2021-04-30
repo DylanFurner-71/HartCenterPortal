@@ -5,22 +5,13 @@ import {useDispatch, useSelector, useStore} from "react-redux";
 import {logoutUser} from "../actions/authActions";
 import logo from "../images/hartCenterLogo.jpg";
 import jwt_decode from 'jwt-decode';
-<<<<<<< HEAD
 import "../styles/navbar.scss"
-<<<<<<< HEAD
-=======
 
-=======
->>>>>>> parent of d97d485... Final commit before showcase
 /*
 To Do -- Logout functionality
     create an algorithm to map and array of category names to a nav drop down menu so when she adds something its there
 */
 
-<<<<<<< HEAD
->>>>>>> origin
-=======
->>>>>>> parent of d97d485... Final commit before showcase
 function renderLogout(onLogout) {
     localStorage.getItem("accessToken") != null ? (
         <button
