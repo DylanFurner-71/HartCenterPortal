@@ -11,7 +11,7 @@ import {HartAPIPrefix} from '../../prefixes/hart';
 import Loading from "../Loading";
 
 import ContactHeader from "./ContactHeader";
-const Administrator = {
+const Administrator2 = {
     name: "Kathy Hubbard",
     email: "khubbard@smu.edu",
     image: Kathy,
@@ -38,7 +38,7 @@ const ContactUs = () => {
                 console.log("Entire response", res)
                 const videos = res.data.response;
                 setContactCardInfo(videos);
-                if (!user.isStudent === true){
+                if (user.isStudent === true){
                     setIsStudent(false);
                   }
                  setIsLoading(false);
@@ -73,7 +73,7 @@ return (
             {
                 contactCardInfo.map(Administrator => {
                     return (
-                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={Administrator.image} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} updateVar={fetchContactCardInfo}/>
+                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={Administrator2.image} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} updateVar={fetchContactCardInfo}/>
                     )
                 })
             }
