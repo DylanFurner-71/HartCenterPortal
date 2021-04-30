@@ -13,6 +13,7 @@ import UpdateCompetenciesForm from './components/admin/UpdateCompetenciesForm.js
 import EditCompetency from './components/admin/EditCompetency';
 import AddOtherSurvey from "./components/admin/AddOtherSurvey";
 import OtherSurvey from './components/student/OtherSurvey.js';
+import EditContactPage from "./components/admin/EditContactPage";
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -26,6 +27,7 @@ export const ROUTES = [
     { path: '/comp/', component: UpdateCompetenciesForm},
     { path: '/competency/edit/competency', component: EditCompetency},
     { path: '/other/AddSurvey/', component: AddOtherSurvey},
-    { path: '/other/survey/', component: OtherSurvey}
+    { path: '/other/survey/', component: OtherSurvey},
+    { path: '/contact/edit/', component: EditContactPage}
 
 ]

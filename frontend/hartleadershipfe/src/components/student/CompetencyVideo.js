@@ -36,7 +36,7 @@ return (
               <br/>
               <br></br>
               <br></br>
-              <button type="button" data-toggle="modal" data-target="#quiz2mod">Take Quiz</button>
+              <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#quiz2mod">Take Quiz</button>
               </Col>
               </Row>
               {props.isAdmin === true &&  

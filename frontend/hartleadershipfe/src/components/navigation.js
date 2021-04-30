@@ -98,12 +98,15 @@ if (user.user.isStudent === false){
 <Nav.Link href ="/other/survey/"> 
         Other Surveys
 </Nav.Link>
-  <NavDropdown title ="My Leadership" id = "basic-nav-dropdown">
-  <NavDropdown.Item href ="/leadership/me/"> My Leadership Dashboard </NavDropdown.Item>
-  <NavDropdown.Item href ="/competency/library/"> Competency Library </NavDropdown.Item>
-  </NavDropdown>
+  {/* <NavDropdown title ="My Leadership" id = "basic-nav-dropdown"> */}
+  {/* <NavDropdown.Item href ="/leadership/me/"> My Leadership Dashboard </NavDropdown.Item> */}
+  {/* <NavDropdown.Item href ="/competency/library/"> Competency Library </NavDropdown.Item> */}
+  <Nav.Link href ="/competency/library"> 
+  Competency Library
+    </Nav.Link>
+  {/* </NavDropdown> */}
   <Nav.Link href ="studenthelpsme"> 
-        Career
+        Hart Center Website
   </Nav.Link>
   <Nav.Link href ="/about/"> 
         About
