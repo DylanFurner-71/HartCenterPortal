@@ -52,7 +52,6 @@ if (user.user.isStudent === false){
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 <NavDropdown title = "Admin Options" id="basic-nav-dropdown">
     <NavDropdown.Item href="/viewReport/"> View Student Reports</NavDropdown.Item>
-    <NavDropdown.Item href="/uploadNewStudents/"> Upload New Students</NavDropdown.Item>
     <NavDropdown.Item href="/debrief-thankyou/"> View/Update De-Brief Session Date and Thank You Note</NavDropdown.Item>
     <NavDropdown.Item href="/surveyStatistics/"> View Survey Result Statistics</NavDropdown.Item>
 </NavDropdown>

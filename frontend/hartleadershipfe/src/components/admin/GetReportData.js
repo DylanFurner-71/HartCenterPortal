@@ -116,7 +116,6 @@ class GetReportData extends Component {
         this.setState({students : students})
     }
     componentDidMount() {
-        // this.getStudentData();
         this.request();
     }
     request = async () => {
