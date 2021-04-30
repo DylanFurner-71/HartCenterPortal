@@ -97,10 +97,15 @@ getContactHeader = async () => new Promise((resolve, reject) => {
     }
     });
   });
- 
+  function readImageFile(file) {
+    // read binary data from a file:
+    const bitmap = fs.readFileSync(file);
+    const buf = new Buffer(bitmap);
+    return buf;
+  }
 addContactCard = (info) => new Promise((resolve, reject) => {
-    pool.query("insert into ccard(name, email, phoneNumber, jobTitle) VALUES (?, ?, ?, ?)",
-    [info.body.name, info.body.email, info.body.phoneNumber,  info.body.jobTitle],
+    pool.query("insert into ccard(name, email, phoneNumber, jobTitle, imageName) VALUES (?, ?, ?, ?, ?)",
+    [info.body.name, info.body.email, info.body.phoneNumber,  info.body.jobTitle, info.body.imageName],
     function (error, results, fields){
         if (error){
             reject();
@@ -108,7 +113,11 @@ addContactCard = (info) => new Promise((resolve, reject) => {
             resolve();
         }
     })
-})
+    //maybe call the image upload function here
+  })
+
+
+
 deleteContactCard = (req) => new Promise((resolve, reject) => {
     pool.query("DELETE FROM ccard WHERE id = ?", [req], 
     function (error, results, fields){
