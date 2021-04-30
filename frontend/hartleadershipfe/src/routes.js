@@ -1,6 +1,6 @@
 import Landing from './components/landing.js'
 import Login from './components/Login'
-import GetReportData from './components/admin/GetReportData'
+import getSurveys from './components/getSurveys'
 import CompetencyLibrary from "./components/student/CompetencyLibrary"
 // this is the private route
 import StudentHome from "./components/student/studentLanding";

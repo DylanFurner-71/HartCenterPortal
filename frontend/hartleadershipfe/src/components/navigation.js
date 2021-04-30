@@ -5,7 +5,7 @@ import {useDispatch, useSelector, useStore} from "react-redux";
 import {logoutUser} from "../actions/authActions";
 import logo from "../images/hartCenterLogo.jpg";
 import jwt_decode from 'jwt-decode';
-import "../styles/navbar.scss"
+
 /*
 To Do -- Logout functionality
     create an algorithm to map and array of category names to a nav drop down menu so when she adds something its there
@@ -38,7 +38,7 @@ const Navigation = props => {
 if (user.user.isStudent === false){
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:999}}> 
+  top: "0"}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/admin/home">
     <img src={logo}
@@ -84,7 +84,7 @@ if (user.user.isStudent === false){
 } else if (user.user.isStudent === true) {
     return (
 <div style={{  position: "sticky",
-  top: "0", zIndex:999}}> 
+  top: "0"}}> 
 <Navbar  style={{background: "#0033A0", color: "white"}} variant="dark" expand="lg" className="border-bottom">
 <Navbar.Brand href="/student/home">
     <img src={logo}
@@ -98,7 +98,11 @@ if (user.user.isStudent === false){
 <Nav className="mr-auto"> 
 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
-        <NavDropdown.Item href ="/hartassessmentslink"> Hart Leadership Survey </NavDropdown.Item>
+        <NavDropdown.Item href ="/survey"> Leadership Survey </NavDropdown.Item>
+</NavDropdown>
+<NavDropdown title = "Other Assessments" id="basic-nav-dropdown">
+        <NavDropdown.Item href ="/hartassessmentslink"> Survey 1</NavDropdown.Item>
+        <NavDropdown.Item href ="/hartassessmentslink"> Survey 2</NavDropdown.Item>
 </NavDropdown>
 <Nav.Link href ="/other/survey/"> 
         Other Surveys
@@ -113,7 +117,7 @@ if (user.user.isStudent === false){
   <Nav.Link href ="studenthelpsme"> 
         Hart Center Website
   </Nav.Link>
-  <Nav.Link href ="/about/"> 
+  <Nav.Link href ="studenthelpsme"> 
         About
   </Nav.Link>
   <Nav.Link href ="/contact/"> 

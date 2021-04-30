@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../actions/authActions.js';
+import {HartAPIPrefix} from '../../prefixes/hart';
+import { Link } from 'react-router-dom';
+import {Card} from "react-bootstrap";
 import Kathy from "../../images/coacher.ec7dc45b3a35077c4368145c68a7719b.jpg";
 import Assoc from "../../images/contact-2.32b96c2dc3afde4dd53b201c98f828ff.png";
 import ContactHeaderImage from "../../images/contact-header.87c70e4ae6c286c3f60af60252764a87.png";
@@ -26,6 +33,7 @@ const associate = { //need to store in api
     jobTitle: "Assistant Director",
 }
 const ContactUs = () => {
+    const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
     const [contactInfo, setContactInfo]= useState({});
     const [contactCardInfo, setContactCardInfo]= useState([]);
@@ -60,7 +68,6 @@ const ContactUs = () => {
             fetchContactCardInfo();
         },[]);
 return (
-
     <div
         className='container justify-content-center align-items-center h-100'
     >

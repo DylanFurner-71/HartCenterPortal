@@ -15,7 +15,6 @@ const login = require("./controllers/login");
 const admin = require("./controllers/admin");
 const response = require("./controllers/response");
 const competency = require("./controllers/competency");
-const other = require("./controllers/other");
 const publicPath = path;
 app.use(express.json());
 app.use(express.static(publicPath));
