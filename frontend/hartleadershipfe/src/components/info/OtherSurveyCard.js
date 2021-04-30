@@ -4,7 +4,7 @@ import {HartAPIPrefix} from '../../prefixes/hart';
 import axios from 'axios';
 
 import {Row, Container, Col} from "react-bootstrap/";
-
+import aa from "../../images/team-roles.png"
 const OtherSurveyCard = (props) => {
   const { user } = useSelector(state => state.auth.user);
   const [isStudent, setIsStudent] = useState(true);
@@ -34,7 +34,7 @@ return (
   <div>
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
-                {/* {renderImage()} */}
+                <img src={aa} style={{height:"15rem", width:"15rem"}}/>
     <Col>
     <a href={survey.link}> {survey.title}</a>
     <p>{survey.description}</p>
