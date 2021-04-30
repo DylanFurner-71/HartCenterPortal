@@ -219,7 +219,7 @@ function Table({ columns, data }) {
 
   return (
     <div>
-      <div style={{maxWidth:'100%', overflowX:'auto'}}>
+      <div style={{padding:'1em', maxWidth:'99%', overflowX:'auto'}}>
       <table className="table table-striped table-bordered" {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
