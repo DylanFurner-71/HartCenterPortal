@@ -37,7 +37,7 @@ const CompetencyButton = (props) => {
             return <img src={sa} style={{height:"5rem", width:"5rem"}}></img>
 
         }
-        if (competency.props.competency === "Intentional Learning"){
+        if (competency.props.competency_id === 2){
             return <img src={il} style={{height:"5rem", width:"5rem"}}></img>
 
         }
@@ -94,18 +94,20 @@ const CompetencyButton = (props) => {
         },[props]);
 return (
     <div style={{zIndex:'950', marginBottom: "1rem", height: "10rem"}}>
-        {redirect ? <Redirect to={{pathname: `/competency/library/${competency.props.competency}`}}/>: null}
+        {redirect ? <Redirect to={{pathname: `/competency/library/competency`}}/>: null}
     {isLoading ? (
         <Loading/> 
      ) : (
     <span className="competency" width="w-5">
         <Button onClick={onClickButton} variant="light">
             <Col className="justify-content-center align-items-center">
-            <Row>            {renderImage()}
+            <Row className="justify-content-center align-items-center">   
+                     {renderImage()}
             </Row>
 
             {`${competency.props.competency}`}
-             </Col></Button>
+             </Col>
+             </Button>
              
     </span>
      )}

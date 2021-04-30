@@ -5,7 +5,6 @@ const express = require("express");
 // var path = require('path');
 const cors = require("cors");
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
-const routes = require('./routes.js');
 const app = express();
 const path = "./public";
 app.use(cors());
@@ -16,6 +15,7 @@ const login = require("./controllers/login");
 const admin = require("./controllers/admin");
 const response = require("./controllers/response");
 const competency = require("./controllers/competency");
+const other = require("./controllers/other");
 const publicPath = path;
 app.use(express.json());
 app.use(express.static(publicPath));
@@ -30,7 +30,6 @@ const config = {
   name: "hartBE"
 }
 var bodyParser = require('body-parser');
-const mongooseConnect = require("./mongooseConnect.js");
 
 app.use(bodyParser.urlencoded({
    extended: false
@@ -38,13 +37,12 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 const logger = log({ console: true, file: false, label: config.name });
-//mongooseConnect();
-// routes(app); //this is where we route to our mongodbConnection, unfinished
 student(app, logger);
 admin(app, logger);
 login(app, logger);
 response(app, logger);
 competency(app, logger);
+other(app, logger);
 var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });

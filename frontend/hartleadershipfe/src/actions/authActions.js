@@ -42,7 +42,6 @@ export const setCurrentCompetency = competency => {
 export const competencies = data => dispatch => {
 
 }
-
 export const login = userData => dispatch => {
         axios
         .post('/login/', userData)

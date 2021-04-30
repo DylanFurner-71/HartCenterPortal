@@ -1,2 +1,5 @@
 node_modules
 .vscode/
+backend/package-lock.json
+frontend/hartleadershipfe/package-lock.json
+frontend/package-lock.json
