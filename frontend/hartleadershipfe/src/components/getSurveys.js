@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Surveys from "./Surveys";
+import axios from 'axios';
+import Results from "./Results";
 import PDFshow from './PDFshow';
 import image1 from './results/results01.jpg';
 import image2 from './results/results02.jpg';
@@ -25,10 +27,24 @@ class getSurveys extends Component {
             info: [
                 {
                     type: 0,
-                    name: "birthdate",
-                    title: "Your birthdate:",
-                    input: "date",
-                    auto: "bdate"
+                    name: "firstName",
+                    title: "First Name:",
+                    input: "text",
+                    auto: "text"
+                },
+                {
+                    type: 0,
+                    name: "lastName",
+                    title: "Last Name:",
+                    input: "text",
+                    auto: "text"
+                },
+                {
+                    type: 0,
+                    name: "graduationYear",
+                    title: "Graduation year:",
+                    input: "text",
+                    auto: "text"
                 },
                 {
                     type: 0,
@@ -36,26 +52,6 @@ class getSurveys extends Component {
                     title: "Enter your SMU ID:",
                     input: "text",
                     auto: "name"
-                },
-                {
-                    title: "question 3",
-                    type: 0,
-                    name: "name",
-                    title: "Please enter your name:",
-                    input: "name",
-                    auto: "name"
-                },
-                {
-                    title: "question 4",
-                    type: 2,
-                    name: "test112",
-                    title: "What school do you go to?",
-                    choices: [
-                        "None",
-                        "Cox",
-                        "Lyle",
-                        "Other"
-                    ]
                 },
                 {
                     title: "Is this your first time taking the exam?",
@@ -93,54 +89,57 @@ class getSurveys extends Component {
                     choice: ["GL", "User", "BL"]
                 },
                 {
-                    title: "Is this your first time taking the exam?",
-                    type: 3,
-                    name: "test115"
+                    title: "Self Disciplined: Stays on task even under difficult circumstances",
+                    type: 1,
+                    name: "a",
+                    choice: ["GL", "User", "BL"]
                 },
                 {
                     title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
                     type: 1,
-                    name: "Candid Self Appraisal",
+                    name: "aa",
                     choice: ["GL", "User", "BL"]
                 },
                 {
                     title: "Self Management: Avoids spreading self too thin",
                     type: 1,
-                    name: "Self Management",
+                    name: "aaa",
                     choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Is this your first time taking the exam?",
-                    type: 3,
-                    name: "test115"
                 },
                 {
                     title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
                     type: 1,
-                    name: "Candid Self Appraisal",
+                    name: "aaaa",
+                    choice: ["GL", "User", "BL"]
+                },
+                {
+                    title: "Self Disciplined: Stays on task even under difficult circumstances",
+                    type: 1,
+                    name: "aaaaa",
                     choice: ["GL", "User", "BL"]
                 },
                 {
                     title: "Self Management: Avoids spreading self too thin",
                     type: 1,
-                    name: "Self Management",
+                    name: "aaaaaa",
                     choice: ["GL", "User", "BL"]
                 },
                 {
-                    title: "Is this your first time taking the exam?",
-                    type: 3,
-                    name: "test115"
+                    title: "Self Disciplined: Stays on task even under difficult circumstances",
+                    type: 1,
+                    name: "b",
+                    choice: ["GL", "User", "BL"]
                 },
                 {
                     title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
                     type: 1,
-                    name: "Candid Self Appraisal",
+                    name: "bb",
                     choice: ["GL", "User", "BL"]
                 },
                 {
                     title: "Self Management: Avoids spreading self too thin",
                     type: 1,
-                    name: "Self Management",
+                    name: "bbb",
                     choice: ["GL", "User", "BL"]
                 }
             ],
@@ -158,6 +157,25 @@ class getSurveys extends Component {
         );
     };
     */
+    
+  
+
+  
+    handleResult = () => {
+        console.log('Results');
+    
+    }
+
+   
+    getData = async () => {
+        await axios
+            .get(`hartBE/v1/surveys/`)
+            .then(res => {
+                var fullSurvey = res.data.response;
+                this.setState({info: fullSurvey});
+            });
+    };
+    
    
     render() {
         //console.log(this.state.questions)
@@ -173,21 +191,12 @@ class getSurveys extends Component {
                 
                 { this.state.resultShowing 
                     ? <div>
-                    <img src={image1} />
-                    <img src={image2} />
-                    <img src={image3} />
-                    <img src={image4} />
-                    <img src={image5} />
-                    <img src={image6} />
-                    <img src={image7} />
-                    <img src={image8} />
-                    <img src={image9} />
-                    <img src={image10} />
+                        <Results/>
                     </div>
                     : null
                 }
                 { this.state.showing 
-                    ? <Surveys questions= {this.state.info}/>
+                    ? <Surveys questions= {this.state.info} handleResult = {this.handleResult}/>
                     : null
                 }
             </div>  
