@@ -7,10 +7,10 @@ var config = {
   port: "3306",
   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   /*
-  dbhost  : lyledb1.seas.smu.edu
-  database: hclsdata
-  username: hartadmin
-  password: hh77gg99
+  dbhost  : sacad7db01.smu.edu
+  database: dbhclssurvey2
+  username: corndog
+  password: dg54sJn1ih84bDf4
   */
 };
 // mysql connection
