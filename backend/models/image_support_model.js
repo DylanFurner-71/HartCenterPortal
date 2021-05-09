@@ -1,15 +1,13 @@
 var pool = require('../db');
+const { unlink } = require('fs');
 
-imageUpload = (info) => new Promise((resolve, reject) => {
-    // const file = info.file; // file passed from client
-    // const meta = info.body;
-    // pool.query("Insert into `bindata` (`data`, `imageName` VALUES (?, ?)",
-    // [file, meta],
-    // function (error, results, fields){
-    //     if (error){
-    //         reject();
-    //     } else {
-    //         resolve();
-    //     }
-    // })
+deleteImage = (info) => new Promise((resolve, reject) => {
+    const path = `./public/images/${image}`
+    unlink(path, (err) => {
+      if (err) throw err
+      console.log("Deleted filenane: ", path)
     })
+    })
+    module.exports = {
+        deleteImage
+    }

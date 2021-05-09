@@ -26,13 +26,10 @@ return (
                     <p> Here is what the student sees: </p>
                     <ContactUs>
                     </ContactUs>
-                To change line 1:
-                To change line 2:
-                To change line 3:
-                To change line 4:
-                To change line 5:
                 To add a new contact card:
+                <div className="w-100">
                 <AddContactCardButton></AddContactCardButton>
+                </div>
                  <div>
 		</div>
                  <p> To delete a contact card, simply hit the trash can button.</p>

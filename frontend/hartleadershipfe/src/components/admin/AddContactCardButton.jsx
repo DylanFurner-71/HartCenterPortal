@@ -1,6 +1,8 @@
 import { useInput } from '../hooks/InputHook';
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import {Row, Container, Col} from "react-bootstrap/";
+
 export function uploadSuccess({ data }) {
   return {
     type: 'UPLOAD_DOCUMENT_SUCCESS',
@@ -57,7 +59,7 @@ const changeHandler = (event) => {
             .then(response => console.log(response))
             .catch(error => console.log(error))
 
-        alert(`Submitting Quote ${newjobTitle}`);
+        alert(`Submitting New Contact card for job role: ${newjobTitle}`);
         try {
           const req = {
             name: newName,
@@ -75,28 +77,39 @@ axios.post('/contact/contactCard/add/', req).then(resp => {
       resetNewQuote();
     }
     return (
+      <Container className="competency border border-dark rounded mb-0 mx-sm my-sm" style={{zIndex:'950', margin: "1rem"}}>
+      <Col >
       <form onSubmit={handleSubmit}>
-               <label>
+        <Row>
+               <label className="w-100">
           Contact Name:
           <input type="text" {...bindNewName}
           placeholder={`The name of this new contact`}/>
         </label>
-        <label>
+        </Row>
+        <Row>
+        <label className="w-100">
         Email:
           <input type="text" {...bindNewEmail}
           placeholder={"The email of this contact"}/>
         </label>
-        <label>
+        </Row>
+        <Row>
+        <label className="w-100">
         Job Title:
           <input type="text" {...bindNewJobTitle}
           placeholder={'The job title of this person'}/>
         </label>
-        <label>
+        </Row>
+        <Row>
+        <label className="w-100">
         Phone number:
           <input type="text" {...bindNewPhoneNumber}
           placeholder={'This person\'s phone number'}/>
         </label>
-        <input type="file" name="file" onChange={changeHandler} />
+        </Row>
+        <Row>
+        <input type="file" name="file" onChange={changeHandler} className="w-100"/>
 			{isSelected ? (
 				<div>
 					<p>Filename: {selectedFile.name}</p>
@@ -109,11 +122,14 @@ axios.post('/contact/contactCard/add/', req).then(resp => {
           
 				</div>
 			) : (
-				<p>Select a file to show details</p>
+				<p className="w-100">Select a file to show details</p>
 			)}
+      </Row>
 			<div>
 			</div>
         <input type="submit" value="Submit" />
       </form>
+      </Col>
+      </Container>
     );
   }

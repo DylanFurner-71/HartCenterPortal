@@ -13,7 +13,7 @@ const {    deleteContactCard,
     getContactCardInfo,
     getContactHeader
 } = require("../models/contact_model");
-const { unlink } = require('fs');
+const { deleteImage } = require('../models/image_support_model');
 module.exports = function competency(app, logger) {
   app.route(`${process.env.HART}/contact/contactInfo`) 
 .get( (req, res, next) => {
@@ -109,12 +109,7 @@ app.route(`${process.env.HART}/contact/contactCardInfo/:id/:image`)
 .delete((req, res, next) => {
   let id = req.params.id
   let image = req.params.image
-  console.log("EHLLO", id, image)
-  const path = `./public/images/${image}`
-  unlink(path, (err) => {
-    if (err) throw err
-    console.log("Deleted filenane: ", path)
-  })
+  deleteImage(image)
   try {
     deleteContactCard(id).then(response => {
       return res.send({response});

@@ -1,4 +1,5 @@
 const { getOtherSurveys, AddOtherSurvey, deleteOtherSurvey} = require("../models/other_model");
+const { deleteImage } = require("../models/image_support_model");
 
 module.exports = function other(app, logger) {
     app.route(`${process.env.HART}/other/survey/`) 
@@ -17,9 +18,11 @@ module.exports = function other(app, logger) {
         console.log(error);
       }
     })
-    app.route(`${process.env.HART}/other/survey/:id`) 
+    app.route(`${process.env.HART}/other/survey/:id/:image`) 
     .delete((req, res, next) => {
       let title = req.params.id
+      let image = req.params.image
+      deleteImage(image)
       try {
         deleteOtherSurvey(title).then(response => {
           return res.send({response});

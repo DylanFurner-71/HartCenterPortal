@@ -9,16 +9,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import {HartAPIPrefix, HartURL} from '../../prefixes/hart';
 import Loading from "../Loading";
-
 import ContactHeader from "./ContactHeader";
-
-const Administrator2 = {
-    name: "Kathy Hubbard",
-    email: "khubbard@smu.edu",
-    image: Kathy,
-    phoneNumber: "(214)768-3033",
-    jobTitle: "Director",
-}
 const ContactUs = () => {
     const { user } = useSelector(state => state.auth.user);
     const [contactInfo, setContactInfo]= useState({});
@@ -70,7 +61,7 @@ return (
                 imgs && contactCardInfo.map(Administrator => {
                     return (
                      
-                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={`http://localhost:8000/public/images/${Administrator.imageName}`} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} imageName={Administrator.imageName}updateVar={fetchContactCardInfo}/>
+                        <ContactCard name={Administrator.name} email={Administrator.email} phoneNumber={Administrator.phoneNumber} image={`${HartURL}/public/images/${Administrator.imageName}`} jobTitle={Administrator.jobTitle} id={Administrator.id} isStudent={isStudent} imageName={Administrator.imageName}updateVar={fetchContactCardInfo}/>
                     )
                 })
             }
