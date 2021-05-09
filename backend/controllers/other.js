@@ -5,11 +5,14 @@ module.exports = function other(app, logger) {
     .get((req, res, next) => {
       getOtherSurveys(req).then(response => {
         return res.send({response})
-    });
-    })
+    }).catch((e)=>{
+      return res.status(400).send(e);
+    })})
     .post((req, res, next)=> { //probably append a new students list to the existing one
      try{
-      AddOtherSurvey(req).then(resp => res.send(resp))
+      AddOtherSurvey(req).then(resp => res.send(resp)).then(res => {return res}).catch((e)=>{
+        return res.status(400).send(e);
+      })
       } catch(error){
         console.log(error);
       }
@@ -20,6 +23,8 @@ module.exports = function other(app, logger) {
       try {
         deleteOtherSurvey(title).then(response => {
           return res.send({response});
+        }).catch((e)=>{
+          return res.status(400).send(e);
         })
       } catch(error){
         console.log(error)

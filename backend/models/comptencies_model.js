@@ -67,7 +67,7 @@ getCompetenciesVideo = () => new Promise((resolve, reject) => {
 });
 DeleteCompetencyVideo = (req) => new Promise((resolve, reject) => {
     console.log(req)
-    db.query("DELETE FROM Competency_videos WHERE vid_desc = ?", [req], 
+    db.query("DELETE FROM Competency_Videos WHERE id = ?", [req], 
     function (error, results, fields){
         if (error){
             reject();

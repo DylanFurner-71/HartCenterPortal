@@ -2,8 +2,8 @@ const mysql = require('mysql');
 var config = {
   user: 'root', //this has to be changed before deployment but i don't know how
   password: 'password',
-  server: 'localhost', 
-  database: 'db1',
+  server: '127.0.0.1', 
+  database: 'db31',
   port: "3306",
   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   /*

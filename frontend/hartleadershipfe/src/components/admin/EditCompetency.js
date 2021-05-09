@@ -77,7 +77,7 @@ return (
     </div>
     <br></br>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} isAdmin={true}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id}isAdmin={true} updateVar={fetchVideos}/></div>
                     })}
             </div>
                  ) 

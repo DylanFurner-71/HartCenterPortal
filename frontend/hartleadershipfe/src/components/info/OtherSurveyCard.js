@@ -14,7 +14,7 @@ const OtherSurveyCard = (props) => {
        setSurvey(props.other);
       },[]);
       useEffect(() => {
-  if (user.isStudent === true){
+  if (!user.isStudent === true){
     setIsStudent(false);
   }
 })
@@ -36,7 +36,7 @@ return (
            <Row>
             <img src={aa} style={{width: "15rem", height: "15rem"}}/>
     <Col>
-    <a href={survey.link}> {survey.title}</a>
+    <a href={`https://www.${survey.link}`}> {survey.title}</a>
     <p>{survey.description}</p>
     {isStudent ? (
 <></>

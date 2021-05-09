@@ -1,6 +1,5 @@
 import Landing from './components/landing.js'
 import Login from './components/Login'
-import GetReportData from './components/admin/GetReportData'
 import CompetencyLibrary from "./components/student/CompetencyLibrary"
 // this is the private route
 import StudentHome from "./components/student/studentLanding";
@@ -23,11 +22,10 @@ export const ROUTES = [
     { path: '/about/', component: AboutUs},
     { path: '/about/fmwk', component: HartLeadershipFramework},
     { path: '/about/surveyinfo', component: HartLeadershipInfo},
-    { path: '/viewReport/', component:GetReportData},
     { path: '/comp/', component: UpdateCompetenciesForm},
     { path: '/competency/edit/competency', component: EditCompetency},
     { path: '/admin/other/AddSurvey/', component: AddOtherSurvey},
     { path: '/other/survey/', component: OtherSurvey},
-    { path: '/contact/edit/', component: EditContactPage}
+    { path: '/contact/edit/', component: EditContactPage},
 
 ]

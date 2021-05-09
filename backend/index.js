@@ -19,7 +19,7 @@ let upload = multer({storage: storage});
 const cors = require("cors");
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 const app = express();
-const path = "./public";
+const path = require('path');
 app.use(cors());
 const contact = require("./controllers/contact");
 //controller imports 
@@ -31,7 +31,7 @@ const competency = require("./controllers/competency");
 const other = require("./controllers/other");
 const publicPath = path;
 app.use(express.json());
-app.use(express.static(publicPath));
+app.use('/public', express.static(path.join(__dirname, '/public/')))
 var router = express.Router()
 const port = process.env.PORT || 8000;
 // middleware that is specific to this router

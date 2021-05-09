@@ -30,6 +30,7 @@ const Competency = (props) => {
                     const vidf = videos.filter(vid => 
                         vid.competency_id === competency.competency_id
                     )
+                    console.log(vidf)
                      setVideos(vidf);
                      setIsLoading(false);
                 }).catch(err=> console.log(err))
@@ -48,7 +49,7 @@ return (
                    <p className="text-secondary">{competency.quote}
             </p>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id}/></div>
                     })}
             </div>
                  ) 
