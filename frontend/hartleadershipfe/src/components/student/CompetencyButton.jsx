@@ -4,7 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser, setCurrentCompetency } from '../../actions/authActions.js';
-import {HartAPIPrefix} from '../../prefixes/hart';
+import {HartAPIPrefix, HartURL} from '../../prefixes/hart';
 import { Link } from 'react-router-dom';
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
@@ -32,55 +32,6 @@ const CompetencyButton = (props) => {
     const prevProps = useRef(props);
     const [redirect, setRedirect] = useState(false);
     const dispatch = useDispatch();
-    function renderImage(){
-        if (competency.props.competency === "Self Awareness"){
-            return <img src={sa} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency_id === 2){
-            return <img src={il} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency === "Effective Communication"){
-            return <img src={ec} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency === "Relational Development"){
-            return <img src={rd} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency === "Embrace Diversity & Difference"){
-            return <img src={dd} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency === "Engaging Leadership"){
-            return <img src={el} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency === "Directive Leadership"){
-            return <img src={dl} style={{height:"5rem", width:"5rem"}}></img>
-        }
-        if (competency.props.competency === "Champions Effective Processes"){
-            return <img src={cep} style={{height:"5rem", width:"5rem"}}></img>
-        }
-        if (competency.props.competency == "Problem Solving"){
-            return <img src={ps} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency == "Strategic Perspective"){
-            return <img src={sp} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency == "Ethics & Integrity"){
-            return <img src={eint} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        if (competency.props.competency == "Innovative Spirit"){
-            return <img src={is} style={{height:"5rem", width:"5rem"}}></img>
-
-        }
-        return <></>
-        }
     function onClickButton(){
         setRedirect(true);
         dispatch(setCurrentCompetency(competency.props));
@@ -102,9 +53,8 @@ return (
         <Button onClick={onClickButton} variant="light">
             <Col className="justify-content-center align-items-center">
             <Row className="justify-content-center align-items-center">   
-                     {renderImage()}
-            </Row>
-
+            <img src={`${HartURL}/public/images/${competency.props.imageName}`} style={{height:"5rem", width:"5rem"}}></img>
+                        </Row>
             {`${competency.props.competency}`}
              </Col>
              </Button>

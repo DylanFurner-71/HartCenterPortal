@@ -1,7 +1,7 @@
 const pool = require('../db')
 const hartPrefix = "/hartBE/v1";
 const jwt = require('jsonwebtoken');
-const { getCompetencies, setCompetencyVideo, getCompetenciesVideo,DeleteCompetencyVideo, setCompetencyTitle, setCompetencyDesc, setCompetencyQuote } = require("../models/comptencies_model");
+const { getCompetencies, setCompetencyVideo, getCompetenciesVideo,DeleteCompetencyVideo, setCompetencyTitle, setCompetencyDesc, setCompetencyQuote, setCompetencyImage } = require("../models/comptencies_model");
 
 module.exports = function competency(app, logger) {
   app.route(`${process.env.HART}/competency/get/video`) 
@@ -62,6 +62,15 @@ app.route(`${process.env.HART}/competency/edit/title`)
 app.route(`${process.env.HART}/competency/edit/desc`) 
 .put( (req, res, next) => {
   setCompetencyDesc(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+});
+})
+app.route(`${process.env.HART}/competency/edit/image`) 
+.put( (req, res, next) => {
+  setCompetencyImage(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{

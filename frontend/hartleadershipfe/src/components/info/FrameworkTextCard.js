@@ -15,7 +15,7 @@ const FrameworkTextCard = (props) => {
             
         },[]);
 return (
-    <Container className="competency border border-dark rounded mb-0 mx-sm my-sm" style={{zIndex:'950', margin: "1rem"}}>
+    <Container className="competency border border-dark rounded mb-0 mx-sm my-sm" style={{zIndex:'950', margin: "1rem", height:"25em"}}>
          <h3>{props.title}</h3>
          <p> <b>A Good {props.type} Leader: </b></p>
          <ul>

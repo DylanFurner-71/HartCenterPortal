@@ -48,7 +48,7 @@ return (
                     <Row>
                     <Col>        <FrameworkTextCard title ="Personal Leadership - Self-Awareness, Intentional Learner, and Communicates Effectively" gl1="Is Self-Aware: Exhibits knowledge of personal values, strengths, shortcomings, and developmental opportunities. Uses self-assessment strategies to inform personal growth and development." gl2="Learns Intentionally: Has knowledge of personal learning style and leverages this knowledge to enhance personal performance, knowledge of self, others, and leadership ability." gl3="Communicates Effectively: Has the ability to communicate effectively through a variety of methods and media and within a range of contexts." type="Personal"/></Col>
                     <Col>        <FrameworkTextCard title ="Relational Leadership - Develops Relationships, Diversity and Difference, and Engaging Leadership" gl1="Develops Relationships: Creates a positive, welcoming environment; sees issues from multiple points of view; and builds effective inter- and intra-group relationships." gl2="Embraces Diversity & Differences: Recognizes the value of different perspectives, skillsets, and people; is able to facilitate productive outcomes in diverse groups."
- gl3="Engages Others: Enables others to step up and lead; creates conditions for others to shine; generates collective commitment and learning." /></Col>
+ gl3="Engages Others: Enables others to step up and lead; creates conditions for others to shine; generates collective commitment and learning." type="Relational" /></Col>
                     </Row>
                     <Row>
                     <Col>        <FrameworkTextCard title ="Functional Leadership - Directive Leadership, Champions Effective Processes, and Problem Solving
