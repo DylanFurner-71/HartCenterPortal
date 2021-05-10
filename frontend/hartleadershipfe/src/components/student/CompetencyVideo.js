@@ -14,6 +14,8 @@ const CompetencyVideo = (props) => {
     const [modalShow, setModalShow] = useState(false)
     const closeModal = () => setModalShow(false);
     const openModal = () => setModalShow(true)
+    const [videos, setVideos]= useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     function deleteVideo(id){
         return new Promise((resolve, reject) => {
             axios.delete(`${HartAPIPrefix}/competency/video/${id}`)
@@ -39,16 +41,21 @@ return (
                   style={{display: "block"}}
                 />         
     <Col>
+            {props.title}
+            <br></br>
               {props.vid_desc}
               <br/>
               <br></br>
               <br></br>
               {!modalShow && <button className="btn btn-primary" type="button" onClick={openModal}>Take Quiz</button>}
-              <QuizPopUp closeModal={closeModal} show={modalShow}/>
+              <QuizPopUp closeModal={closeModal} show={modalShow} id={props.id} isAdmin={props.isAdmin} questions={props.questions} title={props.title}/>
               </Col>
               </Row>
               {props.isAdmin === true &&  
 <div>
+    <p>
+        To edit the quizzes the students see, click the take quiz button
+    </p>
       <button onClick={() => deleteVideo(props.id)} className="btn btn-outline-secondary">
       <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
