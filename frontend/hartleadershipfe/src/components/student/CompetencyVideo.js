@@ -9,8 +9,11 @@ import { Link } from 'react-router-dom';
 import CompetencyButton from "./CompetencyButton";
 import Loading from "../Loading";
 import {Row, Container, Col} from "react-bootstrap/";
-
+import QuizPopUp from "./QuizPopUp"
 const CompetencyVideo = (props) => {
+    const [modalShow, setModalShow] = useState(false)
+    const closeModal = () => setModalShow(false);
+    const openModal = () => setModalShow(true)
     function deleteVideo(id){
         return new Promise((resolve, reject) => {
             axios.delete(`${HartAPIPrefix}/competency/video/${id}`)
@@ -40,7 +43,8 @@ return (
               <br/>
               <br></br>
               <br></br>
-              <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#quiz2mod">Take Quiz</button>
+              {!modalShow && <button className="btn btn-primary" type="button" onClick={openModal}>Take Quiz</button>}
+              <QuizPopUp closeModal={closeModal} show={modalShow}/>
               </Col>
               </Row>
               {props.isAdmin === true &&  

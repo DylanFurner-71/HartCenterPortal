@@ -24,6 +24,7 @@ setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
     })
 })
 setCompetencyQuote = async (info) => new Promise((resolve, reject) => {
+    console.log(info)
     db.query("UPDATE Competency SET quote = ? WHERE competency_id = ?",
     [info.body.quote, info.body.competency_id],
      function (error, results, fields){
