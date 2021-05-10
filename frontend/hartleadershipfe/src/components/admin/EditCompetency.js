@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 import {UpdateCompetenciesQuoteForm} from "./UpdateCompetenciesQuoteForm"
 import {UpdateCompetenciesTitleForm} from "./UpdateCompetenciesTitleForm";
 import {UpdateCompetenciesDescriptionForm} from "./UpdateCompetenciesDescriptionForm";
+import {UpdateCompetenciesImageForm} from "./UpdateCompetenciesImageForm"
 import CompetencyVideo from "../student/CompetencyVideo"
 import {AddVideosForm} from "./AddVideosForm";
 const EditCompetency = (props) => {
@@ -26,6 +27,7 @@ const EditCompetency = (props) => {
     const [title, setTitle] = useState(competency.competency)
     const [desc, setDesc] = useState(competency.competency_desc);
     const [quote, setQuote] = useState(competency.quote);
+    const [imageName, setImageName] = useState(competency.imageName)
     const fetchVideos = async () => {
         await axios
             .get(`${HartAPIPrefix}/competency/get/video/`)
@@ -67,6 +69,8 @@ return (
                 </UpdateCompetenciesDescriptionForm>
             <UpdateCompetenciesQuoteForm init={competency.quote} competency_id={competency.competency_id} updateVar={setQuote}>
     </UpdateCompetenciesQuoteForm>
+    <UpdateCompetenciesImageForm init={competency.quote} competency_id={competency.competency_id} updateVar={setImageName}>
+    </UpdateCompetenciesImageForm>
     </div>
     <div>
         To add more videos and quizzes, use the features below
@@ -77,7 +81,7 @@ return (
     </div>
     <br></br>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} isAdmin={true}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id}isAdmin={true} updateVar={fetchVideos}/></div>
                     })}
             </div>
                  ) 

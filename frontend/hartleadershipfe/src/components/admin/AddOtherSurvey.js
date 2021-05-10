@@ -24,11 +24,12 @@ const AddOtherSurvey = (props) => {
     useEffect(
         () => {
             const fetchSurveys = async () => {
+                setIsLoading(false);
             await axios
             .get(`${HartAPIPrefix}/other/survey/`)
             .then(res => {
+                console.log('response;', res)
                     setSurveys(res.data.response);
-                     setIsLoading(false);
                 }).catch(err=> console.log(err))
             };
             fetchSurveys();

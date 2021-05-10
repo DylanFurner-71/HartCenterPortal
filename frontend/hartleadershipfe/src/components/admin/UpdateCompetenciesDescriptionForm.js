@@ -7,10 +7,7 @@ export function UpdateCompetenciesDescriptionForm(props) {
     const { value:newQuote, bind:bindNewQuote, reset:resetNewQuote } = useInput('');    
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting Quote ${newQuote}`);
-        // submitNewQuote(newQuote, props.competency_id)
-        //call a post to submit the new quote through the API!
-        // resetNewQuote();
+        alert(`Submitting Description ${newQuote}`);
         try {
           const req = {
             competency_desc: newQuote,

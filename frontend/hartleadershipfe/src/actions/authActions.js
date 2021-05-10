@@ -1,10 +1,10 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from './types';
-import {HartAPIPrefix } from "../prefixes/hart";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, SET_CURRENT_COMPETENCY } from './types';
+import {HartAPIPrefix, HartURL } from "../prefixes/hart";
 // Register User
-axios.defaults.baseURL = HartAPIPrefix;
+ axios.defaults.baseURL = HartAPIPrefix;
 
 // Change Password
 // export const changePassword = (userData, history) => dispatch => {
@@ -33,16 +33,22 @@ const setAuthToken = token => {
 };
 export default setAuthToken;
 */
+export const setCurrentCompetency = competency => {
+    return {
+        type: SET_CURRENT_COMPETENCY,
+        payload: competency,
+    };
+};
+export const competencies = data => dispatch => {
 
-
+}
 export const login = userData => dispatch => {
         axios
-        .post('/login/', userData)
+        .post(`${HartAPIPrefix}/login/`, userData)
         .then(res => {
             // Save to localStorage
             // Set token to localStorage
              console.log(res.data);
-             console.log("response::::", res, "a;lsdkj");
             if (res.data.accessToken){
             // localStorage.setItem('user', res.data);
             localStorage.setItem('accessToken', res.data.accessToken);
@@ -68,44 +74,6 @@ export const login = userData => dispatch => {
         })
 };
         
-/*
-export const getSurvey = () =>{
-    axios
-    .get('/Survey_questions')
-    .then(res => {
-        connection.getConnection(function (err, connection) {
-
-        // Executing the MySQL query (select all data from the 'users' table).
-        connection.query('SELECT question_text FROM Survey_questions WHERE survey_id = 0001', function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) throw error;
-        
-              // Getting the 'response' from the database and sending it to our route. This is were the data is.
-              return(results);
-            });
-          });
-        });
-};
-
-export const surveyResult = result =>{
-    axios
-    .post('/student', (req,res))
-    .then(res => {
-        connection.getConnection(function (err, connection) {
-
-            // Executing the MySQL query (select all data from the 'users' table).
-            connection.query('UPDATE student SET survey_result = ' + result + ' WHERE smu_id = 47351594' , function (error, results, fields) {
-            // If some error occurs, we throw an error.
-            if (error) throw error;
-            
-                  // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                  return(results);
-                });
-              });
-            });
-};
-*/
-
 // Set logged in user
 export const setCurrentUser = user => {
     return {

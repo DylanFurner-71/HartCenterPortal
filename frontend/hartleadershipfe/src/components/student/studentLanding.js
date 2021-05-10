@@ -13,19 +13,20 @@ const StudentLanding = () => {
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
     console.log("USER ----->", user);
-    const [students, setStudents] = useState([]);
+    const [response, setResponse] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const fetchStudentResponse = async () => {
+        await axios
+            .get(`${HartAPIPrefix}/response/${user.info.smu_id}`)
+            .then(res => {
+                const students = res.data;
+                setResponse(students);
+                setIsLoading(false);
+            }).catch(err=> console.log(err))
+    };
     useEffect(() => {
-        const fetchStudents = async () => {
-            await axios
-                .get(`${HartAPIPrefix}/student/`)
-                .then(res => {
-                    const students = res.data;
-                     setStudents(students);
-                     setIsLoading(false);
-                }).catch(err=> console.log(err))
-        };
-        fetchStudents();
+       
+        fetchStudentResponse();
     }, []);
 return (
     <div
@@ -39,9 +40,16 @@ return (
             <div className='justify-content-center container align-wrapper'>
                 <h1>
                     {' '}
-                    Hello {`${user.info.last_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
+                    Hello {`${user.info.first_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
                 
                 </h1>
+                {response ? <div> 
+                    You have taken the survey before.
+                    Click here to view your results and competencies.
+                    </div> : 
+                    <div>
+                        You have not taken the survey before. Click here to take the Hart Leadership Survey and start learning about your individual leadership competencies and how to improve them!
+                        </div>}
                 <div className='container'></div>
                 <div>
                     <div className='row'>
