@@ -3,23 +3,13 @@ import { useInput } from '../hooks/InputHook';
 import {editQuote} from "../../actions/authActions";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../prefixes/hart';
-
+import {DeleteQuestionForm} from "./DeleteQuestionForm";
 export function EditQuizPopUp(props) {
     const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
     const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
     const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(''); 
     const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
-    const handleDelete = (id) => {
-        return new Promise((resolve, reject) => {
-            axios.delete(`${HartAPIPrefix}/competency/video/question/${id}`)
-                .then(resp =>     {            
-                resolve(resp.data)
-                }
-                )
-                .catch(err => console.log(err.response));
-        })
-    }
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -76,13 +66,6 @@ axios.post('/competency/video/quiz/', req).then(resp => {
           placeholder={`Place the fourth option here.`}/>
         </label>
         <input type="submit" value="Submit" />
-      </form>
-      <form>
-      <div className="menu">
-      {props.questions.map(vid =>{
-                        return<div className="m-2">  <button onClick={handleDelete(vid.question_id)}> Delete question named: {vid.title}</button></div>
-                    })}          
-        </div>
       </form>
       </div>
     );

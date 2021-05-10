@@ -26,12 +26,9 @@ const Competency = (props) => {
             .get(`${HartAPIPrefix}/competency/get/video/quiz`)
             .then(res => {
                 const videos = res.data.response;
+                videos.forEach(item => item.choices = [item.correctAnswer, item.choice2, item.choice3, item.choice4])
                 console.log(videos)
-                const vidf = videos.filter(vid => 
-                    vid.survey_id === props.id.toString()
-                )
-                console.log(vidf);
-                setQuestions(vidf);
+                setQuestions(videos);
                  setIsLoading(false);
             }).catch(err=> console.log(err))
         };

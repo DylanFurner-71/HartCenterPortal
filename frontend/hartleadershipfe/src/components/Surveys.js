@@ -85,6 +85,7 @@ class Surveys extends Component {
                     isRequired: true,
                     colCount: 4,
                     choices: [],
+                    choicesOrder: value['choicesOrder'],
                     correctAnswer: value['correctAnswer'],
                 };
             for(const [indexInner,valueInner] of this.state.info[index]['choices'].entries()){
