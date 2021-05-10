@@ -57,6 +57,17 @@ setCompetencyDesc = async (info) => new Promise((resolve, reject) => {
         }
     })
 })
+setCompetencyImage = async (info) => new Promise((resolve, reject) => {
+    db.query("UPDATE Competency SET imageName = ? WHERE competency_id = ?",
+    [info.body.imageName, info.body.competency_id],
+     function (error, results, fields){
+        if (error){
+            reject();
+        }else {
+            resolve();
+        }
+    })
+})
 getCompetenciesVideo = () => new Promise((resolve, reject) => {
     db.query('SELECT * FROM Competency_Videos', function (error, results, fields) {
         if (error){
@@ -86,4 +97,5 @@ module.exports = {
     setCompetencyDesc,
     setCompetencyTitle,
     DeleteCompetencyVideo,
+    setCompetencyImage
 }

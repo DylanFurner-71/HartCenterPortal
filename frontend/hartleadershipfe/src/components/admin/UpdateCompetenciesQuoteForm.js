@@ -24,7 +24,6 @@ axios.put('/competency/edit/quote', req).then(resp => console.log(resp))
     return (
       <form onSubmit={handleSubmit}>
         <label>
-          {props.competency_id}
           New Quote:
           <input type="text" {...bindNewQuote}
           placeholder={`${props.init}`}/>

@@ -97,12 +97,7 @@ getContactHeader = async () => new Promise((resolve, reject) => {
     }
     });
   });
-  function readImageFile(file) {
-    // read binary data from a file:
-    const bitmap = fs.readFileSync(file);
-    const buf = new Buffer(bitmap);
-    return buf;
-  }
+
 addContactCard = (info) => new Promise((resolve, reject) => {
     pool.query("insert into ccard(name, email, phoneNumber, jobTitle, imageName) VALUES (?, ?, ?, ?, ?)",
     [info.body.name, info.body.email, info.body.phoneNumber,  info.body.jobTitle, info.body.imageName],
