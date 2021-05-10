@@ -211,17 +211,17 @@ class Surveys extends Component {
                 }).catch(err=> console.log(err))
             
         studentHolder['self_aware'] = selfAware;
-        studentHolder['intentionalLearner'] = intentionalLearner;
+        studentHolder['intentional_learner'] = intentionalLearner;
         studentHolder['communication'] = communication;
-        studentHolder['relationshipDevelopment'] = relationshipDevelopment;
-        studentHolder['diversityDifference'] = diversityDifference;
-        studentHolder['engagingLeadership'] = engagingLeadership;
-        studentHolder['directiveLeadership'] = directiveLeadership;
-        studentHolder['championsProcesses'] = championsProcesses;
-        studentHolder['problemSolving'] = problemSolving;
-        studentHolder['strategicPerspective'] = strategicPerspective;
-        studentHolder['ethicsIntegrity'] = ethicsIntegrity;
-        studentHolder['innovativeSpirit'] = innovativeSpirit;
+        studentHolder['relationship_development'] = relationshipDevelopment;
+        studentHolder['diversity_difference'] = diversityDifference;
+        studentHolder['engaging_leadership'] = engagingLeadership;
+        studentHolder['directive_leadership'] = directiveLeadership;
+        studentHolder['champions_processes'] = championsProcesses;
+        studentHolder['problem_solving'] = problemSolving;
+        studentHolder['strategic_perspective'] = strategicPerspective;
+        studentHolder['ethics_Integrity'] = ethicsIntegrity;
+        studentHolder['innovative_spirit'] = innovativeSpirit;
         studentHolder['gender'] = surveyData['gender'];
         studentHolder['ethnicity'] = surveyData['ethnicity'];
         
