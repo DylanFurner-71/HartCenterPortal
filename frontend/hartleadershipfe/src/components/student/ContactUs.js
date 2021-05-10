@@ -55,6 +55,7 @@ return (
                     <Loading/> 
                  ) : (
                      <div>
+                         <img src={ContactHeaderImage} style={{width: "100%"}}/>
         <ContactHeader contactInfo={contactInfo[0]}/>
             <div className='row'> 
             {

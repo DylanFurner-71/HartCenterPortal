@@ -13,9 +13,11 @@ import EditCompetency from './components/admin/EditCompetency';
 import AddOtherSurvey from "./components/admin/AddOtherSurvey";
 import OtherSurvey from './components/student/OtherSurvey.js';
 import EditContactPage from "./components/admin/EditContactPage";
+import AdminLanding from "./components/admin/AdminLanding";
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
+    { path: '/admin/home', component: AdminLanding },
     { path: '/competency/library', component: CompetencyLibrary},
     { path: '/contact/', component: ContactUs},
     { path: '/competency/library/competency', component: Competency},

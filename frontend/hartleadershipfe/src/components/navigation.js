@@ -56,6 +56,7 @@ if (user.user.isStudent === false){
 <Nav.Link href="/statistics/"> Statistics </Nav.Link>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
         <NavDropdown.Item href ="/edit/hart_survey"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
+        <NavDropdown.Item href ="/admin/other/AddSurvey/"> Other Surveys </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
         <NavDropdown.Item href ="/comp/"> Competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
         <NavDropdown.Item href ="/contact/edit/"> Contact Us</NavDropdown.Item>
         </NavDropdown>
@@ -100,7 +101,7 @@ if (user.user.isStudent === false){
           <Nav.Link href ="/competency/library"> 
           Competency Library
             </Nav.Link>
-          <Nav.Link href ="studenthelpsme"> 
+          <Nav.Link href ="https://www.smu.edu/Lyle/Centers-and-Institutes/Hart"> 
                 Hart Center Website
           </Nav.Link>
           <Nav.Link href ="/about/"> 

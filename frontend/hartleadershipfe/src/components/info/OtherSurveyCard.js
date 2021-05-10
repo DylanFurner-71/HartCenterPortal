@@ -35,7 +35,7 @@ return (
            <Row>
             <img src={`${HartURL}/public/images/${survey.imageName}`} style={{width: "15rem", height: "15rem"}}/>
     <Col>
-    <a href={`https://www.${survey.link}`}> {survey.title}</a>
+    <a href={`${survey.link}`}> {survey.title}</a>
     <p>{survey.description}</p>
     {isStudent ? (
 <></>

@@ -35,12 +35,6 @@ export function AddSurveyButton(props) {
             imageName: selectedFile.name,
             
           }
-          let data = new FormData();
-          data.append('file', selectedFile);
-          data.append('name', selectedFile.name);
-             axios.post('/image/write/', data)
-              .then(response => console.log(response))
-              .catch(error => console.log(error))
   
 axios.post('/other/survey', req).then(resp => {
     console.log(resp)
