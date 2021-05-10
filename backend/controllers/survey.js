@@ -1,5 +1,5 @@
 const pool = require('../db')
-
+const { postResult } = require("../models/survey_model");
 module.exports = function survey(app, logger) {
     
     app.route(`${process.env.HART}/surveys/`) 
