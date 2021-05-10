@@ -18,8 +18,23 @@ const Competency = (props) => {
     const { user } = useSelector(state => state.auth.user);
     const { competency } = useSelector(state => state.competency);
     const [videos, setVideos]= useState([]);
+    const [questions, setQuestions]= useState([]);
     const prevProps = useRef(props);
     const [isLoading, setIsLoading] = useState(true);
+    const fetchQuestions = async () => {
+        await axios
+            .get(`${HartAPIPrefix}/competency/get/video/quiz`)
+            .then(res => {
+                const videos = res.data.response;
+                console.log(videos)
+                const vidf = videos.filter(vid => 
+                    vid.survey_id === props.id.toString()
+                )
+                console.log(vidf);
+                setQuestions(vidf);
+                 setIsLoading(false);
+            }).catch(err=> console.log(err))
+        };
     useEffect(
         () => {
             const fetchVideos = async () => {
@@ -32,10 +47,11 @@ const Competency = (props) => {
                     )
                     console.log(vidf)
                      setVideos(vidf);
-                     setIsLoading(false);
+                    //  setIsLoading(false);
                 }).catch(err=> console.log(err))
             };
                 fetchVideos();
+                fetchQuestions();
         },[]);
 return (
     <div
@@ -49,7 +65,7 @@ return (
                    <p className="text-secondary">{competency.quote}
             </p>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id} title={vid.title} questions={questions}/></div>
                     })}
             </div>
                  ) 

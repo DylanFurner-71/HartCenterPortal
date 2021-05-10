@@ -1,12 +1,30 @@
 const pool = require('../db')
 const hartPrefix = "/hartBE/v1";
 const jwt = require('jsonwebtoken');
-const { getCompetencies, setCompetencyVideo, getCompetenciesVideo,DeleteCompetencyVideo, setCompetencyTitle, setCompetencyDesc, setCompetencyQuote, setCompetencyImage } = require("../models/comptencies_model");
+const { getCompetencies, setCompetencyVideo, getCompetenciesVideo,DeleteCompetencyVideo, setCompetencyTitle, setCompetencyDesc, setCompetencyQuote, setCompetencyImage, getCompetenciesVideoQuiz, addCompetenciesVideoQuizQuestion, DeleteCompetencyVideoQuiz } = require("../models/comptencies_model");
 
 module.exports = function competency(app, logger) {
   app.route(`${process.env.HART}/competency/get/video`) 
 .get( (req, res, next) => {
   getCompetenciesVideo(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+})
+});
+  app.route(`${process.env.HART}/competency/get/video/quiz/`) 
+.get( (req, res, next) => {
+  getCompetenciesVideoQuiz(req).then(response => {
+    return res.send({response});
+})    
+.catch((e)=>{
+  return res.status(400).send(e);
+})
+});
+app.route(`${process.env.HART}/competency/video/quiz/`) 
+.post( (req, res, next) => {
+  addCompetenciesVideoQuizQuestion(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -82,6 +100,17 @@ app.route(`${process.env.HART}/competency/video/:id`)
   let title = req.params.id
   try {
     DeleteCompetencyVideo(title).then(response => {
+      return res.send({response});
+    })
+  } catch(error){
+    console.log(error)
+  }
+})
+app.route(`${process.env.HART}/competency/video/question/:id`) 
+.delete((req, res, next) => {
+  let title = req.params.id
+  try {
+    DeleteCompetencyVideoQuiz(title).then(response => {
       return res.send({response});
     })
   } catch(error){
