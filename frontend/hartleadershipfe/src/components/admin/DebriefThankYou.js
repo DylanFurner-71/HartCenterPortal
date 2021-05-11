@@ -25,7 +25,7 @@ class DebriefThankYou extends Component {
         const response = await fetch("http://localhost:8000/hartBE/v1/getBatch/");
         const json = await response.json();
         let x;
-        let temp = [];
+        let temp = ["-"];
         for(x = 0; x < json.length;x++){
             if(json[x].batch != null && json[x].batch != "")
             temp.push(json[x].batch)
