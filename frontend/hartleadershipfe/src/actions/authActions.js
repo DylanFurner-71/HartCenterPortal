@@ -2,9 +2,9 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, SET_CURRENT_COMPETENCY } from './types';
-import {HartAPIPrefix } from "../prefixes/hart";
+import {HartAPIPrefix, HartURL } from "../prefixes/hart";
 // Register User
-axios.defaults.baseURL = HartAPIPrefix;
+ axios.defaults.baseURL = HartAPIPrefix;
 
 // Change Password
 // export const changePassword = (userData, history) => dispatch => {
@@ -42,15 +42,13 @@ export const setCurrentCompetency = competency => {
 export const competencies = data => dispatch => {
 
 }
-
 export const login = userData => dispatch => {
         axios
-        .post('/login/', userData)
+        .post(`${HartAPIPrefix}/login/`, userData)
         .then(res => {
             // Save to localStorage
             // Set token to localStorage
              console.log(res.data);
-             console.log("response::::", res, "a;lsdkj");
             if (res.data.accessToken){
             // localStorage.setItem('user', res.data);
             localStorage.setItem('accessToken', res.data.accessToken);

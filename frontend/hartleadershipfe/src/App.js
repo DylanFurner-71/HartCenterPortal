@@ -7,15 +7,10 @@ import jwt_decode from 'jwt-decode';
 import PrivateRoute from './components/PrivateRoute';
 import Navigation from './components/navigation';
 import Landing from './components/landing';
-// import Login from './components/login/login';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
-import ViewReportTable from './components/admin/ViewReportTable';
 import store from './store';
 import { ROUTES } from './routes';
-// import SendPassword from './components/sendPassword';
-// import ChangePassword from './components/changePassword';
-// import StylistsList from './components/search/stylistsList';
 
 // Check for token to keep user logged in
 if (localStorage.getItem('accessToken')) {
@@ -48,20 +43,7 @@ function App() {
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/home' component={Landing} />
                   <Route exact path='/login/' component={Login} />
-                  
-                    {/* <Route
-                        exact
-                        path='/user/register'
-                        component={RegisterUser}
-                    />
-                    <Route
-                        exact
-                        path='/resetPassword'
-                        component={SendPassword}
-                    />  */}
                     <Switch>
-                                            {/* <Navigation /> */} {/* maybe will move nav to here */}
-
                         {ROUTES.map((route, i) => (
                             <PrivateRoute exact key={i} {...route} />
                         ))}
