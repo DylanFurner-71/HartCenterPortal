@@ -28,7 +28,16 @@ module.exports = function admin(app, logger) {
     app.route(`${process.env.HART}/getBatch/`) 
     .get((req, res, next) => {
       pool.query(
-        "SELECT DISTINCT(batch) FROM student", [req.params.batch], (err, result) => {
+        "SELECT DISTINCT(batch) FROM student", (err, result) => {
+          if (err) throw err;
+          res.end(JSON.stringify(result));
+          });   
+    }); 
+    //Omar - return study
+    app.route(`${process.env.HART}/getStudy/`) 
+    .get((req, res, next) => {
+      pool.query(
+        "SELECT DISTINCT(study) FROM student", (err, result) => {
           if (err) throw err;
           res.end(JSON.stringify(result));
           });   
@@ -41,7 +50,16 @@ module.exports = function admin(app, logger) {
           if (err) throw err;
           res.end(JSON.stringify(result));
           });   
-    });     
+    });   
+    //Omar - return study
+    app.route(`${process.env.HART}/getStats/:theTerm/:theStudy`) 
+    .get((req, res, next) => {
+      pool.query(
+        "SELECT * FROM student WHERE batch = ? and study = ?", [req.params.theTerm, req.params.theStudy], (err, result) => {
+          if (err) throw err;
+          res.end(JSON.stringify(result));
+          });   
+    });   
     //Omar - insert new debrief note
     app.route(`${process.env.HART}/insertMessage`) 
     .post((req, res, next) => {
