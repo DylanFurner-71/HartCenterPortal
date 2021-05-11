@@ -4,7 +4,6 @@ import CompetencyLibrary from "./components/student/CompetencyLibrary"
 // this is the private route
 import StudentHome from "./components/student/studentLanding";
 import ContactUs from './components/student/ContactUs.js';
-import IntentionalLearning from "./components/student/IntentionalLearning";
 import DebriefThankYou from './components/admin/DebriefThankYou.js';
 import GetSurveyStatistics from './components/admin/GetSurveyStatistics.js';
 import Competency from "./components/student/Competency";
@@ -17,6 +16,7 @@ import AddOtherSurvey from "./components/admin/AddOtherSurvey";
 import OtherSurvey from './components/student/OtherSurvey.js';
 import EditContactPage from "./components/admin/EditContactPage";
 import AdminLanding from "./components/admin/AdminLanding";
+import GetReportData from "./components/admin/GetReportData";
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
