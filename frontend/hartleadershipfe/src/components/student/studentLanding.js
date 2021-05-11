@@ -52,7 +52,7 @@ return (
                         </div>}
                 <div className='container'></div>
                 <div>
-                  
+                  <h2>Please email us to </h2>
                 </div>
             </div>
         </div>
