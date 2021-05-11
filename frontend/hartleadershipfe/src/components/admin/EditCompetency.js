@@ -28,6 +28,17 @@ const EditCompetency = (props) => {
     const [desc, setDesc] = useState(competency.competency_desc);
     const [quote, setQuote] = useState(competency.quote);
     const [imageName, setImageName] = useState(competency.imageName)
+    const [questions, setQuestions]= useState([]);
+    const fetchQuestions = async () => {
+        await axios
+            .get(`${HartAPIPrefix}/competency/get/video/quiz`)
+            .then(res => {
+                const videos = res.data.response;
+                videos.forEach(item => item.choices = [item.correctAnswer, item.choice2, item.choice3, item.choice4])
+                setQuestions(videos);
+                setIsLoading(false);
+            }).catch(err=> console.log(err))
+        };
     const fetchVideos = async () => {
         await axios
             .get(`${HartAPIPrefix}/competency/get/video/`)
@@ -39,12 +50,13 @@ const EditCompetency = (props) => {
                 )
 
                  setVideos(vidf);
-                 setIsLoading(false);
+                //  setIsLoading(false);
             }).catch(err=> console.log(err))
         };
     useEffect(
         () => {
                 fetchVideos();
+                fetchQuestions();
         },[]);
 
 return (
@@ -81,7 +93,7 @@ return (
     </div>
     <br></br>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id}isAdmin={true} updateVar={fetchVideos}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id} title={vid.title} isAdmin={true} questions={questions}/></div>
                     })}
             </div>
                  ) 

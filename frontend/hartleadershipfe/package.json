@@ -36,10 +36,12 @@
     "react-table": "^7.6.3",
     "react-tabs": "^3.1.1",
     "reactstrap": "^8.9.0",
+    "recharts": "^2.0.9",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sass": "^1.32.11",
     "styled-components": "^5.2.2",
+    "survey-react": "^1.8.46",
     "web-vitals": "^1.1.0"
   },
   "scripts": {

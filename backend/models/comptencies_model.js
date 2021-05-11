@@ -13,8 +13,8 @@ getCompetencies = () => new Promise((resolve, reject) => {
 });
 
 setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
-    db.query("INSERT INTO Competency_Videos(competency_id, video_link, vid_desc) VALUES (?, ?, ?)",
-    [info.body.competency_id, info.body.video_link, info.body.video_desc],
+    db.query("INSERT INTO Competency_Videos(competency_id, video_link, vid_desc, title) VALUES (?, ?, ?, ?)",
+    [info.body.competency_id, info.body.video_link, info.body.video_desc, info.body.title],
      function (error, results, fields){
         if (error){
             reject();
@@ -77,6 +77,27 @@ getCompetenciesVideo = () => new Promise((resolve, reject) => {
         }
     });
 });
+getCompetenciesVideoQuiz = () => new Promise((resolve, reject) => {
+    db.query('SELECT * FROM comp_questions', function (error, results, fields) {
+        if (error){
+            reject();
+        }else{
+            resolve(results);
+        }
+    });
+});
+addCompetenciesVideoQuizQuestion = (info) => new Promise((resolve, reject) => {
+    console.log(info)
+    db.query("INSERT INTO comp_questions(survey_id, type, name, title, correctAnswer, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.correctAnswer, info.body.choices[1], info.body.choices[2], info.body.choices[3]],
+     function (error, results, fields){
+        if (error){
+            reject();
+        }else {
+            resolve();
+        }
+    });
+})
 DeleteCompetencyVideo = (req) => new Promise((resolve, reject) => {
     console.log(req)
     db.query("DELETE FROM Competency_Videos WHERE id = ?", [req], 
@@ -87,6 +108,29 @@ DeleteCompetencyVideo = (req) => new Promise((resolve, reject) => {
             resolve();
         }
     })
+    DeleteCompetencyVideoQuizWholeQuiz(req)
+})
+DeleteCompetencyVideoQuiz = (req) => new Promise((resolve, reject) => {
+    console.log(req)
+    db.query("DELETE FROM comp_questions WHERE question_id = ?", [req], 
+    function (error, results, fields){
+        if (error){
+            reject();
+        } else {
+            resolve();
+        }
+    })
+})
+DeleteCompetencyVideoQuizWholeQuiz= (req) => new Promise((resolve, reject) => {
+console.log(req)
+db.query("DELETE FROM comp_questions WHERE survey_id = ?", [req], 
+function (error, results, fields){
+    if (error){
+        reject();
+    } else {
+        resolve();
+    }
+})
 })
 
 module.exports = {
@@ -97,5 +141,8 @@ module.exports = {
     setCompetencyDesc,
     setCompetencyTitle,
     DeleteCompetencyVideo,
-    setCompetencyImage
+    setCompetencyImage, 
+    getCompetenciesVideoQuiz,
+    addCompetenciesVideoQuizQuestion,
+    DeleteCompetencyVideoQuiz
 }

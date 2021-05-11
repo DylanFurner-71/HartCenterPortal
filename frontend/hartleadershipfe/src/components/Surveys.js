@@ -7,16 +7,16 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
 import 'bootstrap/dist/css/bootstrap.css'
-//import './style.css';
 import { conditionalExpression } from '@babel/types';
-
+let globalArr = [];
 class Surveys extends Component {
     constructor(props) {
         super(props);
         this.state = {
             info: this.props.questions,
             showing: false,
-            
+            competencyQuiz: this.props.competencyQuiz ? true : false,
+            title: this.props.title
               
         };
     }
@@ -44,10 +44,11 @@ class Surveys extends Component {
         return null;
     }
     else{
-        var json = { title: "Leader Comparision", showProgressBar: "top", pages: []};    
+        var json = { title: this.props.title ? this.props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
     var pageHolder = {questions:[]};
     for(const [index,value] of this.state.info.entries()){
         console.log(value);
+        globalArr.push(value)
         if(value['type'] == 0){
             var questionTest =
                 {
@@ -83,7 +84,9 @@ class Surveys extends Component {
                     title: value['title'],
                     isRequired: true,
                     colCount: 4,
-                    choices: []
+                    choices: [],
+                    choicesOrder: value['choicesOrder'],
+                    correctAnswer: value['correctAnswer'],
                 };
             for(const [indexInner,valueInner] of this.state.info[index]['choices'].entries()){
                 questionTest.choices.push(valueInner);
@@ -121,7 +124,10 @@ class Surveys extends Component {
         var mySurvey = sender;
         var questionName = options.name;
         var newValue = options.value;
+        console.log(options.question)
     });
+    let inf = this.state.info
+    if (this.state.competencyQuiz === false){
     model
     .onComplete
     .add(function (sender) {
@@ -245,10 +251,25 @@ class Surveys extends Component {
         })
             }  catch (e){
               console.log(e);
-          }
-        
-        
+            } 
     });  
+} else {
+    model
+    .onComplete
+    .add(function (sender, options) {
+        var mySurvey = sender;
+        var surveyData = sender.data;
+        console.log(globalArr)
+        let localArr = globalArr.splice(0, globalArr.length/2)
+        console.log(localArr)
+        let correctedAnswers = {}
+        localArr.forEach(item => {
+            correctedAnswers[item.name] = item.correctAnswer;
+        }        
+        )
+    globalArr = []
+    })
+}
     return (
         <div>
       <Survey.Survey model={model}/>
