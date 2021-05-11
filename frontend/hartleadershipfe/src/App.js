@@ -10,6 +10,7 @@ import Landing from './components/landing';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
 import store from './store';
+import Surveys from './components/getSurveys'
 import { ROUTES } from './routes';
 
 // Check for token to keep user logged in
@@ -43,6 +44,7 @@ function App() {
                     <Route exact path='/' component={Landing} />
                     <Route exact path='/home' component={Landing} />
                   <Route exact path='/login/' component={Login} />
+                  <Route exact path='/survey/' component={Surveys} />
                     <Switch>
                         {ROUTES.map((route, i) => (
                             <PrivateRoute exact key={i} {...route} />

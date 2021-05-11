@@ -1,18 +1,6 @@
 import React, { Component } from 'react';
 import Surveys from "./Surveys";
 import axios from 'axios';
-import Results from "./Results";
-import PDFshow from './PDFshow';
-import image1 from './results/results01.jpg';
-import image2 from './results/results02.jpg';
-import image3 from './results/results03.jpg';
-import image4 from './results/results04.jpg';
-import image5 from './results/results04.jpg';
-import image6 from './results/results06.jpg';
-import image7 from './results/results07.jpg';
-import image8 from './results/results08.jpg';
-import image9 from './results/results09.jpg';
-import image10 from './results/results10.jpg';
 
 
 class getSurveys extends Component {
@@ -191,7 +179,7 @@ class getSurveys extends Component {
                 
                 { this.state.resultShowing 
                     ? <div>
-                        <Results/>
+                        No Results
                     </div>
                     : null
                 }
