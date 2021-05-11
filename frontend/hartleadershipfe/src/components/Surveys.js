@@ -136,7 +136,7 @@ class Surveys extends Component {
         console.log(mySurvey);
         console.log(surveyData);
 
-        var selfAware = surveyData['Candid Self-Appraisal']['user'] + surveyData['Commits Wisely']['user'] + surveyData['Composed']['user'] + surveyData['Self Directed']['user'] + surveyData['Open to Feedback']['user'];
+        var selfAware = surveyData['Candid Self Appraisal']['user'] + surveyData['Commits Wisely']['user'] + surveyData['Composed']['user'] + surveyData['Self Directed']['user'] + surveyData['Open to Feedback']['user'];
         var intentionalLearner = surveyData['Improves Performance']['user'] + surveyData['Wiling to Stretch']['user'] + surveyData['Reflective Learner']['user'] + surveyData['Grows from Adversity']['user'] + surveyData['Seeks Feedback']['user'];
         var communication = surveyData['Open to Feedback']['user'] + surveyData['Seeks Feedback']['user'] + surveyData['Transparent']['user'] + surveyData['Careful Listener']['user'] + surveyData['Gives Candid Feedback']['user'];
         var relationshipDevelopment = surveyData['Inclusive']['user'] + surveyData['Empathetic']['user'] + surveyData['Mends Fences']['user'] + surveyData['Seek Common Ground']['user'] + surveyData['Transparent']['user'];
@@ -150,61 +150,61 @@ class Surveys extends Component {
         var innovativeSpirit = surveyData['Entrepeneurial']['user'] + surveyData['Thinks Different']['user'] + surveyData['Inventive']['user'] + surveyData['Generative']['user'] + surveyData['Maker Instinct']['user'];
 
 
-        var allResponses = surveyData['Candid Self-Appraisal']['GL'].toString() + surveyData['Candid Self-Appraisal']['BL'].toString() + surveyData['Candid Self-Appraisal']['user'].toString()
-        + surveyData['Commits Wisely']['GL'].toString() + surveyData['Commits Wisely']['BL'].toString() + surveyData['Commits Wisely']['user'].toString()
-        + surveyData['Composed']['GL'].toString() + surveyData['Composed']['BL'].toString() + surveyData['Composed']['user'].toString()
-        + surveyData['Self Directed']['GL'].toString() + surveyData['Self Directed']['BL'].toString() + surveyData['Self Directed']['user'].toString()
-        + surveyData['Open to Feedback']['GL'].toString() + surveyData['Open to Feedback']['BL'].toString() + surveyData['Open to Feedback']['user'].toString()
-        + surveyData['Improves Performance']['GL'].toString() + surveyData['Improves Performance']['BL'].toString() + surveyData['Improves Performance']['user'].toString()
-        + surveyData['Wiling to Stretch']['GL'].toString() + surveyData['Wiling to Stretch']['BL'].toString() + surveyData['Wiling to Stretch']['user'].toString() 
-        + surveyData['Reflective Learner']['GL'].toString() + surveyData['Reflective Learner']['BL'].toString() + surveyData['Reflective Learner']['user'].toString() 
-        + surveyData['Grows from Adversity']['GL'].toString() + surveyData['Grows from Adversity']['BL'].toString() + surveyData['Grows from Adversity']['user'].toString() 
-        + surveyData['Seeks Feedback']['GL'].toString() + surveyData['Seeks Feedback']['BL'].toString() + surveyData['Seeks Feedback']['user'].toString()
-        + surveyData['Inclusive']['GL'].toString() + surveyData['Inclusive']['BL'].toString() + surveyData['Inclusive']['user'].toString()
-        + surveyData['Empathetic']['GL'].toString() + surveyData['Empathetic']['BL'].toString() + surveyData['Empathetic']['user'].toString() 
-        + surveyData['Mends Fences']['GL'].toString() + surveyData['Mends Fences']['BL'].toString() + surveyData['Mends Fences']['user'].toString() 
-        + surveyData['Seek Common Ground']['GL'].toString() + surveyData['Seek Common Ground']['BL'].toString()+ surveyData['Seek Common Ground']['user'].toString()
-        + surveyData['Transparent']['GL'].toString() + surveyData['Transparent']['BL'].toString() + surveyData['Transparent']['user'].toString()
-        + surveyData['Student of Culture']['GL'].toString() + surveyData['Student of Culture']['BL'].toString() + surveyData['Student of Culture']['user'].toString() 
-        + surveyData['Values Differences']['GL'].toString() + surveyData['Values Differences']['BL'].toString() + surveyData['Values Differences']['user'].toString() 
-        + surveyData['Cultural Perspective']['GL'].toString() + surveyData['Cultural Perspective']['BL'].toString() + surveyData['Cultural Perspective']['user'].toString() 
-        + surveyData['Culturally Versatile']['GL'].toString() + surveyData['Culturally Versatile']['BL'].toString() + surveyData['Culturally Versatile']['user'].toString() 
-        + surveyData['Multicultural Motivator']['GL'].toString() + surveyData['Multicultural Motivator']['BL'].toString() + surveyData['Multicultural Motivator']['user'].toString()
-        + surveyData['Inspires Commitment']['GL'].toString() + surveyData['Inspires Commitment']['BL'].toString() + surveyData['Inspires Commitment']['user'].toString() 
-        + surveyData['Leverages Others\' Strengths']['GL'].toString() + surveyData['Leverages Others\' Strengths']['BL'].toString() + surveyData['Leverages Others\' Strengths']['user'].toString() 
-        + surveyData['Influences Without Authority']['GL'].toString() + surveyData['Influences Without Authority']['BL'].toString() + surveyData['Influences Without Authority']['user'].toString()
-        + surveyData['Considerate']['GL'].toString() + surveyData['Considerate']['BL'].toString() + surveyData['Considerate']['user'].toString() 
-        + surveyData['Careful Listener']['GL'].toString() + surveyData['Careful Listener']['BL'].toString() + surveyData['Careful Listener']['user'].toString()
-        + surveyData['Gives Directio ']['GL'].toString() + surveyData['Gives Directio ']['BL'].toString() + surveyData['Gives Directio ']['user'].toString() 
-        + surveyData['Prioritizes Effectively']['GL'].toString() + surveyData['Prioritizes Effectively']['BL'].toString() + surveyData['Prioritizes Effectively']['user'].toString() 
-        + surveyData['Clarifies Roles']['GL'].toString() + surveyData['Clarifies Roles']['BL'].toString() + surveyData['Clarifies Roles']['user'].toString() 
-        + surveyData['Provides Guidance']['GL'].toString() + surveyData['Provides Guidance']['BL'].toString() + surveyData['Provides Guidance']['user'].toString() 
-        + surveyData['Gives Candid Feedback']['GL'].toString() + surveyData['Gives Candid Feedback']['BL'].toString() + surveyData['Gives Candid Feedback']['user'].toString()
-        + surveyData['Shares Leadership']['GL'].toString() + surveyData['Shares Leadership']['BL'].toString() + surveyData['Shares Leadership']['user'].toString() 
-        + surveyData['Shares Responsibility']['GL'].toString() + surveyData['Shares Responsibility']['BL'].toString() + surveyData['Shares Responsibility']['user'].toString() 
-        + surveyData['Believes in Others']['GL'].toString() + surveyData['Believes in Others']['BL'].toString() + surveyData['Believes in Others']['user'].toString() 
-        + surveyData['Trusting of Others']['GL'].toString() + surveyData['Trusting of Others']['BL'].toString() + surveyData['Trusting of Others']['user'].toString() 
-        + surveyData['Maintains Accountability']['GL'].toString() + surveyData['Maintains Accountability']['BL'].toString() + surveyData['Maintains Accountability']['user'].toString()
-        + surveyData['Defines Problems Effectively']['GL'].toString() + surveyData['Defines Problems Effectively']['BL'].toString() + surveyData['Defines Problems Effectively']['user'].toString() 
-        + surveyData['Makes Informed Decisions']['GL'].toString() + surveyData['Makes Informed Decisions']['BL'].toString() + surveyData['Makes Informed Decisions']['user'].toString() 
-        + surveyData['Logical Thinker']['GL'].toString() + surveyData['Logical Thinker']['BL'].toString() + surveyData['Logical Thinker']['user'].toString() 
-        + surveyData['Uses Judgment']['GL'].toString() + surveyData['Uses Judgment']['BL'].toString() + surveyData['Uses Judgment']['user'].toString() 
-        + surveyData['Decisive']['GL'].toString() + surveyData['Decisive']['BL'].toString()+ surveyData['Decisive']['BL'].toString()
-        + surveyData['Sees Big Picture']['GL'].toString() + surveyData['Sees Big Picture']['BL'].toString() + surveyData['Sees Big Picture']['user'].toString() 
-        + surveyData['Systemic Awareness']['GL'].toString() + surveyData['Systemic Awareness']['BL'].toString() + surveyData['Systemic Awareness']['user'].toString() 
-        + surveyData['Recognizes Trade-offs']['GL'].toString() + surveyData['Recognizes Trade-offs']['BL'].toString() + surveyData['Recognizes Trade-offs']['user'].toString() 
-        + surveyData['Articulates Pros and Cons']['GL'].toString() + surveyData['Articulates Pros and Cons']['BL'].toString() + surveyData['Articulates Pros and Cons']['user'].toString()
-        + surveyData['Senses Leverage']['GL'].toString() + surveyData['Senses Leverage']['BL'].toString() + surveyData['Senses Leverage']['user'].toString()
-        + surveyData['Encourages Honesty']['GL'].toString() + surveyData['Encourages Honesty']['BL'].toString() + surveyData['Encourages Honesty']['user'].toString() 
-        + surveyData['Trustworthy']['GL'].toString() + surveyData['Trustworthy']['BL'].toString() + surveyData['Trustworthy']['user'].toString() 
-        + surveyData['Ethical Decision-maker']['GL'].toString() + surveyData['Ethical Decision-maker']['BL'].toString() + surveyData['Ethical Decision-maker']['user'].toString() 
-        + surveyData['Ethically Aware']['GL'].toString() + surveyData['Ethically Aware']['BL'].toString() + surveyData['Ethically Aware']['user'].toString() 
-        + surveyData['Principled']['GL'].toString() + surveyData['Principled']['BL'].toString() + surveyData['Principled']['user'].toString()
-        + surveyData['Entrepeneurial']['GL'].toString() + surveyData['Entrepeneurial']['BL'].toString() + surveyData['Entrepeneurial']['user'].toString()
-        + surveyData['Thinks Different']['GL'].toString() + surveyData['Thinks Different']['BL'].toString() + surveyData['Thinks Different']['user'].toString()
-        + surveyData['Inventive']['GL'].toString() + surveyData['Inventive']['BL'].toString() + surveyData['Inventive']['user'].toString() 
-        + surveyData['Generative']['GL'].toString() + surveyData['Generative']['BL'].toString() + surveyData['Generative']['user'].toString() 
-        + surveyData['Maker Instinct']['GL'].toString() + surveyData['Maker Instinct']['BL'].toString() + surveyData['Maker Instinct']['user'].toString();
+        var allResponses = surveyData['Candid Self Appraisal']['GL'].toString() + ',' + surveyData['Candid Self Appraisal']['BL'].toString() + ',' + surveyData['Candid Self Appraisal']['user'].toString() + ','
+        + surveyData['Commits Wisely']['GL'].toString() + ',' + surveyData['Commits Wisely']['BL'].toString() + ',' + surveyData['Commits Wisely']['user'].toString() + ','
+        + surveyData['Composed']['GL'].toString() + ',' + surveyData['Composed']['BL'].toString() + ',' + surveyData['Composed']['user'].toString() + ','
+        + surveyData['Self Directed']['GL'].toString() + ',' + surveyData['Self Directed']['BL'].toString() + ',' + surveyData['Self Directed']['user'].toString() + ','
+        + surveyData['Open to Feedback']['GL'].toString() + ',' + surveyData['Open to Feedback']['BL'].toString() + ',' + surveyData['Open to Feedback']['user'].toString() + ','
+        + surveyData['Improves Performance']['GL'].toString() + ',' + surveyData['Improves Performance']['BL'].toString() + ',' + surveyData['Improves Performance']['user'].toString() + ','
+        + surveyData['Wiling to Stretch']['GL'].toString() + ',' + surveyData['Wiling to Stretch']['BL'].toString() + ',' + surveyData['Wiling to Stretch']['user'].toString() + ',' 
+        + surveyData['Reflective Learner']['GL'].toString() + ',' + surveyData['Reflective Learner']['BL'].toString() + ',' + surveyData['Reflective Learner']['user'].toString() + ',' 
+        + surveyData['Grows from Adversity']['GL'].toString() + ',' + surveyData['Grows from Adversity']['BL'].toString() + ',' + surveyData['Grows from Adversity']['user'].toString() + ',' 
+        + surveyData['Seeks Feedback']['GL'].toString() + ',' + surveyData['Seeks Feedback']['BL'].toString() + ',' + surveyData['Seeks Feedback']['user'].toString() + ','
+        + surveyData['Inclusive']['GL'].toString() + ',' + surveyData['Inclusive']['BL'].toString() + ',' + surveyData['Inclusive']['user'].toString() + ','
+        + surveyData['Empathetic']['GL'].toString() + ',' + surveyData['Empathetic']['BL'].toString() + ',' + surveyData['Empathetic']['user'].toString() + ',' 
+        + surveyData['Mends Fences']['GL'].toString() + ',' + surveyData['Mends Fences']['BL'].toString() + ',' + surveyData['Mends Fences']['user'].toString() + ',' 
+        + surveyData['Seek Common Ground']['GL'].toString() + ',' + surveyData['Seek Common Ground']['BL'].toString() + ','+ surveyData['Seek Common Ground']['user'].toString() + ','
+        + surveyData['Transparent']['GL'].toString() + ',' + surveyData['Transparent']['BL'].toString() + ',' + surveyData['Transparent']['user'].toString() + ','
+        + surveyData['Student of Culture']['GL'].toString() + ',' + surveyData['Student of Culture']['BL'].toString() + ',' + surveyData['Student of Culture']['user'].toString() + ',' 
+        + surveyData['Values Differences']['GL'].toString() + ',' + surveyData['Values Differences']['BL'].toString() + ',' + surveyData['Values Differences']['user'].toString() + ',' 
+        + surveyData['Cultural Perspective']['GL'].toString() + ',' + surveyData['Cultural Perspective']['BL'].toString() + ',' + surveyData['Cultural Perspective']['user'].toString() + ',' 
+        + surveyData['Culturally Versatile']['GL'].toString() + ',' + surveyData['Culturally Versatile']['BL'].toString() + ',' + surveyData['Culturally Versatile']['user'].toString() + ',' 
+        + surveyData['Multicultural Motivator']['GL'].toString() + ',' + surveyData['Multicultural Motivator']['BL'].toString() + ',' + surveyData['Multicultural Motivator']['user'].toString() + ','
+        + surveyData['Inspires Commitment']['GL'].toString() + ',' + surveyData['Inspires Commitment']['BL'].toString() + ',' + surveyData['Inspires Commitment']['user'].toString() + ',' 
+        + surveyData['Leverages Others\' Strengths']['GL'].toString() + ',' + surveyData['Leverages Others\' Strengths']['BL'].toString() + ',' + surveyData['Leverages Others\' Strengths']['user'].toString() + ',' 
+        + surveyData['Influences Without Authority']['GL'].toString() + ',' + surveyData['Influences Without Authority']['BL'].toString() + ',' + surveyData['Influences Without Authority']['user'].toString() + ','
+        + surveyData['Considerate']['GL'].toString() + ',' + surveyData['Considerate']['BL'].toString() + ',' + surveyData['Considerate']['user'].toString() + ',' 
+        + surveyData['Careful Listener']['GL'].toString() + ',' + surveyData['Careful Listener']['BL'].toString() + ',' + surveyData['Careful Listener']['user'].toString() + ','
+        + surveyData['Gives Directio ']['GL'].toString() + ',' + surveyData['Gives Directio ']['BL'].toString() + ',' + surveyData['Gives Directio ']['user'].toString() + ',' 
+        + surveyData['Prioritizes Effectively']['GL'].toString() + ',' + surveyData['Prioritizes Effectively']['BL'].toString() + ',' + surveyData['Prioritizes Effectively']['user'].toString() + ',' 
+        + surveyData['Clarifies Roles']['GL'].toString() + ',' + surveyData['Clarifies Roles']['BL'].toString() + ',' + surveyData['Clarifies Roles']['user'].toString() + ',' 
+        + surveyData['Provides Guidance']['GL'].toString() + ',' + surveyData['Provides Guidance']['BL'].toString() + ',' + surveyData['Provides Guidance']['user'].toString() + ',' 
+        + surveyData['Gives Candid Feedback']['GL'].toString() + ',' + surveyData['Gives Candid Feedback']['BL'].toString() + ',' + surveyData['Gives Candid Feedback']['user'].toString() + ','
+        + surveyData['Shares Leadership']['GL'].toString() + ',' + surveyData['Shares Leadership']['BL'].toString() + ',' + surveyData['Shares Leadership']['user'].toString() + ',' 
+        + surveyData['Shares Responsibility']['GL'].toString() + ',' + surveyData['Shares Responsibility']['BL'].toString() + ',' + surveyData['Shares Responsibility']['user'].toString() + ',' 
+        + surveyData['Believes in Others']['GL'].toString() + ',' + surveyData['Believes in Others']['BL'].toString() + ',' + surveyData['Believes in Others']['user'].toString() + ',' 
+        + surveyData['Trusting of Others']['GL'].toString() + ',' + surveyData['Trusting of Others']['BL'].toString() + ',' + surveyData['Trusting of Others']['user'].toString() + ',' 
+        + surveyData['Maintains Accountability']['GL'].toString() + ',' + surveyData['Maintains Accountability']['BL'].toString() + ',' + surveyData['Maintains Accountability']['user'].toString() + ','
+        + surveyData['Defines Problems Effectively']['GL'].toString() + ',' + surveyData['Defines Problems Effectively']['BL'].toString() + ',' + surveyData['Defines Problems Effectively']['user'].toString() + ',' 
+        + surveyData['Makes Informed Decisions']['GL'].toString() + ',' + surveyData['Makes Informed Decisions']['BL'].toString() + ',' + surveyData['Makes Informed Decisions']['user'].toString() + ',' 
+        + surveyData['Logical Thinker']['GL'].toString() + ',' + surveyData['Logical Thinker']['BL'].toString() + ',' + surveyData['Logical Thinker']['user'].toString() + ',' 
+        + surveyData['Uses Judgment']['GL'].toString() + ',' + surveyData['Uses Judgment']['BL'].toString() + ',' + surveyData['Uses Judgment']['user'].toString() + ',' 
+        + surveyData['Decisive']['GL'].toString() + ',' + surveyData['Decisive']['BL'].toString() + ','+ surveyData['Decisive']['BL'].toString() + ','
+        + surveyData['Sees Big Picture']['GL'].toString() + ',' + surveyData['Sees Big Picture']['BL'].toString() + ',' + surveyData['Sees Big Picture']['user'].toString() + ',' 
+        + surveyData['Systemic Awareness']['GL'].toString() + ',' + surveyData['Systemic Awareness']['BL'].toString() + ',' + surveyData['Systemic Awareness']['user'].toString() + ',' 
+        + surveyData['Recognizes Trade-offs']['GL'].toString() + ',' + surveyData['Recognizes Trade-offs']['BL'].toString() + ',' + surveyData['Recognizes Trade-offs']['user'].toString() + ',' 
+        + surveyData['Articulates Pros and Cons']['GL'].toString() + ',' + surveyData['Articulates Pros and Cons']['BL'].toString() + ',' + surveyData['Articulates Pros and Cons']['user'].toString() + ','
+        + surveyData['Senses Leverage']['GL'].toString() + ',' + surveyData['Senses Leverage']['BL'].toString() + ',' + surveyData['Senses Leverage']['user'].toString() + ','
+        + surveyData['Encourages Honesty']['GL'].toString() + ',' + surveyData['Encourages Honesty']['BL'].toString() + ',' + surveyData['Encourages Honesty']['user'].toString() + ',' 
+        + surveyData['Trustworthy']['GL'].toString() + ',' + surveyData['Trustworthy']['BL'].toString() + ',' + surveyData['Trustworthy']['user'].toString() + ',' 
+        + surveyData['Ethical Decision-maker']['GL'].toString() + ',' + surveyData['Ethical Decision-maker']['BL'].toString() + ',' + surveyData['Ethical Decision-maker']['user'].toString() + ',' 
+        + surveyData['Ethically Aware']['GL'].toString() + ',' + surveyData['Ethically Aware']['BL'].toString() + ',' + surveyData['Ethically Aware']['user'].toString() + ',' 
+        + surveyData['Principled']['GL'].toString() + ',' + surveyData['Principled']['BL'].toString() + ',' + surveyData['Principled']['user'].toString() + ','
+        + surveyData['Entrepeneurial']['GL'].toString() + ',' + surveyData['Entrepeneurial']['BL'].toString() + ',' + surveyData['Entrepeneurial']['user'].toString() + ','
+        + surveyData['Thinks Different']['GL'].toString() + ',' + surveyData['Thinks Different']['BL'].toString() + ',' + surveyData['Thinks Different']['user'].toString() + ','
+        + surveyData['Inventive']['GL'].toString() + ',' + surveyData['Inventive']['BL'].toString() + ',' + surveyData['Inventive']['user'].toString() + ',' 
+        + surveyData['Generative']['GL'].toString() + ',' + surveyData['Generative']['BL'].toString() + ',' + surveyData['Generative']['user'].toString() + ',' 
+        + surveyData['Maker Instinct']['GL'].toString() + ',' + surveyData['Maker Instinct']['BL'].toString() + ',' + surveyData['Maker Instinct']['user'].toString();
         var studentHolder = [];
         var responseHolder = [];
         responseHolder['smu_id'] = surveyData['smuID'];
