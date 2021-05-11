@@ -3,7 +3,7 @@ var config = {
   user: 'root', 
   password: 'password',
   server: '127.0.0.1', 
-  database: 'db31',
+  database: 'db1',
   port: "3306",
   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
   /*
