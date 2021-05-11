@@ -17,6 +17,7 @@ import OtherSurvey from './components/student/OtherSurvey.js';
 import EditContactPage from "./components/admin/EditContactPage";
 import AdminLanding from "./components/admin/AdminLanding";
 import GetReportData from "./components/admin/GetReportData";
+import getSurveys from "./components/getSurveys";
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -35,5 +36,6 @@ export const ROUTES = [
     { path: '/admin/other/AddSurvey/', component: AddOtherSurvey},
     { path: '/other/survey/', component: OtherSurvey},
     { path: '/contact/edit/', component: EditContactPage},
+    { path: '/survey/', component: getSurveys},
 
 ]

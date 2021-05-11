@@ -91,7 +91,7 @@ if (user.user.isStudent === false){
         <Nav className="mr-auto"> 
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <NavDropdown title = "Hart Leadership Assessments" id="basic-nav-dropdown">
-                <NavDropdown.Item href ="/survey2/"> Hart Leadership Survey </NavDropdown.Item>
+                <NavDropdown.Item href ="/survey/"> Hart Leadership Survey </NavDropdown.Item>
         </NavDropdown>
         <Nav.Link href ="/other/survey/"> 
                 Other Surveys
