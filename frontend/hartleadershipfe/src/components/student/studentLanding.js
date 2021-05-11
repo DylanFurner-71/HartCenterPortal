@@ -52,38 +52,7 @@ return (
                         </div>}
                 <div className='container'></div>
                 <div>
-                    <div className='row'>
-                        <div className='col center-align'>
-                            link A
-                            <Link
-                                to={`/stylists/stylistCalendar/stylistId=${user.info.smu_id}`}
-                                style={{
-                                    width: '140px',
-                                    borderRadius: '3px',
-                                    letterSpacing: '1.5px',
-                                    padding: '12px',
-                                }}
-                                className='btn btn-large btn-flat waves-effect blue black-text'
-                            >
-                                Past Assessments
-                            </Link>
-                       
-                            <Link
-                                to='/student/home'
-                                style={{
-                                    width: '140px',
-                                    borderRadius: '3px',
-                                    letterSpacing: '1.5px',
-                                    padding: '12px',
-                                }}
-                                className='btn btn-large btn-flat waves-effect blue black-text'
-
-                           >
-                                LinkC
-                                Back to home
-                            </Link>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
