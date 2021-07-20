@@ -29,6 +29,7 @@ const admin = require("./controllers/admin");
 const response = require("./controllers/response");
 const competency = require("./controllers/competency");
 const other = require("./controllers/other");
+const survey = require("./controllers/survey");
 const publicPath = path;
 app.use(express.json());
 app.use('/public', express.static(path.join(__dirname, '/public/')))
@@ -58,6 +59,7 @@ response(app, logger);
 competency(app, logger);
 other(app, logger);
 contact(app, logger);
+survey(app, logger);
 image_support(app, logger, multer, storage, upload)
 var server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);

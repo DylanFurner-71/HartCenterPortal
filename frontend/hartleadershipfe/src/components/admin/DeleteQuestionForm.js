@@ -3,6 +3,7 @@ import { useInput } from '../hooks/InputHook';
 import {editQuote} from "../../actions/authActions";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../prefixes/hart';
+import Loading from "../Loading";
 
 export function DeleteQuestionForm(props) {
     function deleteVideo(id){
@@ -19,8 +20,8 @@ export function DeleteQuestionForm(props) {
     return (
           <div className="menu">
       {props.questions.map(vid =>{
-                        return <div className="m-2">  <button onClick={deleteVideo(vid.question_id)}> Delete question named: {vid.title}</button></div>
-                    })}          
+                        return <div className="m-2">  <button className="submit" onClick={deleteVideo(vid.question_id)}> Delete question named: {vid.title}</button></div>
+                    })}   
         </div> 
     );
   }

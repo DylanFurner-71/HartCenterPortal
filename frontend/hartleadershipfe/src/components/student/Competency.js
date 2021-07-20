@@ -44,7 +44,6 @@ const Competency = (props) => {
                     )
                     console.log(vidf)
                      setVideos(vidf);
-                    //  setIsLoading(false);
                 }).catch(err=> console.log(err))
             };
                 fetchVideos();

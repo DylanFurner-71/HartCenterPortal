@@ -273,7 +273,6 @@ class Surveys extends Component {
     return (
         <div>
       <Survey.Survey model={model}/>
-      
     </div>
     );
     }
@@ -286,9 +285,4 @@ Surveys.defaultProps = {
 render(<Surveys />, document.getElementById('root'));
 export default
 (Surveys);
-
-
-
-
-
 

@@ -38,7 +38,7 @@ return (
                 </ul>
                 </h2>
                 <p>
-                    Personal Leadership forms the foundation, or base of the arch.The left side of the arch symbolizes Relational Leadership and the right side of the arch represents Functional Leadership. The keystone, or top of the arch, represents Leading in Context.
+                    Personal Leadership forms the foundation, or base of the arch. The left side of the arch symbolizes Relational Leadership and the right side of the arch represents Functional Leadership. The keystone, or top of the arch, represents Leading in Context.
 </p>
 
 

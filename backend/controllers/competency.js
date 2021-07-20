@@ -13,7 +13,7 @@ module.exports = function competency(app, logger) {
   return res.status(400).send(e);
 })
 });
-  app.route(`${process.env.HART}/competency/get/video/quiz/`) 
+app.route(`${process.env.HART}/competency/get/video/quiz/`) 
 .get( (req, res, next) => {
   getCompetenciesVideoQuiz(req).then(response => {
     return res.send({response});

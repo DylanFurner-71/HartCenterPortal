@@ -19,6 +19,7 @@ import {UpdateCompetenciesDescriptionForm} from "./UpdateCompetenciesDescription
 import {UpdateCompetenciesImageForm} from "./UpdateCompetenciesImageForm"
 import CompetencyVideo from "../student/CompetencyVideo"
 import {AddVideosForm} from "./AddVideosForm";
+import {DeleteQuestionForm} from "./DeleteQuestionForm"
 const EditCompetency = (props) => {
     const { user } = useSelector(state => state.auth.user);
     const { competency } = useSelector(state => state.competency);
@@ -98,7 +99,8 @@ return (
             </div>
                  ) 
                 }
-                 
+                <DeleteQuestionForm questions={questions}/>
+
     </div>
 );
 };

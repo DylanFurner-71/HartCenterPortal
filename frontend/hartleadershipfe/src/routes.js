@@ -18,6 +18,7 @@ import EditContactPage from "./components/admin/EditContactPage";
 import AdminLanding from "./components/admin/AdminLanding";
 import GetReportData from "./components/admin/GetReportData";
 import getSurveys from "./components/getSurveys";
+import { DeleteQuestionForm } from './components/admin/DeleteQuestionForm.js';
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -33,6 +34,7 @@ export const ROUTES = [
     { path: '/about/surveyinfo', component: HartLeadershipInfo},
     { path: '/comp/', component: UpdateCompetenciesForm},
     { path: '/competency/edit/competency', component: EditCompetency},
+    { path: '/competency/delete/question', component: DeleteQuestionForm},
     { path: '/admin/other/AddSurvey/', component: AddOtherSurvey},
     { path: '/other/survey/', component: OtherSurvey},
     { path: '/contact/edit/', component: EditContactPage},
