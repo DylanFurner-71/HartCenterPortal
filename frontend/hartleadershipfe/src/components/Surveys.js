@@ -1,53 +1,20 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-import {getSurvey} from "../actions/authActions";
-
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
-
 import 'bootstrap/dist/css/bootstrap.css'
-import { conditionalExpression } from '@babel/types';
 let globalArr = [];
-class Surveys extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            info: this.props.questions,
-            showing: false,
-            competencyQuiz: this.props.competencyQuiz ? true : false,
-            title: this.props.title
-              
-        };
-    }
-  componentWillMount() {    
-     
+const Surveys = (props) => {
     Survey.Survey.cssType = "bootstrap";
-    Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-    
-    
-  }
-  componentDidMount(){
-      
-  }
-  
-  results = (model1) => {
-    //console.log(model1.data);
-    
-    console.log("hi");
-    //this.props.handleResult();
-    }   
-
-  render() {
-    if(this.state.info == 'a'){
-        console.log("here");
+Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+    if(props.questions == 'a'){
         return null;
     }
     else{
-        var json = { title: this.props.title ? this.props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
-    var pageHolder = {questions:[]};
-    for(const [index,value] of this.state.info.entries()){
-        console.log(value);
+    let json = { title: props.title ? props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
+    let pageHolder = {questions:[]};
+    for(const [index,value] of props.questions.entries()){
         globalArr.push(value)
         if(value['type'] == 0){
             var questionTest =
@@ -62,6 +29,7 @@ class Surveys extends Component {
             pageHolder.questions.push(questionTest);
         }
         else if(value['type'] == 1){
+            console.log(value, "<--- current");
             var questionTest =
                 { type: "matrix", name: value['name'], title: value['title'],
                     columns: [{ value: 1, text: "1" },
@@ -69,11 +37,15 @@ class Surveys extends Component {
                         { value: 3, text: "3" },
                         { value: 4, text: "4" }],
                     rows: [
-                        { value: 'GL', text: "Good Leader" },
-                        { value: 'BL', text: "Bad Leader" },
-                        { value: 'user', text: "You" }]
+                        { value: choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
+                        { value: choice2, text: "You" },
+                        { value: choice3, text: "Bad Leader" }]
+                    
                 };
-            
+            if (choice4 != null && choice4Text) {
+                questionTest.rows.push({value: choice4Text})
+
+            }
             pageHolder.questions.push(questionTest);
         }
         else if(value['type'] == 2){
@@ -88,7 +60,7 @@ class Surveys extends Component {
                     choicesOrder: value['choicesOrder'],
                     correctAnswer: value['correctAnswer'],
                 };
-            for(const [indexInner,valueInner] of this.state.info[index]['choices'].entries()){
+            for(const [indexInner,valueInner] of props.questions[index]['choices'].entries()){
                 questionTest.choices.push(valueInner);
             }
             pageHolder.questions.push(questionTest);
@@ -124,10 +96,9 @@ class Surveys extends Component {
         var mySurvey = sender;
         var questionName = options.name;
         var newValue = options.value;
-        console.log(options.question)
     });
-    let inf = this.state.info
-    if (this.state.competencyQuiz === false){
+    let inf = props.info
+    if (props.competencyQuiz === false){
     model
     .onComplete
     .add(function (sender) {
@@ -135,7 +106,7 @@ class Surveys extends Component {
         var surveyData = sender.data;
         console.log(mySurvey);
         console.log(surveyData);
-
+        //code is broken from here onwards. Thanks John!!!!!
         var selfAware = surveyData['Candid Self Appraisal']['user'] + surveyData['Commits Wisely']['user'] + surveyData['Composed']['user'] + surveyData['Self Directed']['user'] + surveyData['Open to Feedback']['user'];
         var intentionalLearner = surveyData['Improves Performance']['user'] + surveyData['Wiling to Stretch']['user'] + surveyData['Reflective Learner']['user'] + surveyData['Grows from Adversity']['user'] + surveyData['Seeks Feedback']['user'];
         var communication = surveyData['Open to Feedback']['user'] + surveyData['Seeks Feedback']['user'] + surveyData['Transparent']['user'] + surveyData['Careful Listener']['user'] + surveyData['Gives Candid Feedback']['user'];
@@ -236,7 +207,7 @@ class Surveys extends Component {
                 axios
                 .post(`hartBE/v1/student/${surveyData['smuID']}`, req)
                 .then(resp => {
-                console.log(resp)
+                console.log(resp, 'studentHolder')
         })
             }  catch (e){
               console.log(e);
@@ -247,7 +218,7 @@ class Surveys extends Component {
                 axios
                 .post(`hartBE/v1/surveys/${surveyData['smuID']}`, req)
                 .then(resp => {
-                console.log(resp)
+                console.log(resp, 'RESPONNSE HOLDER')
         })
             }  catch (e){
               console.log(e);
@@ -277,12 +248,4 @@ class Surveys extends Component {
     );
     }
   }
-  
-}
-Surveys.defaultProps = {
-    questions: 'a'
-  };
-render(<Surveys />, document.getElementById('root'));
-export default
-(Surveys);
-
+export default Surveys
