@@ -7,18 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 let globalArr = [];
 const Surveys = (props) => {
     Survey.Survey.cssType = "bootstrap";
-Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-    if(props.questions == 'a'){
-        return null;
-    }
-    else{
-    let json = { title: props.title ? props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
-    let pageHolder = {questions:[]};
-    for(const [index,value] of props.questions.entries()){
-        globalArr.push(value)
+    function determineQuestion(value){
         if(value['type'] == 0){
-            var questionTest =
-                {
+            return{
                     name: value['name'],
                     type: "text",
                     title: value['title'],
@@ -26,67 +17,84 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
                     isRequired: true,
                     autoComplete: value['auto']
                 };
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 1){
-            console.log(value, "<--- current");
-            var questionTest =
-                { type: "matrix", name: value['name'], title: value['title'],
-                    columns: [{ value: 1, text: "1" },
-                        { value: 2, text: "2" },
-                        { value: 3, text: "3" },
-                        { value: 4, text: "4" }],
-                    rows: [
-                        { value: choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
-                        { value: choice2, text: "You" },
-                        { value: choice3, text: "Bad Leader" }]
-                    
-                };
-            if (choice4 != null && choice4Text) {
-                questionTest.rows.push({value: choice4Text})
-
-            }
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 2){
-            var questionTest =
-                {
-                    type: "radiogroup",
-                    name: value['name'],
-                    title: value['title'],
-                    isRequired: true,
-                    colCount: 4,
-                    choices: [],
-                    choicesOrder: value['choicesOrder'],
-                    correctAnswer: value['correctAnswer'],
-                };
-            for(const [indexInner,valueInner] of props.questions[index]['choices'].entries()){
-                questionTest.choices.push(valueInner);
-            }
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 3){
-            var questionTest =
-                {
+            }   else if(value['type'] == 1){
+                    return { type: "matrix", name: value['name'], title: value['title'],
+                        columns: [{ value: 1, text: "1" },
+                            { value: 2, text: "2" },
+                            { value: 3, text: "3" },
+                            { value: 4, text: "4" }],
+                        rows: [
+                            { value: value.choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
+                            { value: value.choice2, text: "You" },
+                            { value: value.choice3, text: "Bad Leader" }]
+                    };
+                }  else if(value['type'] == 2){
+                    var questionTest =
+                        {
+                            type: "radiogroup",
+                            name: value['name'],
+                            title: value['title'],
+                            isRequired: true,
+                            colCount: 4,
+                            choices: [],
+                            choicesOrder: value['choicesOrder'],
+                            correctAnswer: value['correctAnswer'],
+                        };
+                    // for(const [indexInner,valueInner] of props.questions[index]['choices'].entries()){
+                        for(const [indexInner,valueInner] of ['choices'].entries()){
+ 
+                    questionTest.choices.push(valueInner);
+                    }
+                    return questionTest
+                  }  else if(value['type'] == 3){
+                    return {
                     "type": "boolean",
                     "name": value['name'],
                     "title": "Please answer the question",
                     "label": value['title'],
                     "isRequired": true
                 };
-            pageHolder.questions.push(questionTest);
-        }
-        if(((index + 1) % 5) == 0){
-            json.pages.push(pageHolder);
-            pageHolder = {questions:[]};
-        }
-        
+            }       // if (choice4 != null && choice4Text) {
+                //     questionTest.rows.push({value: choice4Text})
+                // } //soonn
+     
+                // for(const [index,value] of questions1.entries()){
+                //     globalArr.push(value)
+                //     questionsq.push(determineQuestion(value))
+                //     if(((index + 1) % 5) == 0){
+                //         pageHolder.questions.push(questionsq);
+                //     }
+                //     }
+                //     return pageHolder
     }
-    
-    
+    function questionsfromprops(json, questions1, pageHolder){
+        let questionsq = []
+        for(const [index,value] of questions1.entries()){
+            globalArr.push(value)
+            questionsq.push(determineQuestion(value))
+               
+            }
+            return questionsq
+    }
 
 
-    
+
+Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+    if(props.questions == 'a'){
+        return null;
+    }
+    else{
+    let json = { title: props.title ? props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
+    const pageHolder = {questions: []};
+    pageHolder.questions = questionsfromprops(json, props.questions, pageHolder)
+    let tempPageHolder = { questions: []}
+    for (let i = 0; i < pageHolder.questions.length; i++){
+        tempPageHolder.questions.push(pageHolder.questions[i])
+        if(((i + 1) % 5) == 0){
+            json.pages.push(tempPageHolder);
+            tempPageHolder = {questions: []}
+        }
+    }
     json.pages.push(pageHolder);
     var model = new Survey.Model(json);
 
@@ -104,8 +112,6 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
     .add(function (sender) {
         var mySurvey = sender;
         var surveyData = sender.data;
-        console.log(mySurvey);
-        console.log(surveyData);
         //code is broken from here onwards. Thanks John!!!!!
         var selfAware = surveyData['Candid Self Appraisal']['user'] + surveyData['Commits Wisely']['user'] + surveyData['Composed']['user'] + surveyData['Self Directed']['user'] + surveyData['Open to Feedback']['user'];
         var intentionalLearner = surveyData['Improves Performance']['user'] + surveyData['Wiling to Stretch']['user'] + surveyData['Reflective Learner']['user'] + surveyData['Grows from Adversity']['user'] + surveyData['Seeks Feedback']['user'];
@@ -230,9 +236,7 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
     .add(function (sender, options) {
         var mySurvey = sender;
         var surveyData = sender.data;
-        console.log(globalArr)
         let localArr = globalArr.splice(0, globalArr.length/2)
-        console.log(localArr)
         let correctedAnswers = {}
         localArr.forEach(item => {
             correctedAnswers[item.name] = item.correctAnswer;
@@ -247,5 +251,5 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
     </div>
     );
     }
-  }
+}
 export default Surveys

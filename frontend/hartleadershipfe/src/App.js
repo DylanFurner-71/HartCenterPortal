@@ -10,7 +10,6 @@ import Landing from './components/landing';
 import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
 import store from './store';
-import Surveys from './components/getSurveys'
 import { ROUTES } from './routes';
 
 // Check for token to keep user logged in
