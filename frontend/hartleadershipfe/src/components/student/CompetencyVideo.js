@@ -48,7 +48,7 @@ return (
               <br></br>
               <br></br>
               {!modalShow && <button className="btn btn-primary" type="button" onClick={openModal}>Take Quiz</button>}
-              <QuizPopUp closeModal={closeModal} show={modalShow} survey_id={props.id} isAdmin={props.isAdmin} questions={props.questions} title={props.title}/>
+              <QuizPopUp closeModal={closeModal} show={modalShow} id={props.id} isAdmin={props.isAdmin} questions={props.questions} title={props.title}/>
               </Col>
               </Row>
               {props.isAdmin === true &&  

@@ -5,11 +5,15 @@ import axios from 'axios';
 import {Row, Container, Col} from "react-bootstrap/";
 import EditMultipleChoice from "./questions/EditMultipleChoice";
 import QuestionEditor from "./questions/QuestionEditor";
+import QuizPopUp from "../student/QuizPopUp";
 const SurveyCard = (props) => {
   const { user } = useSelector(state => state.auth.user);
   const [isStudent, setIsStudent] = useState(true);
   const [question, setSurvey] = useState({})
   const survey_id =props.survey_id
+  const [modalShow, setModalShow] = useState(false)
+  const closeModal = () => setModalShow(false);
+  const openModal = () => setModalShow(true)
       useEffect(() => {
   if (!user.isStudent === true){
     setIsStudent(false);
@@ -84,11 +88,11 @@ if (question.type == 2) {
 
 } else if (question.type == 1){
 
-    return <div> <p>Options for students to select: </p> 
+    return <div> 
+    <p>Options for students to select: </p> 
     <p>choice 1: {question.choice1}</p>
     <p>choice 2: {question.choice2}</p>
     <p>choice 3: {question.choice3}</p>
-
     </div>
 }
 }
@@ -96,10 +100,10 @@ function mapquestion() {
     // let question1 = determineQuestion(props.question)
     return (
             <div>
-                <p>Question Type</p> {props.question.type}
-                <p>Question name</p> {props.question.name}
-                <p>Question Title (this is the question the student is asked) </p> {props.question.title}
-                <p>Question Type</p> {props.question.type}
+                <p>Question Type: {props.question.type}</p>
+                <p>Question name: {props.question.name}</p>
+                <p>Question Title: (this is the question the student is asked) {props.question.title} </p>
+                <p>Question Type:</p> {props.question.type}
                 <div>{showchoices(props.question)}</div>
             </div>
     )
@@ -114,13 +118,13 @@ return (
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
     <Col>
-    <p>question name: {question.name}</p>
+    <p>question name: {props.question.name}</p>
     <p>{mapquestion()}</p>
     {isStudent ? (
 <></>
     ) : (
 <div>
-      <button onClick={() => deleteQuestion(survey_id, question.name, props.questionid)} className="btn btn-outline-secondary">
+      <button onClick={() => deleteQuestion(survey_id, props.question.name, props.question.question_id)} className="btn btn-outline-secondary">
       <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
           <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -128,10 +132,10 @@ return (
   </button>
   <div>
     <p> Use the form below to enter new questions. The students will see the questions in random order each time</p>
-    {/* <EditMultipleChoice id={props.id} questions={props.questions.filter(item => item.survey_id === props.id.toString())}/> */}
-   <QuestionEditor props={question}/>
-    </div>
+    <QuestionEditor question={props.question} survey_id={props.question.survey_id} question_id={props.question.question_id} pathtoroute={pathtoroute}/>
   </div>
+  </div>
+
     )}
 
               </Col>

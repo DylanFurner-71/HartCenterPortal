@@ -4,7 +4,7 @@ import {editQuote} from "../../../actions/authActions";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../../prefixes/hart';
 import {DeleteQuestionForm} from "../DeleteQuestionForm";
-export function EditMultipleChoice(props) {
+export function EditMultiSelection(props) {
     const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
     const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
@@ -14,6 +14,7 @@ export function EditMultipleChoice(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
+        //here is where we structure the multi selection style question
         //abstract to functionn
         try {
           const req = {
@@ -25,8 +26,7 @@ export function EditMultipleChoice(props) {
                newQuote1, newQuote2, newQuote3, newQuote4
             ],
             correctAnswer: newQuote1,
-            survey_id: props.survey_id,
-            question_id: props.question_id
+            survey_id: props.survey_id
           }
 axios.post(`${props.pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
@@ -47,7 +47,6 @@ console.log(resp)
 
     return (
       <div>
-        hello
       <form onSubmit={handleSubmit}>
          <label>
           Please enter the question followed by a question mark
@@ -79,4 +78,4 @@ console.log(resp)
       </div>
     );
   }
-  export default EditMultipleChoice;
+  export default EditMultiSelection;
