@@ -4,52 +4,39 @@ import {editQuote} from "../../../actions/authActions";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../../prefixes/hart';
 import {DeleteQuestionForm} from "../DeleteQuestionForm";
-export function EditMultiSelection(props) {
-    const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
-    const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
-    const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
-    const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(''); 
+export function AddFreeResponse(props) {
     const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
-        //here is where we structure the multi selection style question
-        //abstract to functionn
         try {
           const req = {
-            type: 1,
+            type: 0,
             name: newTitle,
             title: newTitle,
-            choicesOrder: "random",
-            choice1: "GL",
-            choice2: "You",
-            choice3: "BL",
+            isRequired: true,
+            autoComplete: "text",
+            input: "text",
             survey_id: props.survey_id
           }
-axios.put(`${props.pathtoroute}`, req).then(resp => {
-//find somethinng to do inn here
+axios.post(`${props.pathtoroute}`, req).then(resp => {
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)
-
+//probably add updateVar not sure yet
 });
         
 }  catch (e){
           console.log(e);
       }
-      resetNewQuote1();
-      resetNewQuote2();
-      resetNewQuote3();
-      resetNewQuote4();
       resetNewTitle();
     }
 
     return (
       <div>
-        <p> Answer choices are defaulted to "Good Leader, User, and Bad Leader</p>
       <form onSubmit={handleSubmit}>
          <label>
-          Please enter the question
+          Please enter the question followed by punctuation
           <input type="text" {...bindNewTitle}
           placeholder={`question`}/>
         </label>
@@ -58,4 +45,4 @@ console.log(resp)
       </div>
     );
   }
-  export default EditMultiSelection;
+  export default AddFreeResponse;

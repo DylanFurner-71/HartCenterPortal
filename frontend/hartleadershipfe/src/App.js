@@ -11,6 +11,7 @@ import setAuthToken from './utils/setAuthToken';
 import Login from './components/Login';
 import store from './store';
 import { ROUTES } from './routes';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // Check for token to keep user logged in
 if (localStorage.getItem('accessToken')) {

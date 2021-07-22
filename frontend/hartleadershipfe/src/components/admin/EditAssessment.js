@@ -16,6 +16,7 @@ import OtherSurvey from "../student/OtherSurvey";
 import SurveyCard from "./SurveyCard"
 import {AddSurveyButton} from "./AddSurveyButton";
 import { type } from 'jquery';
+import QuestionAdder from "./questions/QuestionAdder"
 const pathname = window.location.pathname
 const EditAssessment = () => {
     const { user } = useSelector(state => state.auth.user);
@@ -27,20 +28,18 @@ const EditAssessment = () => {
     // let id = String(id1)
     const fetchSurveys = async () => {
         await axios
-        .get(`${HartAPIPrefix}/survey/1`) //check this
+        .get(`${HartAPIPrefix}/survey/${id}`) //check this
         .then(res => {
             console.log(typeof res.data)
             console.log( res.data)
-                // console.log('response;', res)
                 setSurvey(res.data.response);
-                // setIsLoading(false);
             }).catch(err=> console.log(err))
         };
         useEffect(
             () => {
                 const fetchTitle = async () => {
                     await axios 
-                    .get(`${HartAPIPrefix}/survey/title/1`)
+                    .get(`${HartAPIPrefix}/survey/title/${id}`)
                     .then(res => {
                         setTitle(res.data.response[0].title);
 
@@ -66,21 +65,17 @@ return (
  <div>
                     <h1><b>Edit/Add/Delete {title} </b></h1> 
                     <p> Here is what the student sees: </p>
-                    //select tab function, default to =       
                     <div>            
                  {survey.map((s, i) =>{ return <div key={i}>
 
-                 <SurveyCard question={s} survey_id={id} questionid={s.question_id}/>
+                 <SurveyCard survey={s} survey_id={id} questionid={i}/>
 
                  </div>        })}
 
 </div>
-
-                        {/* this will be the function that returns our edit questions table*/}
-                        {/* <div className="m-1"><DisplaySurvey survey={survey} updateVar={setSurvey} /></div> */}
-                    {/* <AddSurveyButton/> */}
-
-                 
+<div>
+<QuestionAdder survey_id={id}/>
+</div>
     </div>
 )}
 </div>

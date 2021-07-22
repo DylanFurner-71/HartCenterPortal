@@ -28,7 +28,7 @@ export function EditMultipleChoice(props) {
             survey_id: props.survey_id,
             question_id: props.question_id
           }
-axios.post(`${props.pathtoroute}`, req).then(resp => {
+axios.put(`${props.pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)

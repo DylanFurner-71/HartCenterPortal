@@ -9,17 +9,12 @@ export const QuestionEditor = (props) => {
     function giveObj(){
         console.log("EDITOR:", props)
         if (props.question.type == 0){
-            return 
-            <EditFreeResponse pathtoroute={props.pathtoroute} survey_id={props.survey_id} />  
-             //open response enter text questions
+            return <EditFreeResponse pathtoroute={props.pathtoroute} survey_id={props.survey_id} />  
         }
         if (props.question.type == 1){
-            return 
-            <EditMultiSelection question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} question={props.question} />  
-             //selection questiosn
+            return <EditMultiSelection question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} question={props.question} />  
         }
         if (props.question.type ==2){
-                {/* <EditMultipleChoice id={props.id} questions={props.questions.filter(item => item.survey_id === props.id.toString())} pathtoroute={pathtoroute}/> */}
 
             return <EditMultipleChoice question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} />           //multiple choice questiosn
         }//desperately need to pass updateVar format to change all of these screenns

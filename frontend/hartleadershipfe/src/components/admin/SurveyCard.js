@@ -19,7 +19,6 @@ const SurveyCard = (props) => {
     setIsStudent(false);
   }
 }, [])
-const pathtoroute = `/survey/edit/${survey_id}/${props.question.question_id}`
 function determineQuestion(value){
 console.log(value, "VALUE")
     if(value.type == 0){
@@ -36,8 +35,7 @@ console.log(value, "VALUE")
                 isRequired: true,
                     columns: [{ value: 1, text: "1" },
                         { value: 2, text: "2" },
-                        { value: 3, text: "3" },
-                        { value: 4, text: "4" }],
+                        { value: 3, text: "3" }],
                     rows: [
                         { value: value.choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
                         { value: value.choice2, text: "You" },
@@ -71,7 +69,7 @@ console.log(value, "VALUE")
     }
 function deleteQuestion(survey_id, questionid) {
   return new Promise((resolve, reject) => {
-      axios.delete(`${HartAPIPrefix}/survey/${props.id}/${props.questionid}`)
+      axios.delete(`${HartAPIPrefix}/survey/${props.id}/${props.survey_id}`)
           .then(resp => resolve(resp.data))
           .catch(err => console.log(err.response));
   })
@@ -100,11 +98,11 @@ function mapquestion() {
     // let question1 = determineQuestion(props.question)
     return (
             <div>
-                <p>Question Type: {props.question.type}</p>
-                <p>Question name: {props.question.name}</p>
-                <p>Question Title: (this is the question the student is asked) {props.question.title} </p>
-                <p>Question Type:</p> {props.question.type}
-                <div>{showchoices(props.question)}</div>
+                <p>Question Type: {props.survey.type}</p>
+                <p>Question name: {props.survey.name}</p>
+                <p>Question Title: (this is the question the student is asked) {props.survey.title} </p>
+                <p>Question Type:</p> {props.survey.type}
+                <div>{showchoices(props.survey)}</div>
             </div>
     )
 }
@@ -118,13 +116,13 @@ return (
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
     <Col>
-    <p>question name: {props.question.name}</p>
+    <p>question name: {props.survey.name}</p>
     <p>{mapquestion()}</p>
     {isStudent ? (
 <></>
     ) : (
 <div>
-      <button onClick={() => deleteQuestion(survey_id, props.question.name, props.question.question_id)} className="btn btn-outline-secondary">
+      <button onClick={() => deleteQuestion(survey_id, props.survey.name, props.survey.question_id)} className="btn btn-outline-secondary">
       <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
           <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -132,7 +130,7 @@ return (
   </button>
   <div>
     <p> Use the form below to enter new questions. The students will see the questions in random order each time</p>
-    <QuestionEditor question={props.question} survey_id={props.question.survey_id} question_id={props.question.question_id} pathtoroute={pathtoroute}/>
+    <QuestionEditor question={props.survey} survey_id={props.survey.survey_id} question_id={props.survey.question_id}/>
   </div>
   </div>
 

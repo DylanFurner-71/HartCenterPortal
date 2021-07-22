@@ -4,7 +4,7 @@ import {editQuote} from "../../../actions/authActions";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../../prefixes/hart';
 import {DeleteQuestionForm} from "../DeleteQuestionForm";
-export function EditMultiSelection(props) {
+export function AddMultipleChoice(props) {
     const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
     const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
@@ -14,22 +14,23 @@ export function EditMultiSelection(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
-        //here is where we structure the multi selection style question
         //abstract to functionn
         try {
           const req = {
-            type: 1,
+            type: 2,
             name: newTitle,
             title: newTitle,
             choicesOrder: "random",
-            choice1: "GL",
-            choice2: "You",
-            choice3: "BL",
-            survey_id: props.survey_id
+            choices: [
+               newQuote1, newQuote2, newQuote3, newQuote4
+            ],
+            correctAnswer: newQuote1,
+            survey_id: props.survey_id,
+            question_id: props.question_id
           }
-axios.put(`${props.pathtoroute}`, req).then(resp => {
+axios.post(`${props.pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
-console.log("Edit mulitiple choice axios responsne: \n")
+console.log("Edit multiple choice axios response: \n")
 console.log(resp)
 
 });
@@ -46,16 +47,36 @@ console.log(resp)
 
     return (
       <div>
-        <p> Answer choices are defaulted to "Good Leader, User, and Bad Leader</p>
+        hello
       <form onSubmit={handleSubmit}>
          <label>
-          Please enter the question
+          Please enter the question followed by a question mark
           <input type="text" {...bindNewTitle}
           placeholder={`question`}/>
+        </label>
+        <label>
+          Please enter the correct answer choice
+          <input type="text" {...bindNewQuote1}
+          placeholder={`correct answer`}/>
+        </label>
+        <label>
+          Please enter the second answer choice
+          <input type="text" {...bindNewQuote2}
+          placeholder={`Place the second option here.`}/>
+        </label>
+        <label>
+          Please enter the third answer choice
+          <input type="text" {...bindNewQuote3}
+          placeholder={`Place the third option here.`}/>
+        </label>
+        <label>
+          Please enter the fourth answer choice
+          <input type="text" {...bindNewQuote4}
+          placeholder={`Place the fourth option here.`}/>
         </label>
         <input type="submit" value="Submit" />
       </form>
       </div>
     );
   }
-  export default EditMultiSelection;
+  export default AddMultipleChoice;
