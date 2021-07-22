@@ -44,7 +44,7 @@ app.route(`${process.env.HART}/contact/contactCard/add`)
 })
 app.route(`${process.env.HART}/contact/contactInfo/title`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderTitle(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -53,7 +53,7 @@ app.route(`${process.env.HART}/contact/contactInfo/title`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/schoolName`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderSchoolName(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -62,7 +62,7 @@ app.route(`${process.env.HART}/contact/contactInfo/schoolName`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/buildingName`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderBuilding(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -71,7 +71,7 @@ app.route(`${process.env.HART}/contact/contactInfo/buildingName`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/addresslineone`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderAddress1(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -80,7 +80,7 @@ app.route(`${process.env.HART}/contact/contactInfo/addresslineone`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/addresslinetwo`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderAddress2(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -89,7 +89,7 @@ app.route(`${process.env.HART}/contact/contactInfo/addresslinetwo`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/fax`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderFax(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{
@@ -98,7 +98,7 @@ app.route(`${process.env.HART}/contact/contactInfo/fax`)
 });
 app.route(`${process.env.HART}/contact/contactInfo/email`) 
 .put( (req, res, next) => {
-    edi(req).then(response => {
+  editContactHeaderEmail(req).then(response => {
     return res.send({response});
 })    
 .catch((e)=>{

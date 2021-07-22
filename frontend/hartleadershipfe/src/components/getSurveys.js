@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 import Surveys from "./Surveys.js"
 import AboutUs from "./info/AboutUs";
 import { Modal} from 'react-bootstrap'
+import HartLeadershipInfo from './info/HartLeadershipInfo.js';
 
 const GetSurveys = (props) => {
 const { user } = useSelector(state => state.auth.user);
@@ -94,7 +95,7 @@ return (
             centered onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        About US
+                        <HartLeadershipInfo></HartLeadershipInfo>
                         </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className ="mx-auto">

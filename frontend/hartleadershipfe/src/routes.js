@@ -19,6 +19,8 @@ import AdminLanding from "./components/admin/AdminLanding";
 import GetReportData from "./components/admin/GetReportData";
 import getSurveys from "./components/getSurveys";
 import { DeleteQuestionForm } from './components/admin/DeleteQuestionForm.js';
+import Results from './components/Results.js'
+import EditAssessment from "./components/admin/EditAssessment";
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -39,5 +41,6 @@ export const ROUTES = [
     { path: '/other/survey/', component: OtherSurvey},
     { path: '/contact/edit/', component: EditContactPage},
     { path: '/survey/', component: getSurveys},
-
+    { path: '/survey/response/', component: Results},
+    { path: '/survey/edit/:id', component: EditAssessment}
 ]

@@ -51,7 +51,7 @@ const UpdateCompetenciesForm = () => {
         <p>
             This is what the student sees throughout the website.
         </p>
-        {competencies.map(competency =>{
+        {competencies.map( competency =>{
                         return<div className="m-2">
                             <CompetencyCard competency={competency}/>
                         </div>

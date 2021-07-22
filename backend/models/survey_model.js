@@ -14,7 +14,7 @@ postResult = async (info) => new Promise((resolve, reject) => {
         }
     })
 })
-getSurveyQuestions = async () => new Promise((resolve, reject) => {
+getSurveyQuestions = async (ifo) => new Promise((resolve, reject) => {
     pool.query( "SELECT * FROM questions WHERE survey_id = 1", function (error, results, fields) {
         if (error){
             reject();
@@ -27,8 +27,34 @@ getSurveyQuestions = async () => new Promise((resolve, reject) => {
 
 
 
+getQuestions = async (survey_id) => new Promise((resolve, reject) => {
+    console.log("IDFFOasdfasdf:", (survey_id))
+    pool.query( "SELECT * FROM questions WHERE survey_id = ?", [survey_id], 
+    function (error, results, fields) {
+        if (error){
+            // console.log(error)
+            reject();
+            // console.log(error)
+        }else{
+            resolve(results);
+        }
+    })
+});
 getSurveys = async (ifo) => new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM surveys", function (error, results, fields) {
+    console.log("IDFFO:", ifo)
+    pool.query( "SELECT * FROM surveys", function (error, results, fields) {
+        if (error){
+            // console.log(error)
+            reject();
+            // console.log(error)
+        }else{
+            resolve(results);
+        }
+    })
+});
+
+getTitle = async (ifo) => new Promise((resolve, reject) => {
+    pool.query( "SELECT * FROM titles WHERE survey_id = ? ", [ifo], function (error, results, fields) {
         if (error){
             console.log(error)
             reject();
@@ -38,9 +64,10 @@ getSurveys = async (ifo) => new Promise((resolve, reject) => {
         }
     })
 });
-
 module.exports = {
     postResult,
     getSurveyQuestions,
-    getSurveys
+    getSurveys,
+    getTitle,
+    getQuestions
 }

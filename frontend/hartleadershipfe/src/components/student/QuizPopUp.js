@@ -6,12 +6,13 @@ import Loading from "../Loading";
 import axios from 'axios';
 import {HartAPIPrefix} from '../../prefixes/hart';
 import {EditQuizPopUp} from "../admin/EditQuizPopUp";
+import { EditMultipleChoice } from '../admin/questions/EditMultipleChoice';
 const QuizPopUp = props => {
     const {show, closeModal} = props;
     function handleResult() {
         console.log('Results');
-    
-    }      
+    }
+    const pathtoroute = '/competency/video/quiz/' //probably change this to props and delete this component
     return (
         <div>
 
@@ -25,12 +26,12 @@ const QuizPopUp = props => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className ="mx-auto">
-                <Surveys questions={props.questions.filter(item => item.survey_id === props.id.toString())} handleResult = {handleResult} competencyQuiz={true} title={props.title}/>
+                <Surveys questions={props.questions.filter(item => item.survey_id === props.id)} handleResult = {handleResult} competencyQuiz={true} title={props.title}/>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={closeModal}> Close </button>
                     {props.isAdmin === true &&  
 <div>
     <p> Use the form below to enter new questions. The students will see the questions in random order each time</p>
-    <EditQuizPopUp id={props.id} questions={props.questions.filter(item => item.survey_id === props.id.toString())}/>
+    <EditMultipleChoice id={props.id} questions={props.questions.filter(item => item.survey_id === props.id.toString())} pathtoroute={pathtoroute}/>
     </div>
     }
                 </Modal.Body>
