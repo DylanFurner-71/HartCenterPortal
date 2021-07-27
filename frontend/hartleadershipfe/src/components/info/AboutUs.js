@@ -11,14 +11,13 @@ import approach from "../../images/approach.png"
 
 const AboutUs = () => {
     const { user } = useSelector(state => state.auth.user);
-    console.log("USER ----->", user);
 return (
 
     <div
         className='container justify-content-center align-items-center h-100'
     >
 
-        <div className='row bg-info text-white'>
+        <div className='row bg-info text-black'>
             <div className='justify-content-center container align-wrapper'>
                 <div className="table justify-content-center" style={{display : 'flex', flexDirection: "row"}}>
                         <img src={smallOne} style={{margin: "0.5rem"}}></img>

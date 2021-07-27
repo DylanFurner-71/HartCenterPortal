@@ -44,7 +44,6 @@ const Competency = (props) => {
                     )
                     console.log(vidf)
                      setVideos(vidf);
-                    //  setIsLoading(false);
                 }).catch(err=> console.log(err))
             };
                 fetchVideos();
@@ -62,7 +61,7 @@ return (
                    <p className="text-secondary">{competency.quote}
             </p>
                     {videos.map(vid =>{
-                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} id={vid.id} title={vid.title} questions={questions}/></div>
+                        return<div className="m-2"> <CompetencyVideo vid_desc={vid.vid_desc} video_link={vid.video_link} question_id={vid.id} title={vid.title} questions={questions}/></div>
                     })}
             </div>
                  ) 

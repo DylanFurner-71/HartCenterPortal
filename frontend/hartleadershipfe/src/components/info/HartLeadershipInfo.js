@@ -4,7 +4,6 @@ import HartArch from "../../images/HartLeadership.png"
 
 const HartLeadershipInfo = () => {
     const { user } = useSelector(state => state.auth.user);
-    console.log("USER ----->", user);
 return (
 
     <div

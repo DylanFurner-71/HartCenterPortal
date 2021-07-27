@@ -87,8 +87,7 @@ getCompetenciesVideoQuiz = () => new Promise((resolve, reject) => {
     });
 });
 addCompetenciesVideoQuizQuestion = (info) => new Promise((resolve, reject) => {
-    console.log(info)
-    db.query("INSERT INTO comp_questions(survey_id, type, name, title, correctAnswer, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+    db.query("INSERT INTO Comp_questions(survey_id, type, name, title, correctAnswer, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.correctAnswer, info.body.choices[1], info.body.choices[2], info.body.choices[3]],
      function (error, results, fields){
         if (error){

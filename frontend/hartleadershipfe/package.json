@@ -1,6 +1,7 @@
 {
   "name": "hartleadershipfe",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@devexpress/dx-react-core": "^2.7.3",

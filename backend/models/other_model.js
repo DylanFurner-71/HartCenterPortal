@@ -11,14 +11,13 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
     });
   });
   AddOtherSurvey = async (info) => new Promise((resolve, reject) => {
-      console.log(info)
     pool.query("INSERT INTO Other_surveys (title, link, description, imageName) VALUES (?, ?, ?, ?)",
     [info.body.title, info.body.link, info.body.description, info.body.imageName],
      function (error, results, fields){
         if (error){
             reject();
         }else {
-            resolve();
+            resolve(result);
         }
     })
 })

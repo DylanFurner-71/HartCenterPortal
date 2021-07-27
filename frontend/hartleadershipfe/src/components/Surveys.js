@@ -1,119 +1,115 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
-import {getSurvey} from "../actions/authActions";
-
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.css'
-import { conditionalExpression } from '@babel/types';
+
 let globalArr = [];
-class Surveys extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            info: this.props.questions,
-            showing: false,
-            competencyQuiz: this.props.competencyQuiz ? true : false,
-            title: this.props.title
-              
-        };
-    }
-  componentWillMount() {    
-     
-    Survey.Survey.cssType = "bootstrap";
-    Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-    
-    
-  }
-  componentDidMount(){
-      
-  }
-  
-  results = (model1) => {
-    //console.log(model1.data);
-    
-    console.log("hi");
-    //this.props.handleResult();
-    }   
+const Surveys = (props) => {
+    const { user } = useSelector(state => state.auth.user);
 
-  render() {
-    if(this.state.info == 'a'){
-        console.log("here");
-        return null;
+        let history = useHistory();
+        function handleClick(resp) {
+          history.push("/survey/response/", {state: resp});
+        }
+    const postStudentsResponse = async() => (studentHolder) => {      
+        try {
+            const req = studentHolder;
+              axios
+              .post(`hartBE/v1/student/${user.info.smu_id}`, req)
+              .then(resp => {
+              console.log(resp, 'studentHolder')
+      })
+          }  catch (e){
+            console.log(e);
+        }
     }
-    else{
-        var json = { title: this.props.title ? this.props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
-    var pageHolder = {questions:[]};
-    for(const [index,value] of this.state.info.entries()){
-        console.log(value);
-        globalArr.push(value)
+    const postStudentSurveyResponse = async() => (responseHolder) => {  
+    try {
+        const req = responseHolder;
+          axios
+          .post(`hartBE/v1/survey/${user.info.smu_id}`, req)
+          .then(resp => {
+          handleClick(resp)
+  })
+      }  catch (e){
+        console.log(e);
+      } 
+    }
+    Survey.Survey.cssType = "bootstrap";
+    function determineQuestion(value){
         if(value['type'] == 0){
-            var questionTest =
-                {
-                    name: value['name'],
-                    type: "text",
+            return{
+                name: value['name'].replace(' ', ''),
+                type: "text",
                     title: value['title'],
                     inputType: value['input'],
                     isRequired: true,
                     autoComplete: value['auto']
                 };
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 1){
-            var questionTest =
-                { type: "matrix", name: value['name'], title: value['title'],
-                    columns: [{ value: 1, text: "1" },
-                        { value: 2, text: "2" },
-                        { value: 3, text: "3" },
-                        { value: 4, text: "4" }],
-                    rows: [
-                        { value: 'GL', text: "Good Leader" },
-                        { value: 'BL', text: "Bad Leader" },
-                        { value: 'user', text: "You" }]
-                };
-            
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 2){
-            var questionTest =
-                {
-                    type: "radiogroup",
-                    name: value['name'],
-                    title: value['title'],
+            }   else if(value['type'] == 1){
+                    return { type: "matrix", name: value['name'].replace(' ', ''), title: value['title'],
                     isRequired: true,
-                    colCount: 4,
-                    choices: [],
-                    choicesOrder: value['choicesOrder'],
-                    correctAnswer: value['correctAnswer'],
-                };
-            for(const [indexInner,valueInner] of this.state.info[index]['choices'].entries()){
-                questionTest.choices.push(valueInner);
-            }
-            pageHolder.questions.push(questionTest);
-        }
-        else if(value['type'] == 3){
-            var questionTest =
-                {
+                        columns: [{ value: 1, text: "1" },
+                            { value: 2, text: "2" },
+                            { value: 3, text: "3" },
+                            { value: 4, text: "4" }],
+                        rows: [
+                            { value: value.choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
+                            { value: value.choice2, text: "You" },
+                            { value: value.choice3, text: "Bad Leader" }]
+                    };
+                }  else if(value['type'] == 2){
+                    var questionTest =
+                        {
+                            type: "radiogroup",
+                            name: value['name'].replace(' ', ''),
+                            title: value['title'],
+                            isRequired: true,
+                            colCount: 4,
+                            choices: value['choices'],
+                            choicesOrder: value['choicesOrder'],
+                            correctAnswer: value['correctAnswer'],
+                        };
+                    for(const [indexInner,valueInner] of value['choices'].entries()){
+                        questionTest.choices.push(valueInner);
+                    }
+                    return questionTest
+                  }  else if(value['type'] == 3){
+                    return {
                     "type": "boolean",
-                    "name": value['name'],
+                    name: value['name'].replace(' ', ''),
                     "title": "Please answer the question",
                     "label": value['title'],
                     "isRequired": true
                 };
-            pageHolder.questions.push(questionTest);
-        }
+            }       // if (choice4 != null && choice4Text) {
+            //     questionTest.rows.push({value: choice4Text})
+            // } //soonn
+ 
+    
+    }
+Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+    if(props.questions == 'a'){
+        return null;
+    }
+    else{
+        //change completedHTML to something
+    let json = { title: props.title ? props.title : "Leader Comparision", showProgressBar: "top", pages: [], completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"};    
+    let pageHolder = {questions: []};
+
+    for(const [index,value] of props.questions.entries()){
+        globalArr.push(value)
+        pageHolder.questions.push(determineQuestion(value, index))
         if(((index + 1) % 5) == 0){
             json.pages.push(pageHolder);
             pageHolder = {questions:[]};
         }
-        
-    }
-    
-    
-
-
+        }
     
     json.pages.push(pageHolder);
     var model = new Survey.Model(json);
@@ -124,18 +120,17 @@ class Surveys extends Component {
         var mySurvey = sender;
         var questionName = options.name;
         var newValue = options.value;
-        console.log(options.question)
     });
-    let inf = this.state.info
-    if (this.state.competencyQuiz === false){
+    let inf = props.info
+    if (props.competencyQuiz === false){
     model
     .onComplete
     .add(function (sender) {
+        //on complete we post the two survey responses to their destinnationn
         var mySurvey = sender;
         var surveyData = sender.data;
-        console.log(mySurvey);
-        console.log(surveyData);
-
+        console.log(surveyData, "surveyData")
+        //code is broken from here onwards. Thanks John!!!!!
         var selfAware = surveyData['Candid Self Appraisal']['user'] + surveyData['Commits Wisely']['user'] + surveyData['Composed']['user'] + surveyData['Self Directed']['user'] + surveyData['Open to Feedback']['user'];
         var intentionalLearner = surveyData['Improves Performance']['user'] + surveyData['Wiling to Stretch']['user'] + surveyData['Reflective Learner']['user'] + surveyData['Grows from Adversity']['user'] + surveyData['Seeks Feedback']['user'];
         var communication = surveyData['Open to Feedback']['user'] + surveyData['Seeks Feedback']['user'] + surveyData['Transparent']['user'] + surveyData['Careful Listener']['user'] + surveyData['Gives Candid Feedback']['user'];
@@ -205,53 +200,201 @@ class Surveys extends Component {
         + surveyData['Inventive']['GL'].toString() + ',' + surveyData['Inventive']['BL'].toString() + ',' + surveyData['Inventive']['user'].toString() + ',' 
         + surveyData['Generative']['GL'].toString() + ',' + surveyData['Generative']['BL'].toString() + ',' + surveyData['Generative']['user'].toString() + ',' 
         + surveyData['Maker Instinct']['GL'].toString() + ',' + surveyData['Maker Instinct']['BL'].toString() + ',' + surveyData['Maker Instinct']['user'].toString();
-        var studentHolder = [];
-        var responseHolder = [];
-        responseHolder['smu_id'] = surveyData['smuID'];
-        responseHolder['Surevy_Resp'] = allResponses;
+//         let selfAware = surveyData.CandidSelfAppraisal.User+surveyData.CommitsWisely.User+surveyData.Composed.User+surveyData.SelfDirected.User+surveyData.OpentoFeedback.User;
+//         let intentionalLearner = surveyData.ImprovesPerformance.User+surveyData.WilingtoStretch.User+surveyData.ReflectiveLearner.User+surveyData.GrowsfromAdversity.User+surveyData.SeeksFeedback.User;
+//         let communication = surveyData.OpentoFeedback.User+surveyData.SeeksFeedback.User+surveyData.Transparent.User+surveyData.CarefulListener.User+surveyData.GivesCandidFeedback.User;
+//         let relationshipDevelopment = surveyData.Inclusive.User+surveyData.Empathetic.User+surveyData.MendsFences.User+surveyData.SeekCommonGround.User+surveyData.Transparent.User;
+//         let diversityDifference = surveyData.StudentofCulture.User+surveyData.ValuesDifferences.User+surveyData.CulturalPerspective.User+surveyData.CulturallyVersatile.User+surveyData.MulticulturalMotivator.User;
+//         let engagingLeadership = surveyData.InspiresCommitment.User+surveyData.LeveragesOthersStrengths.User+surveyData.InfluencesWithoutAuthority.User+surveyData.Considerate.User+surveyData.CarefulListener.User;
+//         let directiveLeadership = surveyData.GivesDirectio.User+surveyData.PrioritizesEffectively.User+surveyData.ClarifiesRoles.User+surveyData.ProvidesGuidance.User+surveyData.GivesCandidFeedback.User;
+//         let championsProcesses = surveyData.SharesLeadership.User+surveyData.SharesResponsibility.User+surveyData.BelievesinOthers.User+surveyData.TrustingofOthers.User+surveyData.MaintainsAccountability.User;
+//         let problemSolving = surveyData.DefinesProblemsEffectively.User+surveyData.MakesInformedDecisions.User+surveyData.LogicalThinker.User+surveyData.UsesJudgment.User+surveyData.Decisive.User;
+//         let strategicPerspective = surveyData.SeesBigPicture.User+surveyData.SystemicAwareness.User+surveyData.RecognizesTrade-offs.User+surveyData.ArticulatesProsandCons.User+surveyData.SensesLeverage.User;
+//         let ethicsIntegrity = surveyData.EncouragesHonesty.User+surveyData.Trustworthy.User+surveyData.EthicalDecision-maker.User+surveyData.EthicallyAware.User+surveyData.Principled.User;
+//         let innovativeSpirit = surveyData.Entrepeneurial.User+surveyData.ThinksDifferent.User+surveyData.Inventive.User+surveyData.Generative.User+surveyData.MakerInstinct.User;
+         
+//         letallResponses=surveyData.CandidSelfAppraisal.GL.toString()+','+surveyData.CandidSelfAppraisal.BL.toString()+','+surveyData.CandidSelfAppraisal.use.toString()+','
+
+
+
+
+// +surveyData.CommitsWisely.GL.toString()+','+surveyData.CommitsWisely.BL.toString()+','+surveyData.CommitsWisely.use.toString()+','
+
+
+// +surveyData.Composed.GL.toString()+','+surveyData.Composed.BL.toString()+','+surveyData.Composed.use.toString()+','
+
+
+// +surveyData.SelfDirected.GL.toString()+','+surveyData.SelfDirected.BL.toString()+','+surveyData.SelfDirected.use.toString()+','
+
+
+// +surveyData.OpentoFeedback.GL.toString()+','+surveyData.OpentoFeedback.BL.toString()+','+surveyData.OpentoFeedback.use.toString()+','
+
+
+// +surveyData.ImprovesPerformance.GL.toString()+','+surveyData.ImprovesPerformance.BL.toString()+','+surveyData.ImprovesPerformance.use.toString()+','
+
+
+// +surveyData.WilingtoStretch.GL.toString()+','+surveyData.WilingtoStretch.BL.toString()+','+surveyData.WilingtoStretch.use.toString()+','
+
+
+// +surveyData.ReflectiveLearne.GL.toString()+','+surveyData.ReflectiveLearne.BL.toString()+','+surveyData.ReflectiveLearne.use.toString()+','
+
+
+// +surveyData.GrowsfromAdversity.GL.toString()+','+surveyData.GrowsfromAdversity.BL.toString()+','+surveyData.GrowsfromAdversity.use.toString()+','
+
+
+// +surveyData.SeeksFeedback.GL.toString()+','+surveyData.SeeksFeedback.BL.toString()+','+surveyData.SeeksFeedback.use.toString()+','
+
+
+// +surveyData.Inclusive.GL.toString()+','+surveyData.Inclusive.BL.toString()+','+surveyData.Inclusive.use.toString()+','
+
+
+// +surveyData.Empathetic.GL.toString()+','+surveyData.Empathetic.BL.toString()+','+surveyData.Empathetic.use.toString()+','
+
+
+// +surveyData.MendsFences.GL.toString()+','+surveyData.MendsFences.BL.toString()+','+surveyData.MendsFences.use.toString()+','
+
+
+// +surveyData.SeekCommonGround.GL.toString()+','+surveyData.SeekCommonGround.BL.toString()+','+surveyData.SeekCommonGround.use.toString()+','
+
+
+// +surveyData.Transparent.GL.toString()+','+surveyData.Transparent.BL.toString()+','+surveyData.Transparent.use.toString()+','
+
+
+// +surveyData.StudentofCulture.GL.toString()+','+surveyData.StudentofCulture.BL.toString()+','+surveyData.StudentofCulture.use.toString()+','
+
+
+// +surveyData.ValuesDifferences.GL.toString()+','+surveyData.ValuesDifferences.BL.toString()+','+surveyData.ValuesDifferences.use.toString()+','
+
+
+// +surveyData.CulturalPerspective.GL.toString()+','+surveyData.CulturalPerspective.BL.toString()+','+surveyData.CulturalPerspective.use.toString()+','
+
+
+// +surveyData.CulturallyVersatile.GL.toString()+','+surveyData.CulturallyVersatile.BL.toString()+','+surveyData.CulturallyVersatile.use.toString()+','
+
+
+// +surveyData.MulticulturalMotivato.GL.toString()+','+surveyData.MulticulturalMotivato.BL.toString()+','+surveyData.MulticulturalMotivato.use.toString()+','
+
+
+// +surveyData.InspiresCommitment.GL.toString()+','+surveyData.InspiresCommitment.BL.toString()+','+surveyData.InspiresCommitment.use.toString()+','
+
+
+// +surveyData.LeveragesOthersStrengths.GL.toString()+','+surveyData.LeveragesOthersStrengths.BL.toString()+','+surveyData.LeveragesOthersStrengths.use.toString()+','
+
+
+// +surveyData.InfluencesWithoutAuthority.GL.toString()+','+surveyData.InfluencesWithoutAuthority.BL.toString()+','+surveyData.InfluencesWithoutAuthority.use.toString()+','
+
+
+// +surveyData.Considerate.GL.toString()+','+surveyData.Considerate.BL.toString()+','+surveyData.Considerate.use.toString()+','
+
+
+// +surveyData.CarefulListene.GL.toString()+','+surveyData.CarefulListene.BL.toString()+','+surveyData.CarefulListene.use.toString()+','
+
+
+// +surveyData.GivesDirectio.GL.toString()+','+surveyData.GivesDirectio.BL.toString()+','+surveyData.GivesDirectio.use.toString()+','
+
+
+// +surveyData.PrioritizesEffectively.GL.toString()+','+surveyData.PrioritizesEffectively.BL.toString()+','+surveyData.PrioritizesEffectively.use.toString()+','
+
+
+// +surveyData.ClarifiesRoles.GL.toString()+','+surveyData.ClarifiesRoles.BL.toString()+','+surveyData.ClarifiesRoles.use.toString()+','
+
+
+// +surveyData.ProvidesGuidance.GL.toString()+','+surveyData.ProvidesGuidance.BL.toString()+','+surveyData.ProvidesGuidance.use.toString()+','
+
+
+// +surveyData.GivesCandidFeedback.GL.toString()+','+surveyData.GivesCandidFeedback.BL.toString()+','+surveyData.GivesCandidFeedback.use.toString()+','
+
+
+// +surveyData.SharesLeadership.GL.toString()+','+surveyData.SharesLeadership.BL.toString()+','+surveyData.SharesLeadership.use.toString()+','
+
+
+// +surveyData.SharesResponsibility.GL.toString()+','+surveyData.SharesResponsibility.BL.toString()+','+surveyData.SharesResponsibility.use.toString()+','
+
+
+// +surveyData.BelievesinOthers.GL.toString()+','+surveyData.BelievesinOthers.BL.toString()+','+surveyData.BelievesinOthers.use.toString()+','
+
+
+// +surveyData.TrustingofOthers.GL.toString()+','+surveyData.TrustingofOthers.BL.toString()+','+surveyData.TrustingofOthers.use.toString()+','
+
+
+// +surveyData.MaintainsAccountability.GL.toString()+','+surveyData.MaintainsAccountability.BL.toString()+','+surveyData.MaintainsAccountability.use.toString()+','
+
+
+// +surveyData.DefinesProblemsEffectively.GL.toString()+','+surveyData.DefinesProblemsEffectively.BL.toString()+','+surveyData.DefinesProblemsEffectively.use.toString()+','
+
+
+// +surveyData.MakesInformedDecisions.GL.toString()+','+surveyData.MakesInformedDecisions.BL.toString()+','+surveyData.MakesInformedDecisions.use.toString()+','
+
+
+// +surveyData.LogicalThinke.GL.toString()+','+surveyData.LogicalThinke.BL.toString()+','+surveyData.LogicalThinke.use.toString()+','
+
+
+// +surveyData.UsesJudgment.GL.toString()+','+surveyData.UsesJudgment.BL.toString()+','+surveyData.UsesJudgment.use.toString()+','
+
+
+// +surveyData.Decisive.GL.toString()+','+surveyData.Decisive.BL.toString()+','+surveyData.Decisive.BL.toString()+','
+
+
+// +surveyData.SeesBigPicture.GL.toString()+','+surveyData.SeesBigPicture.BL.toString()+','+surveyData.SeesBigPicture.use.toString()+','
+
+
+// +surveyData.SystemicAwareness.GL.toString()+','+surveyData.SystemicAwareness.BL.toString()+','+surveyData.SystemicAwareness.use.toString()+','
+
+
+// +surveyData.RecognizesTrade-offs.GL.toString()+','+surveyData.RecognizesTrade-offs.BL.toString()+','+surveyData.RecognizesTrade-offs.use.toString()+','
+
+
+// +surveyData.ArticulatesProsandCons.GL.toString()+','+surveyData.ArticulatesProsandCons.BL.toString()+','+surveyData.ArticulatesProsandCons.use.toString()+','
+
+
+// +surveyData.SensesLeverage.GL.toString()+','+surveyData.SensesLeverage.BL.toString()+','+surveyData.SensesLeverage.use.toString()+','
+
+
+// +surveyData.EncouragesHonesty.GL.toString()+','+surveyData.EncouragesHonesty.BL.toString()+','+surveyData.EncouragesHonesty.use.toString()+','
+
+
+// +surveyData.Trustworthy.GL.toString()+','+surveyData.Trustworthy.BL.toString()+','+surveyData.Trustworthy.use.toString()+','
+
+
+// +surveyData.EthicalDecision-make.GL.toString()+','+surveyData.EthicalDecision-make.BL.toString()+','+surveyData.EthicalDecision-make.use.toString()+','
+
+
+// +surveyData.EthicallyAware.GL.toString()+','+surveyData.EthicallyAware.BL.toString()+','+surveyData.EthicallyAware.use.toString()+','
+
+
+// +surveyData.Principled.GL.toString()+','+surveyData.Principled.BL.toString()+','+surveyData.Principled.use.toString()+','
+
+
+// +surveyData.Entrepeneurial.GL.toString()+','+surveyData.Entrepeneurial.BL.toString()+','+surveyData.Entrepeneurial.use.toString()+','
+
+
+// +surveyData.ThinksDifferent.GL.toString()+','+surveyData.ThinksDifferent.BL.toString()+','+surveyData.ThinksDifferent.use.toString()+','
+
+
+// +surveyData.Inventive.GL.toString()+','+surveyData.Inventive.BL.toString()+','+surveyData.Inventive.use.toString()+','
+
+
+// +surveyData.Generative.GL.toString()+','+surveyData.Generative.BL.toString()+','+surveyData.Generative.use.toString()+','
+
+
+// +surveyData.MakerInstinct.GL.toString()+','+surveyData.MakerInstinct.BL.toString()+','+surveyData.MakerInstinct.use.toString();
+
+
+
         
-            axios
-                .get(`hartBE/v1/student/${surveyData['smuID']}`)
-                .then(res => {
-                    studentHolder = res.data.response;
-                }).catch(err=> console.log(err))
-            
-        studentHolder['self_aware'] = selfAware;
-        studentHolder['intentional_learner'] = intentionalLearner;
-        studentHolder['communication'] = communication;
-        studentHolder['relationship_development'] = relationshipDevelopment;
-        studentHolder['diversity_difference'] = diversityDifference;
-        studentHolder['engaging_leadership'] = engagingLeadership;
-        studentHolder['directive_leadership'] = directiveLeadership;
-        studentHolder['champions_processes'] = championsProcesses;
-        studentHolder['problem_solving'] = problemSolving;
-        studentHolder['strategic_perspective'] = strategicPerspective;
-        studentHolder['ethics_Integrity'] = ethicsIntegrity;
-        studentHolder['innovative_spirit'] = innovativeSpirit;
-        studentHolder['gender'] = surveyData['gender'];
-        studentHolder['ethnicity'] = surveyData['ethnicity'];
+ 
+ 
+                //    //need to add this to the backend and I also ened to figure out how this maps to anythinng
+                // axios
+                // .get(`hartBE/v1/student/${user.smu_id}`)
+                // .then(res => {
+                //     studentHolder = res.data.response;
+                // }).catch(err=> console.log(err))
+                // postStudentsResponse(studentHolder)
+                // postStudentSurveyResponse(responseHolder)
+      
+       
         
-            try {
-              const req = studentHolder;
-                axios
-                .post(`hartBE/v1/student/${surveyData['smuID']}`, req)
-                .then(resp => {
-                console.log(resp)
-        })
-            }  catch (e){
-              console.log(e);
-          }
-        
-            try {
-              const req = responseHolder;
-                axios
-                .post(`hartBE/v1/surveys/${surveyData['smuID']}`, req)
-                .then(resp => {
-                console.log(resp)
-        })
-            }  catch (e){
-              console.log(e);
-            } 
     });  
 } else {
     model
@@ -259,9 +402,7 @@ class Surveys extends Component {
     .add(function (sender, options) {
         var mySurvey = sender;
         var surveyData = sender.data;
-        console.log(globalArr)
         let localArr = globalArr.splice(0, globalArr.length/2)
-        console.log(localArr)
         let correctedAnswers = {}
         localArr.forEach(item => {
             correctedAnswers[item.name] = item.correctAnswer;
@@ -273,22 +414,8 @@ class Surveys extends Component {
     return (
         <div>
       <Survey.Survey model={model}/>
-      
     </div>
     );
     }
   }
-  
-}
-Surveys.defaultProps = {
-    questions: 'a'
-  };
-render(<Surveys />, document.getElementById('root'));
-export default
-(Surveys);
-
-
-
-
-
-
+export default Surveys

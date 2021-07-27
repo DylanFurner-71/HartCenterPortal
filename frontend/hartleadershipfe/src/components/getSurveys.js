@@ -1,196 +1,113 @@
-import React, { Component } from 'react';
-import Surveys from "./Surveys";
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../actions/authActions.js';
+import {HartAPIPrefix} from '../prefixes/hart';
+import { Link } from 'react-router-dom';
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+import { Button } from 'react-bootstrap';
+import Loading from "./Loading";
+import { Redirect } from 'react-router-dom'
+import { Component } from 'react';
+import {connect} from 'react-redux';
+import Surveys from "./Surveys.js"
+import AboutUs from "./info/AboutUs";
+import { Modal} from 'react-bootstrap'
+import HartLeadershipInfo from './info/HartLeadershipInfo.js';
 
+const GetSurveys = (props) => {
+const { user } = useSelector(state => state.auth.user);
+const [surveys, setSurveys]= useState([]);
+const [questions, setQuestions]= useState([]);
+const [prevResults, setPrevResults]= useState([]);
+const prevProps = useRef(props);
+const [show, setModalShow] = useState(true)
+const closeModal = () => setModalShow(false);
+const openModal = () => setModalShow(true)
+const [isLoading, setIsLoading] = useState(true);
+function handleResult() {
+    console.log('Results');
 
-class getSurveys extends Component {
-    constructor(props) {
-        super(props);
+}  
 
-        this.state = {
-            showing: false,
-            resultShowing: false,
-            buttonShowing: true,
-            
-            info: [
-                {
-                    type: 0,
-                    name: "firstName",
-                    title: "First Name:",
-                    input: "text",
-                    auto: "text"
-                },
-                {
-                    type: 0,
-                    name: "lastName",
-                    title: "Last Name:",
-                    input: "text",
-                    auto: "text"
-                },
-                {
-                    type: 0,
-                    name: "graduationYear",
-                    title: "Graduation year:",
-                    input: "text",
-                    auto: "text"
-                },
-                {
-                    type: 0,
-                    name: "smuID",
-                    title: "Enter your SMU ID:",
-                    input: "text",
-                    auto: "name"
-                },
-                {
-                    title: "Is this your first time taking the exam?",
-                    type: 3,
-                    name: "test115"
-                },
-                {
-                    title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
-                    type: 1,
-                    name: "Candid Self Appraisal",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Management: Avoids spreading self too thin",
-                    type: 1,
-                    name: "Self Management",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Disciplined: Stays on task even under difficult circumstances",
-                    type: 1,
-                    name: "Self Disciplined",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Optimistic: Believes most problems can be solved",
-                    type: 1,
-                    name: "Optomistic",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Open to Feedback: Willing to receive constructive criticism",
-                    type: 1,
-                    name: "Open to Feedback",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Disciplined: Stays on task even under difficult circumstances",
-                    type: 1,
-                    name: "a",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
-                    type: 1,
-                    name: "aa",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Management: Avoids spreading self too thin",
-                    type: 1,
-                    name: "aaa",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
-                    type: 1,
-                    name: "aaaa",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Disciplined: Stays on task even under difficult circumstances",
-                    type: 1,
-                    name: "aaaaa",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Management: Avoids spreading self too thin",
-                    type: 1,
-                    name: "aaaaaa",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Disciplined: Stays on task even under difficult circumstances",
-                    type: 1,
-                    name: "b",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Candid Self Appraisal: Aware of personal strengths and shortcomings",
-                    type: 1,
-                    name: "bb",
-                    choice: ["GL", "User", "BL"]
-                },
-                {
-                    title: "Self Management: Avoids spreading self too thin",
-                    type: 1,
-                    name: "bbb",
-                    choice: ["GL", "User", "BL"]
-                }
-            ],
-        }
-    }
-    /*
-    componentDidMount() {
-        this.getActiveSurvey();
-    }
-    getStudentData = () => {
-        fetch("http://localhost:8000/hartBE/v1/surveys/").then((response) => 
-            response.json().then((data) => {
-                this.setState({questions : data});
-            })
-        );
-    };
-    */
+useEffect(
+    () => {
+        fetchSurveys();
+        fetchStudentResponses();   
+        fetchQuestions();  
+        setIsLoading(false); 
+        setModalShow(true); 
+    },[]);
+    useEffect(
+        () => {
     
-  
-
-  
-    handleResult = () => {
-        console.log('Results');
-    
-    }
-
-   
-    getData = async () => {
+        },[]);
+   const fetchQuestions = async () => {
+       await axios
+           .get(`${HartAPIPrefix}/survey/1`)
+           .then(res => {
+               const videos = res.data.response;
+               setQuestions(videos);
+               return videos;
+           }).catch(err=> console.log(err))
+       };
+       const fetchSurveys = async () => {
         await axios
-            .get(`hartBE/v1/surveys/`)
+            .get(`${HartAPIPrefix}/survey/title/1`)
             .then(res => {
-                var fullSurvey = res.data.response;
-                this.setState({info: fullSurvey});
-            });
-    };
-    
-   
-    render() {
-        //console.log(this.state.questions)
-        return (
-            <div>
-                { this.state.buttonShowing 
-                    ? <div>
-                    <button onClick={() => {this.setState({ showing: true }); this.setState({ buttonShowing: false });}}>Take Survey</button>
-                    <button onClick={() => {this.setState({ resultShowing: true }); this.setState({ buttonShowing: false });}}>See Results</button>
-                    </div>
-                    : null
-                }
-                
-                { this.state.resultShowing 
-                    ? <div>
-                        No Results
-                    </div>
-                    : null
-                }
-                { this.state.showing 
-                    ? <Surveys questions= {this.state.info} handleResult = {this.handleResult}/>
-                    : null
-                }
-            </div>  
-            
-        );
-    }
-}
+            const surveys = res.data.response;
+            setSurveys(surveys);
+            return surveys
+            }).catch(err=> console.log(err))
+        };
+                   const fetchStudentResponses = async () => {
+            await axios
+            .get(`${HartAPIPrefix}/response/${user.info.smu_id}`)
+            .then(res => {
+                const students = res.data;
+                console.log("prev results", students)
+                console.log(students.response.length == 0)
+                setPrevResults(students.response);
+                return students.response
+            }).catch(err=> console.log(err))
+           };
 
-export default getSurveys;
+return (
+    <>
+   <div
+       className='container justify-content-center align-items-center h-100'
+   >
+                   <h1><b>The Hart Leadership Assessment</b></h1>
+         {prevResults.length != 0 ? <div> 
+                    You have taken the survey before.
+                    Someday your results will be displayed here
+                    If you would like to take the survey again, please click here.
+                    </div> : (   <div>
+                        {show ?   <div>      <Modal
+            centered onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        <HartLeadershipInfo></HartLeadershipInfo>
+                        </Modal.Title>
+                </Modal.Header>
+                <Modal.Body className ="mx-auto">
+                <AboutUs/>
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={closeModal}> Close </button>
+                        </Modal.Body>
+            </Modal> </div>: null }
+                        <Surveys questions={questions} showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title}/>
+                        </div>)}
+               
+   </div>
+   
+               
+   </>
+);
+};
+ 
+export default GetSurveys;
+

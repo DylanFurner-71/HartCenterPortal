@@ -3,36 +3,8 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, SET_CURRENT_COMPETENCY } from './types';
 import {HartAPIPrefix, HartURL } from "../prefixes/hart";
-// Register User
- axios.defaults.baseURL = HartAPIPrefix;
+axios.defaults.baseURL = HartAPIPrefix;
 
-// Change Password
-// export const changePassword = (userData, history) => dispatch => {
-//     axios
-//         .post('/student/changePassword', userData)
-//         .then(() => history.push('/home')) // re-direct to home after changing password
-//         .catch(err =>
-//             dispatch({
-//                 type: GET_ERRORS,
-//                 payload: err.response.data,
-//             })
-//         );
-// };
-
-/*
-        /*
-import axios from "axios";
-const setAuthToken = token => {
-    if (token) {
-        // Apply authorization token to every request if logged in
-        axios.defaults.headers.common["Authorization"] = token;
-    } else {
-        // Delete auth header
-        delete axios.defaults.headers.common["Authorization"];
-    }
-};
-export default setAuthToken;
-*/
 export const setCurrentCompetency = competency => {
     return {
         type: SET_CURRENT_COMPETENCY,

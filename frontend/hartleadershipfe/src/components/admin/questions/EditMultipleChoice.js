@@ -1,10 +1,10 @@
 import React from "react";
-import { useInput } from '../hooks/InputHook';
-import {editQuote} from "../../actions/authActions";
+import { useInput } from '../../hooks/InputHook';
+import {editQuote} from "../../../actions/authActions";
 import axios from 'axios';
-import {HartAPIPrefix} from '../../prefixes/hart';
-import {DeleteQuestionForm} from "./DeleteQuestionForm";
-export function EditQuizPopUp(props) {
+import {HartAPIPrefix} from '../../../prefixes/hart';
+import {DeleteQuestionForm} from "../DeleteQuestionForm";
+export function EditMultipleChoice(props) {
     const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
     const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
@@ -14,6 +14,7 @@ export function EditQuizPopUp(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
+        //abstract to functionn
         try {
           const req = {
             type: 2,
@@ -24,11 +25,17 @@ export function EditQuizPopUp(props) {
                newQuote1, newQuote2, newQuote3, newQuote4
             ],
             correctAnswer: newQuote1,
-            survey_id: props.id
+            survey_id: props.survey_id,
+            question_id: props.question_id
           }
-axios.post('/competency/video/quiz/', req).then(resp => {
+axios.put(`${props.pathtoroute}`, req).then(resp => {
+//find somethinng to do inn here
+console.log("Edit mulitiple choice axios responsne: \n")
+console.log(resp)
+
 });
-        }  catch (e){
+        
+}  catch (e){
           console.log(e);
       }
       resetNewQuote1();
@@ -37,8 +44,10 @@ axios.post('/competency/video/quiz/', req).then(resp => {
       resetNewQuote4();
       resetNewTitle();
     }
+
     return (
       <div>
+        hello
       <form onSubmit={handleSubmit}>
          <label>
           Please enter the question followed by a question mark
@@ -70,3 +79,4 @@ axios.post('/competency/video/quiz/', req).then(resp => {
       </div>
     );
   }
+  export default EditMultipleChoice;

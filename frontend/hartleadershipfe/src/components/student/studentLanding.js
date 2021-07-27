@@ -12,7 +12,6 @@ const StudentLanding = () => {
     // const user = localStorage.getItem('user');
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth.user);
-    console.log("USER ----->", user);
     const [response, setResponse] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const fetchStudentResponse = async () => {
@@ -20,7 +19,8 @@ const StudentLanding = () => {
             .get(`${HartAPIPrefix}/response/${user.info.smu_id}`)
             .then(res => {
                 const students = res.data;
-                setResponse(students);
+                console.log(students)
+                setResponse(students.response);
                 setIsLoading(false);
             }).catch(err=> console.log(err))
     };
@@ -43,12 +43,12 @@ return (
                     Hello {`${user.info.first_name}  ${user.info.last_name}`} welcome to the Hart Leadership Assessment Portal
                 
                 </h1>
-                {response ? <div> 
+                {response.length > 0 ? <div> 
                     You have taken the survey before.
                     Click here to view your results and competencies.
                     </div> : 
                     <div>
-                        You have not taken the survey before. Click here to take the Hart Leadership Survey and start learning about your individual leadership competencies and how to improve them!
+                        You have not taken the survey before. <a href="/survey/">Click here</a> to take the Hart Leadership Survey and start learning about your individual leadership competencies and how to improve them!
                         </div>}
                 <div className='container'></div>
                 <div>

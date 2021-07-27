@@ -50,21 +50,13 @@ saveUserForTest = (user)=> new Promise((resolve, reject) => {
     });
 });
 
-removeAllUser = () => new Promise((resolve, reject) => {
-    // db.query('DELETE from user where ID > 0',function (error, results, fields) {
-    //     if (error){
-    //         reject();
-    //     }else {
-    //         resolve();
-    //     }
-    // });
-});
 
 
-// The code below export the above functios so it can be used in other files.
+
 module.exports = {
     saveStudent,
     getUserByToken,
     saveUserForTest,
     removeAllUser
 };
+
