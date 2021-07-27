@@ -21,7 +21,7 @@ export function AddFreeResponse(props) {
             survey_id: props.survey_id
           }
 axios.post(`${props.pathtoroute}`, req).then(resp => {
-console.log("Edit mulitiple choice axios responsne: \n")
+console.log("Edit free response choice axios responsne: \n")
 console.log(resp)
 //probably add updateVar not sure yet
 });

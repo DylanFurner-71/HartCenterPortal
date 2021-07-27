@@ -77,10 +77,11 @@ function deleteQuestion(survey_id, questionid) {
 function showchoices(question){
 if (question.type == 2) {
     return <div>
-                <p>Correct Answer:  </p>
-        {question.choices.map((q, index) => {
-        return <p>Choice {index}: {q}</p>
-        })}
+                <p>Correct Answer:  {question.correctAnswer}</p>
+                <p>Choice 2:  {question.correctAnswer}</p>
+                <p>Choice 3:  {question.correctAnswer}</p>
+                <p>Choice 4:  {question.correctAnswer}</p>
+
 
     </div>
 

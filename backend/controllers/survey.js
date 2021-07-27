@@ -46,11 +46,11 @@ module.exports = function survey(app, logger) {
       res.status(400).send(e);
     })
   })
-  app.route(`${process.env.HART}'/survey/edit/:id/fr'`)
+  app.route(`${process.env.HART}/survey/edit/:id/fr`)
   .post( (req, res, next) => {
     const survey_id = req.params.id
     console.log("Survey_id", survey_id)
-    addAssessmentFRQuestion({survey_id}).then(response => {
+    addAssessmentFRQuestion(req.body).then(response => {
       res.send({response});
   }) .catch((e) => {
     console.log(e)
