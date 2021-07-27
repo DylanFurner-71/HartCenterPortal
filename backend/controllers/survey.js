@@ -60,6 +60,7 @@ module.exports = function survey(app, logger) {
   .put( (req, res, next) => {
     const survey_id = req.params.id
     console.log("Survey_id", survey_id)
+    console.log("Request Body", req.body)
     editAssessmentFRQuestion({survey_id, questionid}).then(response => {
        res.send({response});
 
@@ -114,16 +115,26 @@ app.route(`${process.env.HART}/survey/edit/:id/ms`)
          postResult(req).then(resp => res.send(resp))
          } catch(error){
            console.log(error);
-           return res.status(400).send(error);
+          res.status(400).send(error);
          }
        })
       
       app.route(`${process.env.HART}/survey/title/:id`) 
     .get((req, res, next) => {
       getTitle(req.params.id).then(response => {
-        return res.send({response});
+        res.send({response});
       });
 
     }) 
+    app.route(`${process.env.HART}/survey/:qid/:id`)
+    .delete((req, res, next) => {
+      try {
+        deleteAssessmentQuestion(req.params.id, req.params.qid).then(resp => {
+          return res.send({resp});
+        })
+      } catch(error){
+        console.log(error)
+      }
+      })
   }
   

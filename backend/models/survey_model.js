@@ -63,7 +63,7 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         console.log("ADD MC QUESTION, breaking at the insert statement. it works. ", body)
         console.log(body.choicesOrder)
         pool.query("INSERT INTO questions(survey_id, type, name, title, correctAnswer,  choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [body.survey_id, body.type, body.name, body.choicesOrder,body.title, body.correctAnswer, body.choices[0], body.choices[1], body.choices[2], body.choices[3]],
+        [body.survey_id, body.type, body.name,body.title, body.correctAnswer, body.choices[0], body.choices[1], body.choices[2], body.choices[3]],
          function (error, results, fields){
             if (error){
                 reject();
@@ -134,10 +134,10 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
             }
         })
     })
-    deleteAssessmentQuestion= async (info) => new Promise((resolve, reject) => {
+    deleteAssessmentQuestion= async (survey_id, question_id) => new Promise((resolve, reject) => {
         //also need to update the student table where this student's information is
-        pool.query("INSERT INTO questions (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [info.survey_id, info.body.Survey_Resp],
+        pool.query("DELETE FROM questions WHERE survey_id = ? AND question_id = ?",
+        [survey_id, question_id],
          function (error, results, fields){
             if (error){
                 reject();
