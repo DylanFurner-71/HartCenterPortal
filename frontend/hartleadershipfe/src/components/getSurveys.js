@@ -24,7 +24,7 @@ const [surveys, setSurveys]= useState([]);
 const [questions, setQuestions]= useState([]);
 const [prevResults, setPrevResults]= useState([]);
 const prevProps = useRef(props);
-const [show, setModalShow] = useState(false)
+const [show, setModalShow] = useState(true)
 const closeModal = () => setModalShow(false);
 const openModal = () => setModalShow(true)
 const [isLoading, setIsLoading] = useState(true);
@@ -35,23 +35,19 @@ function handleResult() {
 
 useEffect(
     () => {
-        fetchStudentResponses();    
-    },[]);
-
-useEffect(
-    () => {
-        fetchSurveys();    
+        fetchSurveys();
+        fetchStudentResponses();   
+        fetchQuestions();  
+        setIsLoading(false); 
+        setModalShow(true); 
     },[]);
     useEffect(
         () => {
-            fetchQuestions();  
-            setIsLoading(false); 
-            setModalShow(true);
+    
         },[]);
    const fetchQuestions = async () => {
-       
        await axios
-           .get(`${HartAPIPrefix}/survey/get/1`)
+           .get(`${HartAPIPrefix}/survey/1`)
            .then(res => {
                const videos = res.data.response;
                setQuestions(videos);
@@ -60,7 +56,7 @@ useEffect(
        };
        const fetchSurveys = async () => {
         await axios
-            .get(`${HartAPIPrefix}/survey/`)
+            .get(`${HartAPIPrefix}/survey/title/1`)
             .then(res => {
             const surveys = res.data.response;
             setSurveys(surveys);
@@ -69,7 +65,7 @@ useEffect(
         };
                    const fetchStudentResponses = async () => {
             await axios
-            .get(`${HartAPIPrefix}/response/47419883`)
+            .get(`${HartAPIPrefix}/response/${user.info.smu_id}`)
             .then(res => {
                 const students = res.data;
                 console.log("prev results", students)
@@ -84,7 +80,6 @@ return (
    <div
        className='container justify-content-center align-items-center h-100'
    >
-
                    <h1><b>The Hart Leadership Assessment</b></h1>
          {prevResults.length != 0 ? <div> 
                     You have taken the survey before.

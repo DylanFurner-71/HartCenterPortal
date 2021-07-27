@@ -54,7 +54,7 @@ if (user.user.isStudent === false){
 
 </NavDropdown>
 <NavDropdown title = "Edit" id="basic-nav-dropdown">
-        <NavDropdown.Item href ="/survey/edit/id=1"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
+        <NavDropdown.Item href ="/survey/edit/1"> Leadership Survey </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
         <NavDropdown.Item href ="/admin/other/AddSurvey/"> Other Surveys </NavDropdown.Item> {/*all of these can and should be mapped into somethinng*/}
         <NavDropdown.Item href ="/comp/"> Competency</NavDropdown.Item> {/* Probbbaly make competency a variable */}
         <NavDropdown.Item href ="/contact/edit/"> Contact Us</NavDropdown.Item>

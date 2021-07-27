@@ -35,6 +35,9 @@ const EditAssessment = () => {
                 setSurvey(res.data.response);
             }).catch(err=> console.log(err))
         };
+    function updateVar(){
+        fetchSurveys();
+    }
         useEffect(
             () => {
                 const fetchTitle = async () => {
@@ -42,11 +45,7 @@ const EditAssessment = () => {
                     .get(`${HartAPIPrefix}/survey/title/${id}`)
                     .then(res => {
                         setTitle(res.data.response[0].title);
-
-
                     }).catch(err=> console.log(err))
-
-
                 }
                 fetchSurveys();
                 fetchTitle();  
@@ -74,7 +73,7 @@ return (
 
 </div>
 <div>
-<QuestionAdder survey_id={id}/>
+<QuestionAdder survey_id={id} updateVar={updateVar}/>
 </div>
     </div>
 )}

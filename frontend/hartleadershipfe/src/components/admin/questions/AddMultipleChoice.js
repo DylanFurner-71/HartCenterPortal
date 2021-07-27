@@ -14,6 +14,14 @@ export function AddMultipleChoice(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
+        console.log("evt------>", evt, " <---------")
+        console.log("title::::    ", newTitle);
+        
+        console.log(newQuote1)
+        console.log("newQuote1 ^^^^")
+        console.log("newQuote2 ^^^^")
+        console.log(newQuote2)
+
         //abstract to functionn
         try {
           const req = {
@@ -30,7 +38,7 @@ export function AddMultipleChoice(props) {
           }
 axios.post(`${props.pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
-console.log("Edit multiple choice axios response: \n")
+console.log("Add multiple choice axios response: \n")
 console.log(resp)
 
 });

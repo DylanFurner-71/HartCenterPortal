@@ -27,7 +27,6 @@ getSurveyQuestions = async (ifo) => new Promise((resolve, reject) => {
 
 
 getQuestions = async (survey_id) => new Promise((resolve, reject) => {
-    console.log("IDFFOasdfasdf:", (survey_id))
     pool.query( "SELECT * FROM questions WHERE survey_id = ?", [survey_id], 
     function (error, results, fields) {
         if (error){
@@ -58,16 +57,19 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         }
     })
 })
-    addAssessmentMCQuestion = async (info) => new Promise((resolve, reject) => {
+    addAssessmentMCQuestion = async (body1) => new Promise((resolve, reject) => {
+        const body = body1.body;
         //also need to update the student table where this student's information is
-        console.log("ADD MC QUESTION, breaking at the innsert statement. it works. ")
-        pool.query("INSERT INTO questions(survey_id, type, name, title, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.choice[1], info.body.choice[2], info.body.choice[3]],
+        console.log("ADD MC QUESTION, breaking at the insert statement. it works. ", body)
+        console.log(body.choicesOrder)
+        pool.query("INSERT INTO questions(survey_id, type, name, choicesOrder, title, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [body.survey_id, body.type, body.name, body.choicesOrder,body.title, body.correctAnswer, body.choices[1], body.choices[2], body.choices[3]],
          function (error, results, fields){
             if (error){
                 reject();
             }else {
-                resolve();
+
+                resolve(results);
             }
         })
     })
@@ -86,9 +88,9 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     addAssessmentMSQuestion = async (info) => new Promise((resolve, reject) => {
-        //also need to update the student table where this student's information is
-        pool.query("INSERT INTO questions (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [info.survey_id, info.body.Survey_Resp],
+        console.log("INFFOOOOO:::::", info)
+        pool.query("INSERT INTO questions (survey_id,type,name,title,choice1,choice2, choice3) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [info.survey_id, info.type, info.name, info.title, info.choice1, info.choice2, info.choice3],
          function (error, results, fields){
             if (error){
                 reject();
