@@ -5,7 +5,8 @@ import axios from 'axios';
 import {HartAPIPrefix} from '../../../prefixes/hart';
 import {DeleteQuestionForm} from "../DeleteQuestionForm";
 export function EditFreeResponse(props) {
-    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
+    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput(props.question.title);     
+    const pathtoroute = `/survey/edit/${props.question.survey_id}/fr`
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -13,14 +14,14 @@ export function EditFreeResponse(props) {
         try {
           const req = {
             type: 0,
-            name: newTitle.split(" ").join(""),
-            title: newTitle,
+            name: newTitle === "" || newTitle === props.question.title ? props.question.title : newTitle.split(" ").join(""),
+            title: newTitle === "" || newTitle === props.question.title ?  props.question.title : newTitle ,
             isRequired: true,
             autoComplete: "text",
             input: "text",
             survey_id: props.survey_id
           }
-axios.put(`${props.pathtoroute}`, req).then(resp => {
+axios.put(`${pathtoroute}`, req).then(resp => {
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)
 //probably add updateVar not sure yet

@@ -9,10 +9,10 @@ export const QuestionEditor = (props) => {
     function giveObj(){
         console.log("EDITOR:", props)
         if (props.question.type == 0){
-            return <EditFreeResponse question={props.question} pathtoroute={props.pathtoroute} survey_id={props.survey_id} />  
+            return <EditFreeResponse question={props.question} survey_id={props.survey_id} />  
         }
         if (props.question.type == 1){
-            return <EditMultiSelection question={props.question}  question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} question={props.question} />  
+            return <EditMultiSelection question={props.question}  question_id={props.question.question_id} survey_id={props.question.survey_id} question={props.question} />  
         }
         if (props.question.type ==2){
 

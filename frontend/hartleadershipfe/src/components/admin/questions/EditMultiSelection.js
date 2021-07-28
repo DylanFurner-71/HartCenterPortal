@@ -9,7 +9,8 @@ export function EditMultiSelection(props) {
     const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
     const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(''); 
-    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
+    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput(props.question.title);     
+    const pathtoroute = `/survey/edit/${props.question.survey_id}/ms`
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -19,15 +20,15 @@ export function EditMultiSelection(props) {
         try {
           const req = {
             type: 1,
-            name: newTitle.split(" ").join(""),
-            title: newTitle,
+            name: newTitle === "" || newTitle === props.question.title ? props.question.title : newTitle.split(" ").join(""),
+            title: newTitle === "" || newTitle === props.question.title ?  props.question.title : newTitle ,
             choicesOrder: "random",
             choice1: "GL",
             choice2: "You",
             choice3: "BL",
             survey_id: props.survey_id
           }
-axios.put(`${props.pathtoroute}`, req).then(resp => {
+axios.put(`${pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)
