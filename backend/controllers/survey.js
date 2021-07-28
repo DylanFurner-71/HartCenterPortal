@@ -4,7 +4,7 @@ const { postResult,
   getTitle,     
   addAssessmentMCQuestion,
   addAssessmentFRQuestion,
-  addAssessmentMSQuestion, deleteAssessmentQuestion } = require("../models/survey_model");
+  addAssessmentMSQuestion, deleteAssessmentQuestion, editAssessmentMCQuestion, editAssessmentMSQuestion, editAssessmentFRQuestion } = require("../models/survey_model");
 module.exports = function survey(app, logger) {
     app.route(`${process.env.HART}/survey/`)
       .get( (req, res, next) => {
@@ -83,7 +83,7 @@ app.route(`${process.env.HART}/survey/edit/:id/ms`)
 .put( (req, res, next) => {
   const survey_id = req.params.id
   console.log("Survey_id", survey_id)
-  editAssessmenMSCQuestion({survey_id}).then(response => {
+  editAssessmentMSQuestion({survey_id}).then(response => {
     console.log("REEEEZ", response)
      res.send({response});
 

@@ -1,5 +1,3 @@
-const pool = require('../db')
-//define our model below
 const { getResponses, getResponseBySMUID, saveResponse, editResponse, deleteResponse
 } = require('../models/survey_Resp_Model');
 module.exports = function response(app, logger) {
@@ -19,10 +17,6 @@ module.exports = function response(app, logger) {
         .all((req, res, next) => { //idk
         res.send('Other requests called'); 
         });  
-        //end of response
-
-//response with smu_id as param id=
-
         app.route(`${process.env.HART}/response/:id`) 
       .get( (req, res, next) => {
         getResponseBySMUID(req).then(response => {
