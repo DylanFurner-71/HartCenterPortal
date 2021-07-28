@@ -13,7 +13,7 @@ export function AddFreeResponse(props) {
         try {
           const req = {
             type: 0,
-            name: newTitle,
+            name: newTitle.split(" ").join(""),
             title: newTitle,
             isRequired: true,
             autoComplete: "text",

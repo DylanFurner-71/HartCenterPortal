@@ -37,8 +37,7 @@ module.exports = function survey(app, logger) {
   })
     .put( (req, res, next) => {
       const survey_id = req.params.id
-      console.log("Survey_id", survey_id)
-      editAssessmentMCQuestion({survey_id, questionid}).then(response => {
+      editAssessmentMCQuestion(req).then(response => {
         res.send({response});
 
     })    

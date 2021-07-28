@@ -13,7 +13,7 @@ export function EditFreeResponse(props) {
         try {
           const req = {
             type: 0,
-            name: newTitle,
+            name: newTitle.split(" ").join(""),
             title: newTitle,
             isRequired: true,
             autoComplete: "text",

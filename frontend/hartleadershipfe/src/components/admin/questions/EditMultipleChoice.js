@@ -5,30 +5,36 @@ import axios from 'axios';
 import {HartAPIPrefix} from '../../../prefixes/hart';
 import {DeleteQuestionForm} from "../DeleteQuestionForm";
 export function EditMultipleChoice(props) {
-    const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(''); 
-    const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(''); 
-    const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
-    const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(''); 
-    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
-
+    const { value:newQuote1, bind:bindNewQuote1, reset:resetNewQuote1 } = useInput(props.question.choice1); 
+    const { value:newQuote2, bind:bindNewQuote2, reset:resetNewQuote2 } = useInput(props.question.choice2); 
+    const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(props.question.choice3); 
+    const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(props.question.choice4); 
+    const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput(props.question.title);     
+    const pathtoroute = `/survey/edit/${props.question.survey_id}/mc`
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting Question ${newTitle}`);
-        //abstract to functionn
+        alert(`Submitting Question ${newQuote1}`);
+        console.log(
+          "new quote:", newQuote1
+        )
+        if (newQuote1 === null) {
+          console.log("IT's nnull")
+        }
         try {
           const req = {
             type: 2,
-            name: newTitle,
-            title: newTitle,
+            name: newTitle === "" || newTitle === props.question.title ? props.question.title : newTitle.split(" ").join(""),
+            title: newTitle === "" || newTitle === props.question.title ?  props.question.title : newTitle ,
             choicesOrder: "random",
             choices: [
-               newQuote1, newQuote2, newQuote3, newQuote4
+               (newQuote1 === null || newQuote1 === props.question.choice1) ?  props.question.choice1 : newQuote1, newQuote2 === "" || newQuote2 === props.question.choice2 ? props.question.choice2 : newQuote2, newQuote3 === "" || newQuote3 === props.question.choice3 ? props.question.choice3 : newQuote3, newQuote4 === "" || newQuote4 === props.question.choice4 ? props.question.choice4 : newQuote4
             ],
-            correctAnswer: newQuote1,
-            survey_id: props.survey_id,
-            question_id: props.question_id
+            correctAnswer: newQuote1 === props.question.choice1 ? newQuote1 : props.question.choice1,
+            survey_id: props.question.survey_id,
+            question_id: props.question.question_id
           }
-axios.put(`${props.pathtoroute}`, req).then(resp => {
+          console.log("WE are putting", req)
+axios.put(`${pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)

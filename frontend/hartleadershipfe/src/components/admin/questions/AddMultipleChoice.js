@@ -26,7 +26,7 @@ export function AddMultipleChoice(props) {
         try {
           const req = {
             type: 2,
-            name: newTitle,
+            name: newTitle.split(" ").join(""),
             title: newTitle,
             choicesOrder: "random",
             choices: [

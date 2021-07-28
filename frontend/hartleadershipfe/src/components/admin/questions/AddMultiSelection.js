@@ -17,7 +17,7 @@ export function AddMultiSelection(props) {
         try {
           const req = {
             type: 1,
-            name: newTitle,
+            name: newTitle.split(" ").join(""),
             title: newTitle,
             choicesOrder: "random",
             choice1: "GL",

@@ -93,6 +93,10 @@ if (question.type == 2) {
     <p>choice 2: {question.choice2}</p>
     <p>choice 3: {question.choice3}</p>
     </div>
+} else {
+    return <div>
+        This is a free response question. Students can enter text for their response.
+    </div>
 }
 }
 function mapquestion() {
@@ -130,7 +134,7 @@ return (
       </svg>
   </button>
   <div>
-    <p> Use the form below to enter new questions. The students will see the questions in random order each time</p>
+    <p> Use the form below to edit new questions.</p>
     <QuestionEditor question={props.survey} survey_id={props.survey.survey_id} question_id={props.survey.question_id}/>
   </div>
   </div>

@@ -1,6 +1,5 @@
 const pool = require('../db');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 
 postResult = async (info) => new Promise((resolve, reject) => {
     pool.query("INSERT INTO Student_Survey_Resp (smu_id, Survey_Resp) VALUES (?, ?)",
@@ -30,9 +29,7 @@ getQuestions = async (survey_id) => new Promise((resolve, reject) => {
     pool.query( "SELECT * FROM questions WHERE survey_id = ?", [survey_id], 
     function (error, results, fields) {
         if (error){
-            // console.log(error)
             reject();
-            // console.log(error)
         }else{
             resolve(results);
         }
@@ -59,7 +56,6 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
 })
     addAssessmentMCQuestion = async (body1) => new Promise((resolve, reject) => {
         const body = body1.body;
-        //also need to update the student table where this student's information is
         console.log("ADD MC QUESTION, breaking at the insert statement. it works. ", body)
         console.log(body.choicesOrder)
         pool.query("INSERT INTO questions(survey_id, type, name, title, correctAnswer,  choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -74,11 +70,9 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentMCQuestion = async (info) => new Promise((resolve, reject) => {
-        //also need to update the student table where this student's information is
-        //figure this out
         console.log("EDIT MC QUESTION")
-        pool.query("UPDATE INTO questions(survey_id, type, name, title, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-        [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.choice[1], info.body.choice[2], info.body.choice[3]],
+        pool.query("UPDATE questions SET type = ?, name = ?, title = ?, correctAnswer =?, choice1 =?, choice2=?, choice3=?, choice4=? WHERE survey_id = ? AND question_id = ?",
+        [info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.choices[0], info.body.choices[1], info.body.choices[2], info.body.choices[3], info.body.survey_id, info.body.question_id],
          function (error, results, fields){
             if (error){
                 reject();
@@ -110,7 +104,6 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     addAssessmentFRQuestion = async (info) => new Promise((resolve, reject) => {
-        //also need to update the student table where this student's information is
         pool.query("INSERT INTO questions (survey_id,type,name,title,input, auto) VALUES (?, ?, ?, ?, ?, ?)",
         [info.survey_id, info.type, info.name, info.title, info.input, info.autoComplete],
          function (error, results, fields){
@@ -122,8 +115,6 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentFRQuestion = async (info) => new Promise((resolve, reject) => {
-        //also need to update the student table where this student's information is
-        //figure this out
         pool.query("UPDATE INTO questions(survey_id, type, name, title, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.choice[1], info.body.choice[2], info.body.choice[3]],
          function (error, results, fields){
@@ -135,7 +126,6 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     deleteAssessmentQuestion= async (survey_id, question_id) => new Promise((resolve, reject) => {
-        //also need to update the student table where this student's information is
         pool.query("DELETE FROM questions WHERE survey_id = ? AND question_id = ?",
         [survey_id, question_id],
          function (error, results, fields){

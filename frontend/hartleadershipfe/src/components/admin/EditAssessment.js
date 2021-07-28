@@ -24,7 +24,6 @@ const EditAssessment = () => {
     const [survey, setSurvey] = useState([]);
     const [title, setTitle] = useState('');
     const {id} = useParams();
-    console.log("IDALKJSFL 1234: ", id)
     // let id = String(id1)
     const fetchSurveys = async () => {
         await axios
