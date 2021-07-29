@@ -18,20 +18,17 @@ import AboutUs from "./info/AboutUs";
 import { Modal} from 'react-bootstrap'
 import HartLeadershipInfo from './info/HartLeadershipInfo.js';
 import ReportOrSurveyCard from "./student/ReportOrSurveyCard"
-import SurveyPopUp from './student/SurveyPopUp.js';
-const GetSurveys = (props) => {
+const SurveyLanding = (props) => {
 const { user } = useSelector(state => state.auth.user);
 const [surveys, setSurveys]= useState([]);
 const [questions, setQuestions]= useState([]);
 const [gl, setGL]= useState([]);
 const [bl, setBL]= useState([]);
+
+const [prevResults, setPrevResults]= useState([]);
 const prevProps = useRef(props);
-const [modalShow, setModalShow] = useState(false)
-const [showSurvey, setShowSurvey] = useState(false)
-const closeModal = () => { 
-    setModalShow(false);
-    setShowSurvey(true);
-}
+const [show, setModalShow] = useState(true)
+const closeModal = () => setModalShow(false);
 const openModal = () => setModalShow(true)
 const [isLoading, setIsLoading] = useState(true);
 function handleResult() {
@@ -42,11 +39,12 @@ function handleResult() {
 useEffect(
     () => {
         fetchSurveys();
+        fetchStudentResponses();   
         fetchQuestions();  
         setIsLoading(false); 
-        // console.log("MODAL SHOW:::", show)
-        openModal(); 
-        // console.log("Modal Show:::", show)
+        console.log("MODAL SHOW:::", show)
+        setModalShow(true); 
+        console.log("Modal Show:::", show)
     },[]);
     useEffect(
         () => {
@@ -70,18 +68,40 @@ useEffect(
             return surveys
             }).catch(err=> console.log(err))
         };
+                   const fetchStudentResponses = async () => {
+            await axios
+            .get(`${HartAPIPrefix}/response/${user.info.smu_id}`)
+            .then(res => {
+                const students = res.data;
+                console.log("prev results", students)
+                console.log(students.response.length == 0)
+                setPrevResults(students.response);
+                return students.response
+            }).catch(err=> console.log(err))
+           };
 return (
     <>
    <div
        className='container justify-content-center align-items-center h-100'
    >
                    <h1><b>The Hart Leadership Assessment</b></h1>
-                     <div>
-                     {!modalShow && !showSurvey && <button className="btn btn-primary" type="button" onClick={openModal}>Take Hart Leadership Assessment</button>}
-                     <SurveyPopUp closeModal={closeModal} show={modalShow} good={setGL} bad={setBL}/>
-                     {showSurvey && <Surveys questions={questions} showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title} gl={gl} bl={bl}/>}
-
-                        </div>
+         {prevResults.length != 0 ? <div> 
+                    You have taken the survey before.
+                    Someday your results will be displayed here
+                    If you would like to take the survey again, please click here.
+                    <div className="col">
+                        <div className="row">
+                            <ReportOrSurveyCard isReport={true}/>
+                            <ReportOrSurveyCard isReport={false}/>
+                            </div> 
+                            Most recent survey report will be shown here. Otherwise, find a way for them to navigate and take the real survey again.
+                    </div>
+                    </div> : (   <div>
+                       <HartLeadershipInfo/>
+                       To take the survey, <a href="/survey/take/">click here </a>
+                       <div className='justify-content-center align-items-center'>
+                       </div>
+                        </div>)}
                
    </div>
    
@@ -90,5 +110,5 @@ return (
 );
 };
  
-export default GetSurveys;
+export default SurveyLanding;
 

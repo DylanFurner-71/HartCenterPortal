@@ -28,6 +28,7 @@ module.exports = function response(app, logger) {
     })
     .post((req, res, next) => { //probably append a new students list to the existing one
         res.send('POST request called'); 
+        req 
         }) 
         .all((req, res, next) => { //idk
         res.send('Other requests called'); 

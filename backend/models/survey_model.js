@@ -93,8 +93,9 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentMSQuestion = async (info) => new Promise((resolve, reject) => {
+        console.log("INFO:::: ", info)
         pool.query("UPDATE questions SET name=?, title = ? WHERE survey_id = ? AND question_id = ?",
-        [info.body.type, info.body.name, info.body.title, info.body.survey_id, info.body.question_id],
+        [info.name, info.title, info.survey_id, info.question_id],
          function (error, results, fields){
             if (error){
                 reject();
@@ -115,12 +116,14 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentFRQuestion = async (info) => new Promise((resolve, reject) => {
-        pool.query("UPDATE questions SET name=?, title = ? WHERE survey_id = ? AND question_id = ?",
-        [info.body.type, info.body.name, info.body.title, info.body.survey_id, info.body.question_id],
+        console.log("Edit FR: ", info)
+        pool.query("UPDATE questions SET name = ?, title = ? WHERE survey_id = ? AND question_id = ?",
+        [info.name, info.title, info.survey_id, info.question_id],
          function (error, results, fields){
             if (error){
                 reject();
             }else {
+                console.log(results)
                 resolve();
             }
         })
@@ -145,5 +148,8 @@ module.exports = {
     addAssessmentMCQuestion,
     addAssessmentFRQuestion,
     addAssessmentMSQuestion,
-    deleteAssessmentQuestion
+    deleteAssessmentQuestion,
+    editAssessmentFRQuestion,
+    editAssessmentMSQuestion,
+    editAssessmentMCQuestion
 }

@@ -19,7 +19,8 @@ export function EditFreeResponse(props) {
             isRequired: true,
             autoComplete: "text",
             input: "text",
-            survey_id: props.survey_id
+            survey_id: props.survey_id,
+            question_id: props.question.question_id
           }
 axios.put(`${pathtoroute}`, req).then(resp => {
 console.log("Edit mulitiple choice axios responsne: \n")

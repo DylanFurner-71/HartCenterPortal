@@ -11,7 +11,8 @@ import { useHistory } from "react-router-dom";
 let globalArr = [];
 const Surveys = (props) => {
    const { user } = useSelector(state => state.auth.user);
- 
+
+
        let history = useHistory();
        function handleClick(resp) {
          history.push("/survey/response/", {state: resp});
@@ -59,9 +60,9 @@ const Surveys = (props) => {
                            { value: 3, text: "3" },
                            { value: 4, text: "4" }],
                        rows: [
-                           { value: value.choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
+                           { value: value.choice1, text: props.gl }, //need to add this to the database to make it work for all of the questions,
                            { value: value.choice2, text: "You" },
-                           { value: value.choice3, text: "Bad Leader" }]
+                           { value: value.choice3, text: props.bl }]
                    };
                }  else if(value.type == 2){
                    var questionTest =
@@ -71,7 +72,7 @@ const Surveys = (props) => {
                            title: value.title,
                            isRequired: true,
                            colCount: 4,
-                           choices: value.choices,
+                           choices: [value.choice1, value.choice2, value.choice3, value.choice4],
                            choicesOrder: value.choicesOrder,
                            correctAnswer: value.correctAnswer,
                        };
@@ -129,6 +130,8 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
        var mySurvey = sender;
        var surveyData = sender.data;
        console.log(surveyData, "surveyData")
+       console.log(typeof surveyData)
+       console.log(surveyData['CandidSelfAppraisal'])
        //code is broken from here onwards. Thanks John!!!!!
     //    var selfAware = surveyData.Candid Self Appraisal.user + surveyData.Commits Wisely.user + surveyData.Composed.user + surveyData.Self Directed.user + surveyData.Open to Feedback.user;
     //    var intentionalLearner = surveyData.Improves Performance.user + surveyData.Wiling to Stretch.user + surveyData.Reflective Learner.user + surveyData.Grows from Adversity.user + surveyData.Seeks Feedback.user;

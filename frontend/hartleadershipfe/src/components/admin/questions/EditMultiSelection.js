@@ -17,16 +17,18 @@ export function EditMultiSelection(props) {
         alert(`Submitting Question ${newTitle}`);
         //here is where we structure the multi selection style question
         //abstract to functionn
+        const newName = newTitle.slice(0, newTitle.indexOf(':')).split(" ").join("")
         try {
           const req = {
             type: 1,
-            name: newTitle === "" || newTitle === props.question.title ? props.question.title : newTitle.split(" ").join(""),
+            name: newName,
             title: newTitle === "" || newTitle === props.question.title ?  props.question.title : newTitle ,
             choicesOrder: "random",
             choice1: "GL",
             choice2: "You",
             choice3: "BL",
-            survey_id: props.survey_id
+            survey_id: props.survey_id,
+            question_id: props.question.question_id
           }
 axios.put(`${pathtoroute}`, req).then(resp => {
 //find somethinng to do inn here

@@ -60,7 +60,7 @@ module.exports = function survey(app, logger) {
     const survey_id = req.params.id
     console.log("Survey_id", survey_id)
     console.log("Request Body", req.body)
-    editAssessmentFRQuestion({survey_id, questionid}).then(response => {
+    editAssessmentFRQuestion(req.body).then(response => {
        res.send({response});
 
   })    
@@ -82,8 +82,7 @@ app.route(`${process.env.HART}/survey/edit/:id/ms`)
 })  
 .put( (req, res, next) => {
   const survey_id = req.params.id
-  console.log("Survey_id", survey_id)
-  editAssessmentMSQuestion({survey_id}).then(response => {
+  editAssessmentMSQuestion(req.body).then(response => {
     console.log("REEEEZ", response)
      res.send({response});
 
