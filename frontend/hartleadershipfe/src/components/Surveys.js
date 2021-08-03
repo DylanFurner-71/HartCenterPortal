@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
  
 let globalArr = [];
 const Surveys = (props) => {
-   const { user } = useSelector(state => state.auth.user);
+   const { user } = useSelector(state => state.auth.user)
 
 
        let history = useHistory();
@@ -54,14 +54,14 @@ const Surveys = (props) => {
                };
            }   else if(value.type == 1){
                    return { type: "matrix", name: value.name.replace(' ', ''), title: value.title,
-                   isRequired: true,
+                   isRequired: false,
                        columns: [{ value: 1, text: "1" },
                            { value: 2, text: "2" },
                            { value: 3, text: "3" },
                            { value: 4, text: "4" }],
                        rows: [
                            { value: value.choice1, text: props.gl }, //need to add this to the database to make it work for all of the questions,
-                           { value: value.choice2, text: "You" },
+                           { value: "You", text: "You" },
                            { value: value.choice3, text: props.bl }]
                    };
                }  else if(value.type == 2){
@@ -128,258 +128,188 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
    .add(function (sender) {
        //on complete we post the two survey responses to their destinnationn
        var mySurvey = sender;
-       var surveyData = sender.data;
-       console.log(surveyData, "surveyData")
-       console.log(typeof surveyData)
-       console.log(typeof surveyData['CandidSelfAppraisal'])
-       //code is broken from here onwards. Thanks John!!!!!
-    //    var selfAware = surveyData.Candid Self Appraisal.user + surveyData.Commits Wisely.user + surveyData.Composed.user + surveyData.Self Directed.user + surveyData.Open to Feedback.user;
-    //    var intentionalLearner = surveyData.Improves Performance.user + surveyData.Wiling to Stretch.user + surveyData.Reflective Learner.user + surveyData.Grows from Adversity.user + surveyData.Seeks Feedback.user;
-    //    var communication = surveyData.Open to Feedback.user + surveyData.Seeks Feedback.user + surveyData.Transparent.user + surveyData.Careful Listener.user + surveyData.Gives Candid Feedback.user;
-    //    var relationshipDevelopment = surveyData.Inclusive.user + surveyData.Empathetic.user + surveyData.Mends Fences.user + surveyData.Seek Common Ground.user + surveyData.Transparent.user;
-    //    var diversityDifference = surveyData.Student of Culture.user + surveyData.Values Differences.user + surveyData.Cultural Perspective.user + surveyData.Culturally Versatile.user + surveyData.Multicultural Motivator.user;
-    //    var engagingLeadership = surveyData.Inspires Commitment.user + surveyData.Leverages Others\' Strengths.user + surveyData.Influences Without Authority.user + surveyData.Considerate.user + surveyData.Careful Listener.user;
-    //    var directiveLeadership = surveyData.Gives Directio .user + surveyData.Prioritizes Effectively.user + surveyData.Clarifies Roles.user + surveyData.Provides Guidance.user + surveyData.Gives Candid Feedback.user;
-    //    var championsProcesses = surveyData.Shares Leadership.user + surveyData.Shares Responsibility.user + surveyData.Believes in Others.user + surveyData.Trusting of Others.user + surveyData.Maintains Accountability.user;
-    //    var problemSolving = surveyData.Defines Problems Effectively.user + surveyData.Makes Informed Decisions.user + surveyData.Logical Thinker.user + surveyData.Uses Judgment.user + surveyData.Decisive.user;
-    //    var strategicPerspective = surveyData.Sees Big Picture.user + surveyData.Systemic Awareness.user + surveyData.Recognizes Trade-offs.user + surveyData.Articulates Pros and Cons.user + surveyData.Senses Leverage.user;
-    //    var ethicsIntegrity = surveyData.Encourages Honesty.user + surveyData.Trustworthy.user + surveyData.Ethical Decision-maker.user + surveyData.Ethically Aware.user + surveyData.Principled.user;
-    //    var innovativeSpirit = surveyData.Entrepeneurial.user + surveyData.Thinks Different.user + surveyData.Inventive.user + surveyData.Generative.user + surveyData.Maker Instinct.user;
- 
- 
-    //    var allResponses = surveyData.Candid Self Appraisal.GL.toString() + ',' + surveyData.Candid Self Appraisal.BL.toString() + ',' + surveyData.Candid Self Appraisal.user.toString() + ','
-    //    + surveyData.Commits Wisely.GL.toString() + ',' + surveyData.Commits Wisely.BL.toString() + ',' + surveyData.Commits Wisely.user.toString() + ','
-    //    + surveyData.Composed.GL.toString() + ',' + surveyData.Composed.BL.toString() + ',' + surveyData.Composed.user.toString() + ','
-    //    + surveyData.Self Directed.GL.toString() + ',' + surveyData.Self Directed.BL.toString() + ',' + surveyData.Self Directed.user.toString() + ','
-    //    + surveyData.Open to Feedback.GL.toString() + ',' + surveyData.Open to Feedback.BL.toString() + ',' + surveyData.Open to Feedback.user.toString() + ','
-    //    + surveyData.Improves Performance.GL.toString() + ',' + surveyData.Improves Performance.BL.toString() + ',' + surveyData.Improves Performance.user.toString() + ','
-    //    + surveyData.Wiling to Stretch.GL.toString() + ',' + surveyData.Wiling to Stretch.BL.toString() + ',' + surveyData.Wiling to Stretch.user.toString() + ','
-    //    + surveyData.Reflective Learner.GL.toString() + ',' + surveyData.Reflective Learner.BL.toString() + ',' + surveyData.Reflective Learner.user.toString() + ','
-    //    + surveyData.Grows from Adversity.GL.toString() + ',' + surveyData.Grows from Adversity.BL.toString() + ',' + surveyData.Grows from Adversity.user.toString() + ','
-    //    + surveyData.Seeks Feedback.GL.toString() + ',' + surveyData.Seeks Feedback.BL.toString() + ',' + surveyData.Seeks Feedback.user.toString() + ','
-    //    + surveyData.Inclusive.GL.toString() + ',' + surveyData.Inclusive.BL.toString() + ',' + surveyData.Inclusive.user.toString() + ','
-    //    + surveyData.Empathetic.GL.toString() + ',' + surveyData.Empathetic.BL.toString() + ',' + surveyData.Empathetic.user.toString() + ','
-    //    + surveyData.Mends Fences.GL.toString() + ',' + surveyData.Mends Fences.BL.toString() + ',' + surveyData.Mends Fences.user.toString() + ','
-    //    + surveyData.Seek Common Ground.GL.toString() + ',' + surveyData.Seek Common Ground.BL.toString() + ','+ surveyData.Seek Common Ground.user.toString() + ','
-    //    + surveyData.Transparent.GL.toString() + ',' + surveyData.Transparent.BL.toString() + ',' + surveyData.Transparent.user.toString() + ','
-    //    + surveyData.Student of Culture.GL.toString() + ',' + surveyData.Student of Culture.BL.toString() + ',' + surveyData.Student of Culture.user.toString() + ','
-    //    + surveyData.Values Differences.GL.toString() + ',' + surveyData.Values Differences.BL.toString() + ',' + surveyData.Values Differences.user.toString() + ','
-    //    + surveyData.Cultural Perspective.GL.toString() + ',' + surveyData.Cultural Perspective.BL.toString() + ',' + surveyData.Cultural Perspective.user.toString() + ','
-    //    + surveyData.Culturally Versatile.GL.toString() + ',' + surveyData.Culturally Versatile.BL.toString() + ',' + surveyData.Culturally Versatile.user.toString() + ','
-    //    + surveyData.Multicultural Motivator.GL.toString() + ',' + surveyData.Multicultural Motivator.BL.toString() + ',' + surveyData.Multicultural Motivator.user.toString() + ','
-    //    + surveyData.Inspires Commitment.GL.toString() + ',' + surveyData.Inspires Commitment.BL.toString() + ',' + surveyData.Inspires Commitment.user.toString() + ','
-    //    + surveyData.Leverages Others\' Strengths.GL.toString() + ',' + surveyData.Leverages Others\' Strengths.BL.toString() + ',' + surveyData.Leverages Others\' Strengths.user.toString() + ','
-    //    + surveyData.Influences Without Authority.GL.toString() + ',' + surveyData.Influences Without Authority.BL.toString() + ',' + surveyData.Influences Without Authority.user.toString() + ','
-    //    + surveyData.Considerate.GL.toString() + ',' + surveyData.Considerate.BL.toString() + ',' + surveyData.Considerate.user.toString() + ','
-    //    + surveyData.Careful Listener.GL.toString() + ',' + surveyData.Careful Listener.BL.toString() + ',' + surveyData.Careful Listener.user.toString() + ','
-    //    + surveyData.Gives Directio .GL.toString() + ',' + surveyData.Gives Directio .BL.toString() + ',' + surveyData.Gives Directio .user.toString() + ','
-    //    + surveyData.Prioritizes Effectively.GL.toString() + ',' + surveyData.Prioritizes Effectively.BL.toString() + ',' + surveyData.Prioritizes Effectively.user.toString() + ','
-    //    + surveyData.Clarifies Roles.GL.toString() + ',' + surveyData.Clarifies Roles.BL.toString() + ',' + surveyData.Clarifies Roles.user.toString() + ','
-    //    + surveyData.Provides Guidance.GL.toString() + ',' + surveyData.Provides Guidance.BL.toString() + ',' + surveyData.Provides Guidance.user.toString() + ','
-    //    + surveyData.Gives Candid Feedback.GL.toString() + ',' + surveyData.Gives Candid Feedback.BL.toString() + ',' + surveyData.Gives Candid Feedback.user.toString() + ','
-    //    + surveyData.Shares Leadership.GL.toString() + ',' + surveyData.Shares Leadership.BL.toString() + ',' + surveyData.Shares Leadership.user.toString() + ','
-    //    + surveyData.Shares Responsibility.GL.toString() + ',' + surveyData.Shares Responsibility.BL.toString() + ',' + surveyData.Shares Responsibility.user.toString() + ','
-    //    + surveyData.Believes in Others.GL.toString() + ',' + surveyData.Believes in Others.BL.toString() + ',' + surveyData.Believes in Others.user.toString() + ','
-    //    + surveyData.Trusting of Others.GL.toString() + ',' + surveyData.Trusting of Others.BL.toString() + ',' + surveyData.Trusting of Others.user.toString() + ','
-    //    + surveyData.Maintains Accountability.GL.toString() + ',' + surveyData.Maintains Accountability.BL.toString() + ',' + surveyData.Maintains Accountability.user.toString() + ','
-    //    + surveyData.Defines Problems Effectively.GL.toString() + ',' + surveyData.Defines Problems Effectively.BL.toString() + ',' + surveyData.Defines Problems Effectively.user.toString() + ','
-    //    + surveyData.Makes Informed Decisions.GL.toString() + ',' + surveyData.Makes Informed Decisions.BL.toString() + ',' + surveyData.Makes Informed Decisions.user.toString() + ','
-    //    + surveyData.Logical Thinker.GL.toString() + ',' + surveyData.Logical Thinker.BL.toString() + ',' + surveyData.Logical Thinker.user.toString() + ','
-    //    + surveyData.Uses Judgment.GL.toString() + ',' + surveyData.Uses Judgment.BL.toString() + ',' + surveyData.Uses Judgment.user.toString() + ','
-    //    + surveyData.Decisive.GL.toString() + ',' + surveyData.Decisive.BL.toString() + ','+ surveyData.Decisive.BL.toString() + ','
-    //    + surveyData.Sees Big Picture.GL.toString() + ',' + surveyData.Sees Big Picture.BL.toString() + ',' + surveyData.Sees Big Picture.user.toString() + ','
-    //    + surveyData.Systemic Awareness.GL.toString() + ',' + surveyData.Systemic Awareness.BL.toString() + ',' + surveyData.Systemic Awareness.user.toString() + ','
-    //    + surveyData.Recognizes Trade-offs.GL.toString() + ',' + surveyData.Recognizes Trade-offs.BL.toString() + ',' + surveyData.Recognizes Trade-offs.user.toString() + ','
-    //    + surveyData.Articulates Pros and Cons.GL.toString() + ',' + surveyData.Articulates Pros and Cons.BL.toString() + ',' + surveyData.Articulates Pros and Cons.user.toString() + ','
-    //    + surveyData.Senses Leverage.GL.toString() + ',' + surveyData.Senses Leverage.BL.toString() + ',' + surveyData.Senses Leverage.user.toString() + ','
-    //    + surveyData.Encourages Honesty.GL.toString() + ',' + surveyData.Encourages Honesty.BL.toString() + ',' + surveyData.Encourages Honesty.user.toString() + ','
-    //    + surveyData.Trustworthy.GL.toString() + ',' + surveyData.Trustworthy.BL.toString() + ',' + surveyData.Trustworthy.user.toString() + ','
-    //    + surveyData.Ethical Decision-maker.GL.toString() + ',' + surveyData.Ethical Decision-maker.BL.toString() + ',' + surveyData.Ethical Decision-maker.user.toString() + ','
-    //    + surveyData.Ethically Aware.GL.toString() + ',' + surveyData.Ethically Aware.BL.toString() + ',' + surveyData.Ethically Aware.user.toString() + ','
-    //    + surveyData.Principled.GL.toString() + ',' + surveyData.Principled.BL.toString() + ',' + surveyData.Principled.user.toString() + ','
-    //    + surveyData.Entrepeneurial.GL.toString() + ',' + surveyData.Entrepeneurial.BL.toString() + ',' + surveyData.Entrepeneurial.user.toString() + ','
-    //    + surveyData.Thinks Different.GL.toString() + ',' + surveyData.Thinks Different.BL.toString() + ',' + surveyData.Thinks Different.user.toString() + ','
-    //    + surveyData.Inventive.GL.toString() + ',' + surveyData.Inventive.BL.toString() + ',' + surveyData.Inventive.user.toString() + ','
-    //    + surveyData.Generative.GL.toString() + ',' + surveyData.Generative.BL.toString() + ',' + surveyData.Generative.user.toString() + ','
-    //    + surveyData.Maker Instinct.GL.toString() + ',' + surveyData.Maker Instinct.BL.toString() + ',' + surveyData.Maker Instinct.user.toString();
-        let selfAware = surveyData.CandidSelfAppraisal.User+surveyData.CommitsWisely.User+surveyData.Composed.User+surveyData.SelfDirected.User+surveyData.OpentoFeedback.User;
-        let intentionalLearner = surveyData.ImprovesPerformance.User+surveyData.WilingtoStretch.User+surveyData.ReflectiveLearner.User+surveyData.GrowsfromAdversity.User+surveyData.SeeksFeedback.User;
-        let communication = surveyData.OpentoFeedback.User+surveyData.SeeksFeedback.User+surveyData.Transparent.User+surveyData.CarefulListener.User+surveyData.GivesCandidFeedback.User;
-        let relationshipDevelopment = surveyData.Inclusive.User+surveyData.Empathetic.User+surveyData.MendsFences.User+surveyData.SeekCommonGround.User+surveyData.Transparent.User;
-        let diversityDifference = surveyData.StudentofCulture.User+surveyData.ValuesDifferences.User+surveyData.CulturalPerspective.User+surveyData.CulturallyVersatile.User+surveyData.MulticulturalMotivator.User;
-        let engagingLeadership = surveyData.InspiresCommitment.User+surveyData.LeveragesOthersStrengths.User+surveyData.InfluencesWithoutAuthority.User+surveyData.Considerate.User+surveyData.CarefulListener.User;
-        let directiveLeadership = surveyData.GivesDirectio.User+surveyData.PrioritizesEffectively.User+surveyData.ClarifiesRoles.User+surveyData.ProvidesGuidance.User+surveyData.GivesCandidFeedback.User;
-        let championsProcesses = surveyData.SharesLeadership.User+surveyData.SharesResponsibility.User+surveyData.BelievesinOthers.User+surveyData.TrustingofOthers.User+surveyData.MaintainsAccountability.User;
-        let problemSolving = surveyData.DefinesProblemsEffectively.User+surveyData.MakesInformedDecisions.User+surveyData.LogicalThinker.User+surveyData.UsesJudgment.User+surveyData.Decisive.User;
-        let strategicPerspective = surveyData.SeesBigPicture.User+surveyData.SystemicAwareness.User+surveyData.RecognizesTradeoffs.User+surveyData.ArticulatesProsandCons.User+surveyData.SensesLeverage.User;
-        let ethicsIntegrity = surveyData.EncouragesHonesty.User+surveyData.Trustworthy.User+surveyData.EthicalDecisionMaker.User+surveyData.EthicallyAware.User+surveyData.Principled.User;
-        let innovativeSpirit = surveyData.Entrepeneurial.User+surveyData.ThinksDifferent.User+surveyData.Inventive.User+surveyData.Generative.User+surveyData.MakerInstinct.User;
+       var SurveyData = sender.data;
+       console.log(SurveyData, "surveyData")
+       console.log(typeof SurveyData)
        
-        let allResponses=surveyData.CandidSelfAppraisal.GL.toString()+','+surveyData.CandidSelfAppraisal.BL.toString()+','+surveyData.CandidSelfAppraisal.use.toString()+','
+       console.log(typeof SurveyData['OpentoFeedback'])
+        let selfAware = SurveyData['CandidSelfAppraisal'].You+SurveyData['CommitsWisely'].You+SurveyData['Composed'].You+SurveyData['SelfDirected'].You+SurveyData['OpentoFeedback'].You;
+        let intentionalLearner = SurveyData['ImprovesPerformance'].You+SurveyData['WilingtoStretch'].You+SurveyData['ReflectiveLearner'].You+SurveyData['GrowsfromAdversity'].You+SurveyData['SeeksFeedback'].You;
+        let communication = SurveyData['OpentoFeedback'].You+SurveyData['SeeksFeedback'].You+SurveyData['Transparent'].You+SurveyData['CarefulListener'].You+SurveyData['GivesCandidFeedback'].You;
+        let relationshipDevelopment = SurveyData['Inclusive'].You+SurveyData['Empathetic'].You+SurveyData['MendsFences'].You+SurveyData['SeekCommonGround'].You+SurveyData['Transparent'].You;
+        let diversityDifference = SurveyData['StudentofCulture'].You+SurveyData['ValuesDifferences'].You+SurveyData['CulturalPerspective'].You+SurveyData['CulturallyVersatile'].You+SurveyData['MulticulturalMotivator'].You;
+        let engagingLeadership = SurveyData['InspiresCommitment'].You+SurveyData['LeveragesOthersStrengths'].You+SurveyData['InfluencesWithoutAuthority'].You+SurveyData['Considerate'].You+SurveyData['CarefulListener'].You;
+        let directiveLeadership = SurveyData['GivesDirectio'].You+SurveyData['PrioritizesEffectively'].You+SurveyData['ClarifiesRoles'].You+SurveyData['ProvidesGuidance'].You+SurveyData['GivesCandidFeedback'].You;
+        let championsProcesses = SurveyData['SharesLeadership'].You+SurveyData['SharesResponsibility'].You+SurveyData['BelievesinOthers'].You+SurveyData['TrustingofOthers'].You+SurveyData['MaintainsAccountability'].You;
+        let problemSolving = SurveyData['DefinesProblemsEffectively'].You+SurveyData['MakesInformedDecisions'].You+SurveyData['LogicalThinker'].You+SurveyData['UsesJudgment'].You+SurveyData['Decisive'].You;
+        let strategicPerspective = SurveyData['SeesBigPicture'].You+SurveyData['SystemicAwareness'].You+SurveyData['RecognizesTradeoffs'].You+SurveyData['ArticulatesProsandCons'].You+SurveyData['SensesLeverage'].You;
+        let ethicsIntegrity = SurveyData['EncouragesHonesty'].You+SurveyData['Trustworthy'].You+SurveyData['EthicalDecisionMaker'].You+SurveyData['EthicallyAware'].You+SurveyData['Principled'].You;
+        let innovativeSpirit = SurveyData['Entrepeneurial'].You+SurveyData['ThinksDifferent'].You+SurveyData['Inventive'].You+SurveyData['Generative'].You+SurveyData['MakerInstinct'].You;
+        let allResponses=SurveyData['CandidSelfAppraisal'].GL.toString()+','+SurveyData['CandidSelfAppraisal'].BL.toString()+','+SurveyData['CandidSelfAppraisal'].You.toString()+','
  
  
  
  
-+surveyData.CommitsWisely.GL.toString()+','+surveyData.CommitsWisely.BL.toString()+','+surveyData.CommitsWisely.use.toString()+','
++SurveyData['CommitsWisely'].GL.toString()+','+SurveyData['CommitsWisely'].BL.toString()+','+SurveyData['CommitsWisely'].You.toString()+','
  
  
-+surveyData.Composed.GL.toString()+','+surveyData.Composed.BL.toString()+','+surveyData.Composed.use.toString()+','
++SurveyData['Composed'].GL.toString()+','+SurveyData['Composed'].BL.toString()+','+SurveyData['Composed'].You.toString()+','
  
  
-+surveyData.SelfDirected.GL.toString()+','+surveyData.SelfDirected.BL.toString()+','+surveyData.SelfDirected.use.toString()+','
++SurveyData['SelfDirected'].GL.toString()+','+SurveyData['SelfDirected'].BL.toString()+','+SurveyData['SelfDirected'].You.toString()+','
  
  
-+surveyData.OpentoFeedback.GL.toString()+','+surveyData.OpentoFeedback.BL.toString()+','+surveyData.OpentoFeedback.use.toString()+','
++SurveyData['OpentoFeedback'].GL.toString()+','+SurveyData['OpentoFeedback'].BL.toString()+','+SurveyData['OpentoFeedback'].You.toString()+','
  
  
-+surveyData.ImprovesPerformance.GL.toString()+','+surveyData.ImprovesPerformance.BL.toString()+','+surveyData.ImprovesPerformance.use.toString()+','
++SurveyData['ImprovesPerformance'].GL.toString()+','+SurveyData['ImprovesPerformance'].BL.toString()+','+SurveyData['ImprovesPerformance'].You.toString()+','
  
  
-+surveyData.WilingtoStretch.GL.toString()+','+surveyData.WilingtoStretch.BL.toString()+','+surveyData.WilingtoStretch.use.toString()+','
++SurveyData['WilingtoStretch'].GL.toString()+','+SurveyData['WilingtoStretch'].BL.toString()+','+SurveyData['WilingtoStretch'].You.toString()+','
  
  
-+surveyData.ReflectiveLearne.GL.toString()+','+surveyData.ReflectiveLearne.BL.toString()+','+surveyData.ReflectiveLearne.use.toString()+','
++SurveyData['ReflectiveLearne'].GL.toString()+','+SurveyData['ReflectiveLearne'].BL.toString()+','+SurveyData['ReflectiveLearne'].You.toString()+','
  
  
-+surveyData.GrowsfromAdversity.GL.toString()+','+surveyData.GrowsfromAdversity.BL.toString()+','+surveyData.GrowsfromAdversity.use.toString()+','
++SurveyData['GrowsfromAdversity'].GL.toString()+','+SurveyData['GrowsfromAdversity'].BL.toString()+','+SurveyData['GrowsfromAdversity'].You.toString()+','
  
  
-+surveyData.SeeksFeedback.GL.toString()+','+surveyData.SeeksFeedback.BL.toString()+','+surveyData.SeeksFeedback.use.toString()+','
++SurveyData['SeeksFeedback'].GL.toString()+','+SurveyData['SeeksFeedback'].BL.toString()+','+SurveyData['SeeksFeedback'].You.toString()+','
  
  
-+surveyData.Inclusive.GL.toString()+','+surveyData.Inclusive.BL.toString()+','+surveyData.Inclusive.use.toString()+','
++SurveyData['Inclusive'].GL.toString()+','+SurveyData['Inclusive'].BL.toString()+','+SurveyData['Inclusive'].You.toString()+','
  
  
-+surveyData.Empathetic.GL.toString()+','+surveyData.Empathetic.BL.toString()+','+surveyData.Empathetic.use.toString()+','
++SurveyData['Empathetic'].GL.toString()+','+SurveyData['Empathetic'].BL.toString()+','+SurveyData['Empathetic'].You.toString()+','
  
  
-+surveyData.MendsFences.GL.toString()+','+surveyData.MendsFences.BL.toString()+','+surveyData.MendsFences.use.toString()+','
++SurveyData['MendsFences'].GL.toString()+','+SurveyData['MendsFences'].BL.toString()+','+SurveyData['MendsFences'].You.toString()+','
  
  
-+surveyData.SeekCommonGround.GL.toString()+','+surveyData.SeekCommonGround.BL.toString()+','+surveyData.SeekCommonGround.use.toString()+','
++SurveyData['SeekCommonGround'].GL.toString()+','+SurveyData['SeekCommonGround'].BL.toString()+','+SurveyData['SeekCommonGround'].You.toString()+','
  
  
-+surveyData.Transparent.GL.toString()+','+surveyData.Transparent.BL.toString()+','+surveyData.Transparent.use.toString()+','
++SurveyData['Transparent'].GL.toString()+','+SurveyData['Transparent'].BL.toString()+','+SurveyData['Transparent'].You.toString()+','
  
  
-+surveyData.StudentofCulture.GL.toString()+','+surveyData.StudentofCulture.BL.toString()+','+surveyData.StudentofCulture.use.toString()+','
++SurveyData['StudentofCulture'].GL.toString()+','+SurveyData['StudentofCulture'].BL.toString()+','+SurveyData['StudentofCulture'].You.toString()+','
  
  
-+surveyData.ValuesDifferences.GL.toString()+','+surveyData.ValuesDifferences.BL.toString()+','+surveyData.ValuesDifferences.use.toString()+','
++SurveyData['ValuesDifferences'].GL.toString()+','+SurveyData['ValuesDifferences'].BL.toString()+','+SurveyData['ValuesDifferences'].You.toString()+','
  
  
-+surveyData.CulturalPerspective.GL.toString()+','+surveyData.CulturalPerspective.BL.toString()+','+surveyData.CulturalPerspective.use.toString()+','
++SurveyData['CulturalPerspective'].GL.toString()+','+SurveyData['CulturalPerspective'].BL.toString()+','+SurveyData['CulturalPerspective'].You.toString()+','
  
  
-+surveyData.CulturallyVersatile.GL.toString()+','+surveyData.CulturallyVersatile.BL.toString()+','+surveyData.CulturallyVersatile.use.toString()+','
++SurveyData['CulturallyVersatile'].GL.toString()+','+SurveyData['CulturallyVersatile'].BL.toString()+','+SurveyData['CulturallyVersatile'].You.toString()+','
  
  
-+surveyData.MulticulturalMotivato.GL.toString()+','+surveyData.MulticulturalMotivato.BL.toString()+','+surveyData.MulticulturalMotivato.use.toString()+','
++SurveyData['MulticulturalMotivato'].GL.toString()+','+SurveyData['MulticulturalMotivato'].BL.toString()+','+SurveyData['MulticulturalMotivato'].You.toString()+','
  
  
-+surveyData.InspiresCommitment.GL.toString()+','+surveyData.InspiresCommitment.BL.toString()+','+surveyData.InspiresCommitment.use.toString()+','
++SurveyData['InspiresCommitment'].GL.toString()+','+SurveyData['InspiresCommitment'].BL.toString()+','+SurveyData['InspiresCommitment'].You.toString()+','
  
  
-+surveyData.LeveragesOthersStrengths.GL.toString()+','+surveyData.LeveragesOthersStrengths.BL.toString()+','+surveyData.LeveragesOthersStrengths.use.toString()+','
++SurveyData['LeveragesOthersStrengths'].GL.toString()+','+SurveyData['LeveragesOthersStrengths'].BL.toString()+','+SurveyData['LeveragesOthersStrengths'].You.toString()+','
  
  
-+surveyData.InfluencesWithoutAuthority.GL.toString()+','+surveyData.InfluencesWithoutAuthority.BL.toString()+','+surveyData.InfluencesWithoutAuthority.use.toString()+','
++SurveyData['InfluencesWithoutAuthority'].GL.toString()+','+SurveyData['InfluencesWithoutAuthority'].BL.toString()+','+SurveyData['InfluencesWithoutAuthority'].You.toString()+','
  
  
-+surveyData.Considerate.GL.toString()+','+surveyData.Considerate.BL.toString()+','+surveyData.Considerate.use.toString()+','
++SurveyData['Considerate'].GL.toString()+','+SurveyData['Considerate'].BL.toString()+','+SurveyData['Considerate'].You.toString()+','
  
  
-+surveyData.CarefulListene.GL.toString()+','+surveyData.CarefulListene.BL.toString()+','+surveyData.CarefulListene.use.toString()+','
++SurveyData['CarefulListene'].GL.toString()+','+SurveyData['CarefulListene'].BL.toString()+','+SurveyData['CarefulListene'].You.toString()+','
  
  
-+surveyData.GivesDirectio.GL.toString()+','+surveyData.GivesDirectio.BL.toString()+','+surveyData.GivesDirectio.use.toString()+','
++SurveyData['GivesDirectio'].GL.toString()+','+SurveyData['GivesDirectio'].BL.toString()+','+SurveyData['GivesDirectio'].You.toString()+','
  
  
-+surveyData.PrioritizesEffectively.GL.toString()+','+surveyData.PrioritizesEffectively.BL.toString()+','+surveyData.PrioritizesEffectively.use.toString()+','
++SurveyData['PrioritizesEffectively'].GL.toString()+','+SurveyData['PrioritizesEffectively'].BL.toString()+','+SurveyData['PrioritizesEffectively'].You.toString()+','
  
  
-+surveyData.ClarifiesRoles.GL.toString()+','+surveyData.ClarifiesRoles.BL.toString()+','+surveyData.ClarifiesRoles.use.toString()+','
++SurveyData['ClarifiesRoles'].GL.toString()+','+SurveyData['ClarifiesRoles'].BL.toString()+','+SurveyData['ClarifiesRoles'].You.toString()+','
  
  
-+surveyData.ProvidesGuidance.GL.toString()+','+surveyData.ProvidesGuidance.BL.toString()+','+surveyData.ProvidesGuidance.use.toString()+','
++SurveyData['ProvidesGuidance'].GL.toString()+','+SurveyData['ProvidesGuidance'].BL.toString()+','+SurveyData['ProvidesGuidance'].You.toString()+','
  
  
-+surveyData.GivesCandidFeedback.GL.toString()+','+surveyData.GivesCandidFeedback.BL.toString()+','+surveyData.GivesCandidFeedback.use.toString()+','
++SurveyData['GivesCandidFeedback'].GL.toString()+','+SurveyData['GivesCandidFeedback'].BL.toString()+','+SurveyData['GivesCandidFeedback'].You.toString()+','
  
  
-+surveyData.SharesLeadership.GL.toString()+','+surveyData.SharesLeadership.BL.toString()+','+surveyData.SharesLeadership.use.toString()+','
++SurveyData['SharesLeadership'].GL.toString()+','+SurveyData['SharesLeadership'].BL.toString()+','+SurveyData['SharesLeadership'].You.toString()+','
  
  
-+surveyData.SharesResponsibility.GL.toString()+','+surveyData.SharesResponsibility.BL.toString()+','+surveyData.SharesResponsibility.use.toString()+','
++SurveyData['SharesResponsibility'].GL.toString()+','+SurveyData['SharesResponsibility'].BL.toString()+','+SurveyData['SharesResponsibility'].You.toString()+','
  
  
-+surveyData.BelievesinOthers.GL.toString()+','+surveyData.BelievesinOthers.BL.toString()+','+surveyData.BelievesinOthers.use.toString()+','
++SurveyData['BelievesinOthers'].GL.toString()+','+SurveyData['BelievesinOthers'].BL.toString()+','+SurveyData['BelievesinOthers'].You.toString()+','
  
  
-+surveyData.TrustingofOthers.GL.toString()+','+surveyData.TrustingofOthers.BL.toString()+','+surveyData.TrustingofOthers.use.toString()+','
++SurveyData['TrustingofOthers'].GL.toString()+','+SurveyData['TrustingofOthers'].BL.toString()+','+SurveyData['TrustingofOthers'].You.toString()+','
  
  
-+surveyData.MaintainsAccountability.GL.toString()+','+surveyData.MaintainsAccountability.BL.toString()+','+surveyData.MaintainsAccountability.use.toString()+','
++SurveyData['MaintainsAccountability'].GL.toString()+','+SurveyData['MaintainsAccountability'].BL.toString()+','+SurveyData['MaintainsAccountability'].You.toString()+','
  
  
-+surveyData.DefinesProblemsEffectively.GL.toString()+','+surveyData.DefinesProblemsEffectively.BL.toString()+','+surveyData.DefinesProblemsEffectively.use.toString()+','
++SurveyData['DefinesProblemsEffectively'].GL.toString()+','+SurveyData['DefinesProblemsEffectively'].BL.toString()+','+SurveyData['DefinesProblemsEffectively'].You.toString()+','
  
  
-+surveyData.MakesInformedDecisions.GL.toString()+','+surveyData.MakesInformedDecisions.BL.toString()+','+surveyData.MakesInformedDecisions.use.toString()+','
++SurveyData['MakesInformedDecisions'].GL.toString()+','+SurveyData['MakesInformedDecisions'].BL.toString()+','+SurveyData['MakesInformedDecisions'].You.toString()+','
  
  
-+surveyData.LogicalThinke.GL.toString()+','+surveyData.LogicalThinke.BL.toString()+','+surveyData.LogicalThinke.use.toString()+','
++SurveyData['LogicalThinke'].GL.toString()+','+SurveyData['LogicalThinke'].BL.toString()+','+SurveyData['LogicalThinke'].You.toString()+','
  
  
-+surveyData.UsesJudgment.GL.toString()+','+surveyData.UsesJudgment.BL.toString()+','+surveyData.UsesJudgment.use.toString()+','
++SurveyData['UsesJudgment'].GL.toString()+','+SurveyData['UsesJudgment'].BL.toString()+','+SurveyData['UsesJudgment'].You.toString()+','
  
  
-+surveyData.Decisive.GL.toString()+','+surveyData.Decisive.BL.toString()+','+surveyData.Decisive.BL.toString()+','
++SurveyData['Decisive'].GL.toString()+','+SurveyData['Decisive'].BL.toString()+','+SurveyData['Decisive'].BL.toString()+','
  
  
-+surveyData.SeesBigPicture.GL.toString()+','+surveyData.SeesBigPicture.BL.toString()+','+surveyData.SeesBigPicture.use.toString()+','
++SurveyData['SeesBigPicture'].GL.toString()+','+SurveyData['SeesBigPicture'].BL.toString()+','+SurveyData['SeesBigPicture'].You.toString()+','
  
  
-+surveyData.SystemicAwareness.GL.toString()+','+surveyData.SystemicAwareness.BL.toString()+','+surveyData.SystemicAwareness.use.toString()+','
++SurveyData['SystemicAwareness'].GL.toString()+','+SurveyData['SystemicAwareness'].BL.toString()+','+SurveyData['SystemicAwareness'].You.toString()+','
  
  
-+surveyData.RecognizesTradeOffs.GL.toString()+','+surveyData.RecognizesTradeOffs.BL.toString()+','+surveyData.RecognizesTradeOffs.use.toString()+','
++SurveyData['RecognizesTradeOffs'].GL.toString()+','+SurveyData['RecognizesTradeOffs'].BL.toString()+','+SurveyData['RecognizesTradeOffs'].You.toString()+','
  
  
-+surveyData.ArticulatesProsandCons.GL.toString()+','+surveyData.ArticulatesProsandCons.BL.toString()+','+surveyData.ArticulatesProsandCons.use.toString()+','
++SurveyData['ArticulatesProsandCons'].GL.toString()+','+SurveyData['ArticulatesProsandCons'].BL.toString()+','+SurveyData['ArticulatesProsandCons'].You.toString()+','
  
  
-+surveyData.SensesLeverage.GL.toString()+','+surveyData.SensesLeverage.BL.toString()+','+surveyData.SensesLeverage.use.toString()+','
++SurveyData['SensesLeverage'].GL.toString()+','+SurveyData['SensesLeverage'].BL.toString()+','+SurveyData['SensesLeverage'].You.toString()+','
  
  
-+surveyData.EncouragesHonesty.GL.toString()+','+surveyData.EncouragesHonesty.BL.toString()+','+surveyData.EncouragesHonesty.use.toString()+','
++SurveyData['EncouragesHonesty'].GL.toString()+','+SurveyData['EncouragesHonesty'].BL.toString()+','+SurveyData['EncouragesHonesty'].You.toString()+','
  
  
-+surveyData.Trustworthy.GL.toString()+','+surveyData.Trustworthy.BL.toString()+','+surveyData.Trustworthy.use.toString()+','
++SurveyData['Trustworthy'].GL.toString()+','+SurveyData['Trustworthy'].BL.toString()+','+SurveyData['Trustworthy'].You.toString()+','
  
  
-+surveyData.EthicalDecisionMaker.GL.toString()+','+surveyData.EthicalDecisionMaker.BL.toString()+','+surveyData.EthicalDecisionMaker.use.toString()+','
++SurveyData['EthicalDecisionMaker'].GL.toString()+','+SurveyData['EthicalDecisionMaker'].BL.toString()+','+SurveyData['EthicalDecisionMaker'].You.toString()+','
  
  
-+surveyData.EthicallyAware.GL.toString()+','+surveyData.EthicallyAware.BL.toString()+','+surveyData.EthicallyAware.use.toString()+','
++SurveyData['EthicallyAware'].GL.toString()+','+SurveyData['EthicallyAware'].BL.toString()+','+SurveyData['EthicallyAware'].You.toString()+','
  
  
-+surveyData.Principled.GL.toString()+','+surveyData.Principled.BL.toString()+','+surveyData.Principled.use.toString()+','
++SurveyData['Principled'].GL.toString()+','+SurveyData['Principled'].BL.toString()+','+SurveyData['Principled'].You.toString()+','
  
  
-+surveyData.Entrepeneurial.GL.toString()+','+surveyData.Entrepeneurial.BL.toString()+','+surveyData.Entrepeneurial.use.toString()+','
++SurveyData['Entrepeneurial'].GL.toString()+','+SurveyData['Entrepeneurial'].BL.toString()+','+SurveyData['Entrepeneurial'].You.toString()+','
  
  
-+surveyData.ThinksDifferent.GL.toString()+','+surveyData.ThinksDifferent.BL.toString()+','+surveyData.ThinksDifferent.use.toString()+','
++SurveyData['ThinksDifferent'].GL.toString()+','+SurveyData['ThinksDifferent'].BL.toString()+','+SurveyData['ThinksDifferent'].You.toString()+','
  
  
-+surveyData.Inventive.GL.toString()+','+surveyData.Inventive.BL.toString()+','+surveyData.Inventive.use.toString()+','
++SurveyData['Inventive'].GL.toString()+','+SurveyData['Inventive'].BL.toString()+','+SurveyData['Inventive'].You.toString()+','
  
  
-+surveyData.Generative.GL.toString()+','+surveyData.Generative.BL.toString()+','+surveyData.Generative.use.toString()+','
++SurveyData['Generative'].GL.toString()+','+SurveyData['Generative'].BL.toString()+','+SurveyData['Generative'].You.toString()+','
  
  
-+surveyData.MakerInstinct.GL.toString()+','+surveyData.MakerInstinct.BL.toString()+','+surveyData.MakerInstinct.use.toString();
++SurveyData['MakerInstinct'].GL.toString()+','+SurveyData['MakerInstinct'].BL.toString()+','+SurveyData['MakerInstinct'].You.toString();
  
  
  
