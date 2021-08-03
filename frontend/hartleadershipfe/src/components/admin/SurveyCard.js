@@ -103,6 +103,7 @@ function mapquestion() {
     // let question1 = determineQuestion(props.question)
     return (
             <div>
+                <p>Question Category: {props.survey.category}</p>
                 <p>Question Type: {props.survey.type}</p>
                 <p>Question name: {props.survey.name}</p>
                 <p>Question Title: (this is the question the student is asked) {props.survey.title} </p>

@@ -93,9 +93,8 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentMSQuestion = async (info) => new Promise((resolve, reject) => {
-        console.log("INFO:::: ", info)
-        pool.query("UPDATE questions SET name=?, title = ? WHERE survey_id = ? AND question_id = ?",
-        [info.name, info.title, info.survey_id, info.question_id],
+        pool.query("UPDATE questions SET title = ? WHERE survey_id = ? AND question_id = ?",
+        [info.title, info.survey_id, info.question_id],
          function (error, results, fields){
             if (error){
                 reject();
@@ -139,6 +138,15 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
             }
         })
     })
+    getDistinctCategories = async (ifo) => new Promise((resolve, reject) => {
+        pool.query( "SELECT distinct category FROM surveys where survey_id = 1", function (error, results, fields) {
+            if (error){
+                reject();
+            }else{
+                resolve(results);
+            }
+        })
+    });
 module.exports = {
     postResult,
     getSurveyQuestions,
@@ -151,5 +159,6 @@ module.exports = {
     deleteAssessmentQuestion,
     editAssessmentFRQuestion,
     editAssessmentMSQuestion,
-    editAssessmentMCQuestion
+    editAssessmentMCQuestion,
+    getDistinctCategories
 }

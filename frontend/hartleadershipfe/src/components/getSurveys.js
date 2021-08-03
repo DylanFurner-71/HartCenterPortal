@@ -22,6 +22,7 @@ import SurveyPopUp from './student/SurveyPopUp.js';
 const GetSurveys = (props) => {
 const { user } = useSelector(state => state.auth.user);
 const [surveys, setSurveys]= useState([]);
+const [categories, setCategories]= useState([]);
 const [questions, setQuestions]= useState([]);
 const [gl, setGL]= useState([]);
 const [bl, setBL]= useState([]);
@@ -42,6 +43,7 @@ function handleResult() {
 useEffect(
     () => {
         fetchSurveys();
+        fetchCategories();
         fetchQuestions();  
         setIsLoading(false); 
         // console.log("MODAL SHOW:::", show)
@@ -70,6 +72,15 @@ useEffect(
             return surveys
             }).catch(err=> console.log(err))
         };
+        const fetchCategories = async () => {
+            await axios
+                .get(`${HartAPIPrefix}/survey/category`)
+                .then(res => {
+                const surveys = res.data.response;
+                setCategories(surveys);
+                return surveys
+                }).catch(err=> console.log(err))
+            };
 return (
     <>
    <div
@@ -79,7 +90,7 @@ return (
                      <div>
                      {!modalShow && !showSurvey && <button className="btn btn-primary" type="button" onClick={openModal}>Take Hart Leadership Assessment</button>}
                      <SurveyPopUp closeModal={closeModal} show={modalShow} good={setGL} bad={setBL}/>
-                     {showSurvey && <Surveys questions={questions} showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title} gl={gl} bl={bl}/>}
+                     {showSurvey && <Surveys questions={questions} categories={categories}showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title} gl={gl} bl={bl}/>}
 
                         </div>
                

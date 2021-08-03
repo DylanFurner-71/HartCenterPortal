@@ -4,7 +4,9 @@ const { postResult,
   getTitle,     
   addAssessmentMCQuestion,
   addAssessmentFRQuestion,
-  addAssessmentMSQuestion, deleteAssessmentQuestion, editAssessmentMCQuestion, editAssessmentMSQuestion, editAssessmentFRQuestion } = require("../models/survey_model");
+  addAssessmentMSQuestion, deleteAssessmentQuestion,
+  getDistinctCategories,
+   editAssessmentMCQuestion, editAssessmentMSQuestion, editAssessmentFRQuestion } = require("../models/survey_model");
 module.exports = function survey(app, logger) {
     app.route(`${process.env.HART}/survey/`)
       .get( (req, res, next) => {
@@ -19,6 +21,19 @@ module.exports = function survey(app, logger) {
   
     });
     })
+    app.route(`${process.env.HART}/survey/category`)
+    .get( (req, res, next) => {
+    getDistinctCategories(req).then(response => {
+      console.log("GetDistinctCategories")
+      console.log(response)
+       res.send({response});
+  })    
+  .catch((e)=>{
+    console.log(e)
+     res.status(400).send(e);
+
+  });
+  })
     app.route(`${process.env.HART}/survey/edit/:id/mc`)
       .post( (req, res, next) => {
       console.log("EW ARE INSIDIDDIDIDIDIDIDID")

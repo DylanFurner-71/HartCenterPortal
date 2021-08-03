@@ -131,7 +131,7 @@ Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
        var surveyData = sender.data;
        console.log(surveyData, "surveyData")
        console.log(typeof surveyData)
-       console.log(surveyData['CandidSelfAppraisal'])
+       console.log(typeof surveyData['CandidSelfAppraisal'])
        //code is broken from here onwards. Thanks John!!!!!
     //    var selfAware = surveyData.Candid Self Appraisal.user + surveyData.Commits Wisely.user + surveyData.Composed.user + surveyData.Self Directed.user + surveyData.Open to Feedback.user;
     //    var intentionalLearner = surveyData.Improves Performance.user + surveyData.Wiling to Stretch.user + surveyData.Reflective Learner.user + surveyData.Grows from Adversity.user + surveyData.Seeks Feedback.user;
