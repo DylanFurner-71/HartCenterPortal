@@ -22,8 +22,9 @@ import SurveyPopUp from './student/SurveyPopUp.js';
 const GetSurveys = (props) => {
 const { user } = useSelector(state => state.auth.user);
 const [surveys, setSurveys]= useState([]);
-const [categories, setCategories]= useState([]);
+// const [categories, setCategories]= useState([]);
 const [questions, setQuestions]= useState([]);
+const [competencies, setCompetencies] = useState([]);
 const [gl, setGL]= useState([]);
 const [bl, setBL]= useState([]);
 const prevProps = useRef(props);
@@ -43,7 +44,7 @@ function handleResult() {
 useEffect(
     () => {
         fetchSurveys();
-        fetchCategories();
+        fetchCompetencies();
         fetchQuestions();  
         setIsLoading(false); 
         // console.log("MODAL SHOW:::", show)
@@ -72,15 +73,14 @@ useEffect(
             return surveys
             }).catch(err=> console.log(err))
         };
-        const fetchCategories = async () => {
-            await axios
-                .get(`${HartAPIPrefix}/survey/category`)
-                .then(res => {
-                const surveys = res.data.response;
-                setCategories(surveys);
-                return surveys
-                }).catch(err=> console.log(err))
-            };
+        const fetchCompetencies = async () => {
+                    await axios
+                        .get(`${HartAPIPrefix}/competency/cc`)
+                        .then(res => {
+                            const competencies = res.data.response;
+                            setCompetencies(competencies);
+                        });
+                };
 return (
     <>
    <div
@@ -90,7 +90,7 @@ return (
                      <div>
                      {!modalShow && !showSurvey && <button className="btn btn-primary" type="button" onClick={openModal}>Take Hart Leadership Assessment</button>}
                      <SurveyPopUp closeModal={closeModal} show={modalShow} good={setGL} bad={setBL}/>
-                     {showSurvey && <Surveys questions={questions} categories={categories}showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title} gl={gl} bl={bl}/>}
+                     {showSurvey && <Surveys questions={questions.slice(0, 5).sort((e, l) => {return e.question_id < l.question_id})} competencies={competencies}showing={false} resultShowing={false} buttonShowing={true} handleResult = {handleResult} competencyQuiz={false} title={surveys.title} gl={gl} bl={bl}/>}
 
                         </div>
                

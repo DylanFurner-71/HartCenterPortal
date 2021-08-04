@@ -1,7 +1,15 @@
 var db = require('../db');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-
+getCompetenciesC = () => new Promise((resolve, reject) => {
+    db.query('SELECT competency FROM competency order by competency_id', function (error, results, fields) {
+        if (error){
+            reject();
+        }else{
+            resolve(results);
+        }
+    });
+});
 getCompetencies = () => new Promise((resolve, reject) => {
     db.query('SELECT * FROM competency', function (error, results, fields) {
         if (error){
@@ -143,5 +151,6 @@ module.exports = {
     setCompetencyImage, 
     getCompetenciesVideoQuiz,
     addCompetenciesVideoQuizQuestion,
-    DeleteCompetencyVideoQuiz
+    DeleteCompetencyVideoQuiz,
+    getCompetenciesC
 }

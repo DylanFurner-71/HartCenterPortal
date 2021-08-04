@@ -33,9 +33,6 @@ export function EditMultiSelection(props) {
             category: newQuote4 == "" || props.question.category === newCategory ? props.question.category : newCategory,
           }
 axios.put(`${pathtoroute}`, req).then(resp => {
-//find somethinng to do inn here
-console.log("Edit mulitiple choice axios responsne: \n")
-console.log(resp)
 
 });
         

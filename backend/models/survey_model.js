@@ -93,8 +93,8 @@ getTitle = async (ifo) => new Promise((resolve, reject) => {
         })
     })
     editAssessmentMSQuestion = async (info) => new Promise((resolve, reject) => {
-        pool.query("UPDATE questions SET title = ? WHERE survey_id = ? AND question_id = ?",
-        [info.title, info.survey_id, info.question_id],
+        pool.query("UPDATE questions SET name = ? WHERE survey_id = ? AND question_id = ?",
+        [info.name, info.survey_id, info.question_id],
          function (error, results, fields){
             if (error){
                 reject();
