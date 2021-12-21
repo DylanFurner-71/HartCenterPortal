@@ -43,10 +43,11 @@ console.log(resp)
       resetNewQuote4();
       resetNewTitle();
     }
-
     return (
       <div>
-        <p> Answer choices are defaulted to "Good Leader, User, and Bad Leader</p>
+        {props.survey_id === 1 ? (
+        <p> Answer choices are defaulted to "Good Leader, You, and Bad Leader. Disregard that the choice above says "User" instead of "You"</p>
+        ) : (null)}
       <form onSubmit={handleSubmit}>
          <label>
           Please enter the question

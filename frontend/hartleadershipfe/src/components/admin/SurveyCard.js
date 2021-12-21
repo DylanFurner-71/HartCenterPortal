@@ -6,6 +6,7 @@ import {Row, Container, Col} from "react-bootstrap/";
 import EditMultipleChoice from "./questions/EditMultipleChoice";
 import QuestionEditor from "./questions/QuestionEditor";
 import QuizPopUp from "../student/QuizPopUp";
+import {deleteQuestion} from "../../actions/surveyActions";
 const SurveyCard = (props) => {
   const { user } = useSelector(state => state.auth.user);
   const [isStudent, setIsStudent] = useState(true);
@@ -19,61 +20,13 @@ const SurveyCard = (props) => {
     setIsStudent(false);
   }
 }, [])
-function determineQuestion(value){
-console.log(value, "VALUE")
-    if(value.type == 0){
-        return{
-            name: value['name'].replace(' ', ''),
-            type: "text",
-                title: value['title'],
-                inputType: value['input'],
-                isRequired: true,
-                autoComplete: value['auto']
-            };
-        }   else if(value['type'] == 1){
-                return { type: "matrix", name: value['name'].replace(' ', ''), title: value['title'],
-                isRequired: true,
-                    columns: [{ value: 1, text: "1" },
-                        { value: 2, text: "2" },
-                        { value: 3, text: "3" }],
-                    rows: [
-                        { value: value.choice1, text: "Good Leader" }, //need to add this to the database to make it work for all of the questions,
-                        { value: value.choice2, text: "You" },
-                        { value: value.choice3, text: "Bad Leader" }]
-                };
-            }  else if(value['type'] == 2){
-                var questionTest =
-                    {
-                        type: "radiogroup",
-                        name: value['name'].replace(' ', ''),
-                        title: value['title'],
-                        isRequired: true,
-                        colCount: 4,
-                        choices: value['choices'],
-                        choicesOrder: value['choicesOrder'],
-                        correctAnswer: value['correctAnswer'],
-                    };
-                for(const [indexInner,valueInner] of value['choices'].entries()){
-                    questionTest.choices.push(valueInner);
-                }
-                return questionTest
-              }  else if(value['type'] == 3){
-                return {
-                "type": "boolean",
-                name: value['name'].replace(' ', ''),
-                "title": "Please answer the question",
-                "label": value['title'],
-                "isRequired": true
-            };
-        }       // if (choice4 != null && choice4Text) {
-    }
-function deleteQuestion(survey_id, questionid) {
-  return new Promise((resolve, reject) => {
-      axios.delete(`${HartAPIPrefix}/survey/${questionid}/${survey_id}`)
-          .then(resp => resolve(resp.data))
-          .catch(err => console.log(err.response));
-  })
-} 
+// function deleteQuestion(survey_id, questionid) {
+//   return new Promise((resolve, reject) => {
+//       axios.delete(`${HartAPIPrefix}/survey/${questionid}/${survey_id}`)
+//           .then(resp => resolve(resp.data))
+//           .catch(err => console.log(err.response));
+//   })
+// } 
 function showchoices(question){
 if (question.type == 2) {
     return <div>
@@ -84,9 +37,7 @@ if (question.type == 2) {
 
 
     </div>
-
 } else if (question.type == 1){
-
     return <div> 
     <p>Options for students to select: </p> 
     <p>choice 1: {question.choice1}</p>
@@ -96,11 +47,10 @@ if (question.type == 2) {
 }
 }
 function mapquestion() {
-    // let question1 = determineQuestion(props.question)
     return (
             <div>
-                <p>Question Type: {props.survey.type}</p>
-                <p>Question name: {props.survey.name}</p>
+                <p>Question #{props.questionid+1}</p>
+                <p>Question Category: {props.survey.category}</p>
                 <p>Question Title: (this is the question the student is asked) {props.survey.title} </p>
                 <p>Question Type:</p> {props.survey.type}
                 <div>{showchoices(props.survey)}</div>
@@ -117,7 +67,6 @@ return (
     <Container className="competency border border-dark rounded" style={{zIndex:'950'}}>
            <Row>
     <Col>
-    <p>question name: {props.survey.name}</p>
     <p>{mapquestion()}</p>
     {isStudent ? (
 <></>
@@ -130,7 +79,7 @@ return (
       </svg>
   </button>
   <div>
-    <p> Use the form below to enter new questions. The students will see the questions in random order each time</p>
+    <p> Use the form below to enter new questions.</p>
     <QuestionEditor question={props.survey} survey_id={props.survey.survey_id} question_id={props.survey.question_id}/>
   </div>
   </div>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Link} from 'react-router-dom'
 import { Modal} from 'react-bootstrap'
-import Surveys from "../Surveys"
-import Loading from "../Loading";
-import axios from 'axios';
+import Surveys from "../Survey/Surveys"
 import {HartAPIPrefix} from '../../prefixes/hart';
 import {EditQuizPopUp} from "../admin/EditQuizPopUp";
 import {DeleteQuestionForm} from "../admin/DeleteQuestionForm"

@@ -24,10 +24,10 @@ module.exports = function image_support(app, logger, multer, storage, upload) {
 app.route(`${process.env.HART}/static/public/images/:imgName`) 
  .get((req, res, err) => {
   let imgName = req.params.imgName;
-  console.log(imgName)
+  // console.log(imgName)
   
     const path = `./public/images/${imgName}`;
-    console.log(path);
+    // console.log(path);
       if (err) {
         // res.writeHead(500, {
         //   'Content-Type': 'application/json'

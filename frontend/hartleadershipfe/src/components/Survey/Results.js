@@ -1,35 +1,39 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Surveys from "./Surveys";
 import axios from 'axios';
-
-
-class Results extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            
-        }
-    }
-    
-    
-  //jijf
-
-  
-    handleResult = () => {
-        console.log('Results');
-    
-    }
-
-   
-    
-    
-   
-    render() {
-        //console.log(this.state.questions)
+import {fetchStudentResponses} from "../../actions/surveyActions.js";
+import Loading from "../Loading";
+const Results = (props) => {
+	const { user } = useSelector(state => state.auth.user);
+	const [response, setResponse]= useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	useEffect(
+		() => {
+			console.log("PROPS: ",props);
+			if (props.response == null){
+				console.log("qqq");
+				fetchStudentResponses(setResponse, user.info.smu_id);   
+			} else {
+				setResponse(props.response);
+			}
+			console.log("results: ", response);
+			setIsLoading(false); 
+		},[])
         return (
 					<div>
-            <div ng-repeat="surveyResponse in surveyResponses"/>
+						 {isLoading ? (
+                    <Loading/> 
+                 ) : (
+ <div>
+                    {/* <h1><b>Welcome. Here are the other surveys that you may try!</b></h1> 
+                    {surveys.map(survey =>{
+                            return <div className="m-1"><OtherSurveyCard other={survey}/></div>
+                        })} */}
+            </div>
+                 ) 
+                }
+            {/* <div ng-repeat="surveyResponse in surveyResponses"/>
 <div ng-controller="LineGraphController as ctrl" ng-init="init(surveyResponse)" >
 <div style="text-align: center; fontSize: 18px; fontWeight: bold"> 1/11 </div>
 <div style="fontSize: 25px; fontWeight: bold; margin-left: 10px"> Name: Name
@@ -681,11 +685,11 @@ Displays the courage to initiate positive change; innovative; will risk failing 
 
 </div>
 <div className="result-page" style="height: 1300px; text-align: center; fontSize: 24px; fontWeight: bold"> Notes </div>
-</div>
+</div> */}
 
 </div>
         );
     }
-}
+
 
 export default Results;

@@ -13,7 +13,6 @@ getResponses = () => new Promise((resolve, reject) => {
 });
 
 getResponseBySMUID = (req) => new Promise((resolve,reject)=>{
-    console.log(req.params.id);
     db.query('SELECT * FROM Student_Survey_Resp WHERE smu_id = ?', [req.params.id], function (error, results, fields) {
         
         if (error){

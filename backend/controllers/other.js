@@ -15,7 +15,8 @@ module.exports = function other(app, logger) {
         return res.status(400).send(e);
       })
       } catch(error){
-        console.log(error);
+        return res.status(400).send(error);
+;
       }
     })
     app.route(`${process.env.HART}/other/survey/:id/:image`) 
@@ -30,7 +31,8 @@ module.exports = function other(app, logger) {
           return res.status(400).send(e);
         })
       } catch(error){
-        console.log(error)
+        return res.status(400).send(error);
+
       }
     })
 }

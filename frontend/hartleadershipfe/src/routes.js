@@ -17,10 +17,12 @@ import OtherSurvey from './components/student/OtherSurvey.js';
 import EditContactPage from "./components/admin/EditContactPage";
 import AdminLanding from "./components/admin/AdminLanding";
 import GetReportData from "./components/admin/GetReportData";
-import getSurveys from "./components/getSurveys";
+import getSurveys from "./components/Survey/getSurveys";
 import { DeleteQuestionForm } from './components/admin/DeleteQuestionForm.js';
-import Results from './components/Results.js'
+import Results from './components/Survey/Results.js'
 import EditAssessment from "./components/admin/EditAssessment";
+import SurveyModal from "./components/Survey/SurveyModal";
+import { Survey } from 'survey-react';
 export const ROUTES = [
     { path: '/', component: Landing },
     { path: '/student/home', component: StudentHome },
@@ -42,5 +44,7 @@ export const ROUTES = [
     { path: '/contact/edit/', component: EditContactPage},
     { path: '/survey/', component: getSurveys},
     { path: '/survey/response/', component: Results},
-    { path: '/survey/edit/:id', component: EditAssessment}
+    { path: '/survey/edit/:id', component: EditAssessment},
+    { path: '/survey/takeassessment', component: SurveyModal}
+
 ]

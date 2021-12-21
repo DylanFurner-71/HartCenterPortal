@@ -24,7 +24,6 @@ setCompetencyVideo = async (info) => new Promise((resolve, reject) => {
     })
 })
 setCompetencyQuote = async (info) => new Promise((resolve, reject) => {
-    console.log(info)
     db.query("UPDATE Competency SET quote = ? WHERE competency_id = ?",
     [info.body.quote, info.body.competency_id],
      function (error, results, fields){
@@ -87,6 +86,7 @@ getCompetenciesVideoQuiz = () => new Promise((resolve, reject) => {
     });
 });
 addCompetenciesVideoQuizQuestion = (info) => new Promise((resolve, reject) => {
+    console.log("Survey_ID: ", info.body.survey_id);
     db.query("INSERT INTO Comp_questions(survey_id, type, name, title, correctAnswer, choice1, choice2, choice3, choice4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [info.body.survey_id, info.body.type, info.body.name, info.body.title, info.body.correctAnswer, info.body.correctAnswer, info.body.choices[1], info.body.choices[2], info.body.choices[3]],
      function (error, results, fields){
@@ -98,7 +98,6 @@ addCompetenciesVideoQuizQuestion = (info) => new Promise((resolve, reject) => {
     });
 })
 DeleteCompetencyVideo = (req) => new Promise((resolve, reject) => {
-    console.log(req)
     db.query("DELETE FROM Competency_Videos WHERE id = ?", [req], 
     function (error, results, fields){
         if (error){
@@ -110,7 +109,6 @@ DeleteCompetencyVideo = (req) => new Promise((resolve, reject) => {
     DeleteCompetencyVideoQuizWholeQuiz(req)
 })
 DeleteCompetencyVideoQuiz = (req) => new Promise((resolve, reject) => {
-    console.log(req)
     db.query("DELETE FROM comp_questions WHERE question_id = ?", [req], 
     function (error, results, fields){
         if (error){
@@ -121,7 +119,6 @@ DeleteCompetencyVideoQuiz = (req) => new Promise((resolve, reject) => {
     })
 })
 DeleteCompetencyVideoQuizWholeQuiz= (req) => new Promise((resolve, reject) => {
-console.log(req)
 db.query("DELETE FROM comp_questions WHERE survey_id = ?", [req], 
 function (error, results, fields){
     if (error){

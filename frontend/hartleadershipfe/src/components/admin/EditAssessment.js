@@ -52,7 +52,6 @@ const EditAssessment = () => {
                 setIsLoading(false); 
  
             },[]);
-            //set modal show to show the student survey
 return (
 
     <div
@@ -66,7 +65,6 @@ return (
                     <p> Here is what the student sees: </p>
                     <div>            
                  {survey.map((s, i) =>{ return <div key={i}>
-
                  <SurveyCard survey={s} survey_id={id} questionid={i}/>
 
                  </div>        })}

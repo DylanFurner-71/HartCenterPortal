@@ -115,7 +115,8 @@ app.route(`${process.env.HART}/contact/contactCardInfo/:id/:image`)
       return res.send({response});
     })
   } catch(error){
-    console.log(error)
+    return res.status(400).send(error);
+
   }
 })
 }

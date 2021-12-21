@@ -17,7 +17,7 @@ getOtherSurveys = async () => new Promise((resolve, reject) => {
         if (error){
             reject();
         }else {
-            resolve(result);
+            resolve();
         }
     })
 })

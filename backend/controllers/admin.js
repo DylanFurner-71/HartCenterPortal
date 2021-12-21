@@ -15,16 +15,15 @@ module.exports = function admin(app, logger) {
     .all((req, res, next) => { //idk
     res.send('Other requests called'); 
     }); 
-    //Omar - return all students
-    app.route(`${process.env.HART}/getAllStudents/`) 
-    .get((req, res, next) => {
-      pool.query(
-        "SELECT * FROM student", (err, result) => {
-          if (err) throw err;
-          res.end(JSON.stringify(result));
-          });   
-    }); 
-    //Omar - return batches
+    //Omar - return all students probably going to delete this since i wrote this same route but he didn't know how teamwork functions 
+    // app.route(`${process.env.HART}/getAllStudents/`) 
+    // .get((req, res, next) => {
+    //   pool.query(
+    //     "SELECT * FROM student", (err, result) => {
+    //       if (err) throw err;
+    //       res.end(JSON.stringify(result));
+    //       });   
+    // }); 
     app.route(`${process.env.HART}/getBatch/`) 
     .get((req, res, next) => {
       pool.query(
@@ -33,7 +32,6 @@ module.exports = function admin(app, logger) {
           res.end(JSON.stringify(result));
           });   
     }); 
-    //Omar - return study
     app.route(`${process.env.HART}/getStudy/`) 
     .get((req, res, next) => {
       pool.query(
@@ -42,7 +40,6 @@ module.exports = function admin(app, logger) {
           res.end(JSON.stringify(result));
           });   
     }); 
-    //Omar - return batches
     app.route(`${process.env.HART}/getMessage/:theTerm`) 
     .get((req, res, next) => {
       pool.query(
@@ -51,7 +48,6 @@ module.exports = function admin(app, logger) {
           res.end(JSON.stringify(result));
           });   
     });   
-    //Omar - return study
     app.route(`${process.env.HART}/getStats/:theTerm/:theStudy`) 
     .get((req, res, next) => {
       pool.query(
@@ -60,7 +56,6 @@ module.exports = function admin(app, logger) {
           res.end(JSON.stringify(result));
           });   
     });   
-    //Omar - insert new debrief note
     app.route(`${process.env.HART}/insertMessage`) 
     .post((req, res, next) => {
       pool.query(

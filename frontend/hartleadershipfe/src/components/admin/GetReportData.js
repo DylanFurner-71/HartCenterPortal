@@ -117,7 +117,8 @@ class GetReportData extends Component {
     }
     request = async () => {
         this.setState({isLoading: "Fetching..."});
-        const response = await fetch("http://localhost:8000/hartBE/v1/getAllStudents/");
+        // const response = await fetch("http://localhost:8000/hartBE/v1/getAllStudents/"); //omar wrote this because he's dumb!
+        const response = await fetch("http://localhost:8000/hartBE/v1/student/"); 
         const json = await response.json();
         this.setState({students : json});
         this.setState({ isLoading: " "});

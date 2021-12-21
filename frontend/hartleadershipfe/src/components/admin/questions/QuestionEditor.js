@@ -7,7 +7,6 @@ import EditFreeResponse from "./EditFreeResponse"
 import EditMultiSelection from "./EditMultiSelection"
 export const QuestionEditor = (props) => {
     function giveObj(){
-        console.log("EDITOR:", props)
         if (props.question.type == 0){
             return <EditFreeResponse pathtoroute={props.pathtoroute} survey_id={props.survey_id} />  
         }
@@ -15,9 +14,8 @@ export const QuestionEditor = (props) => {
             return <EditMultiSelection question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} question={props.question} />  
         }
         if (props.question.type ==2){
-
             return <EditMultipleChoice question_id={props.question.question_id} pathtoroute={props.pathtoroute} survey_id={props.question.survey_id} />           //multiple choice questiosn
-        }//desperately need to pass updateVar format to change all of these screenns
+        }
     }
     const t=giveObj()
     return (

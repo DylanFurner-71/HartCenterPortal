@@ -10,11 +10,9 @@ export function EditMultipleChoice(props) {
     const { value:newQuote3, bind:bindNewQuote3, reset:resetNewQuote3 } = useInput(''); 
     const { value:newQuote4, bind:bindNewQuote4, reset:resetNewQuote4 } = useInput(''); 
     const { value:newTitle, bind:bindNewTitle, reset:resetNewTitle } = useInput('');     
-
     const handleSubmit = (evt) => {
         evt.preventDefault();
         alert(`Submitting Question ${newTitle}`);
-        //abstract to functionn
         try {
           const req = {
             type: 2,
@@ -29,12 +27,9 @@ export function EditMultipleChoice(props) {
             question_id: props.question_id
           }
 axios.put(`${props.pathtoroute}`, req).then(resp => {
-//find somethinng to do inn here
 console.log("Edit mulitiple choice axios responsne: \n")
 console.log(resp)
-
-});
-        
+});  
 }  catch (e){
           console.log(e);
       }

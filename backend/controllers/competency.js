@@ -65,7 +65,7 @@ app.route(`${process.env.HART}/competency/edit/quote`)
           return res.send({response});
         })
       } catch(error){
-        console.log(error)
+        return res.status(400).send(error);
       }
     })
 app.route(`${process.env.HART}/competency/edit/title`) 
@@ -103,7 +103,7 @@ app.route(`${process.env.HART}/competency/video/:id`)
       return res.send({response});
     })
   } catch(error){
-    console.log(error)
+    return res.status(400).send(error);
   }
 })
 app.route(`${process.env.HART}/competency/video/question/:id`) 
@@ -114,7 +114,8 @@ app.route(`${process.env.HART}/competency/video/question/:id`)
       return res.send({response});
     })
   } catch(error){
-    console.log(error)
+    return res.status(400).send(error);
+
   }
 })
 }

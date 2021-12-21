@@ -25,7 +25,7 @@ module.exports = function login(app, logger) {
       }
     })  
   } catch(err) {
-    console.log("ERR", err);
+    return res.status(400).send(err);
   }
   }    else {
     return res.status(400).send('incorrect username/password')
